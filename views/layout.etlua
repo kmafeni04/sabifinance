@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= Page_title or "Finance Tracker" %></title>
+    <script src="../static/JS/HTMX.js"></script>
+    <script src="../static/JS/Alpine.js" defer></script>
+    <link rel="stylesheet" href="../static/CSS/app.css" />
+  </head>
+  <body>
+    <% content_for("inner") %>
+  </body>
+</html>
