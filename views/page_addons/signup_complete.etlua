@@ -1,0 +1,6 @@
+<div class="signup-complete smooth">
+  <h1>Sign up complete</h1>
+  <button hx-get="/home" hx-target="closest body" hx-push-url="true">
+    Proceed to Home Page
+  </button>
+</div>

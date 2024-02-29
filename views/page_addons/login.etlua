@@ -1,0 +1,28 @@
+<form
+  hx-post="/home"
+  hx-target="closest main"
+  hx-push-url="true"
+  hx-swap="outerHTML"
+>
+  <h1>Welcome Back</h1>
+  <label for="username">Username</label>
+  <input type="Username" name="username" />
+  <label for="password">Password</label>
+  <input type="password" name="password" />
+  <p>
+    <input type="checkbox" />
+    <span>Remember me</span>
+  </p>
+  <button>Log in</button>
+  <br />
+  <p>
+    Dont have an account?
+    <a
+      href="/signup_addon"
+      hx-target=".first-half"
+      hx-swap="innerHTML"
+      hx-push-url="/signup"
+      >Sign up</a
+    >
+  </p>
+</form>

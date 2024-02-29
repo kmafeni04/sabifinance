@@ -1,0 +1,11 @@
+.dashboard {
+  width: 100%;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+.top h1 {
+  font-size: 2rem;
+}

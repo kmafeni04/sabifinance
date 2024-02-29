@@ -1,0 +1,27 @@
+<form hx-post="/signup_complete" hx-target=".content">
+  <h1>Create Your Account</h1>
+  <label for="username">Username</label>
+  <input type="text" name="username" />
+  <label for="email">Email</label>
+  <input type="email" name="email" />
+  <label for="password">Password</label>
+  <input type="password" name="password" />
+  <label for="confirm-password">Confirm password</label>
+  <input type="password" name="confirm-password" />
+  <p>
+    <input type="checkbox" />
+    <span>Remember me</span>
+  </p>
+  <button>Sign up</button>
+  <br />
+  <p>
+    Already have an account?
+    <a
+      href="/login_addon"
+      hx-target=".first-half"
+      hx-swap="innerHTML"
+      hx-push-url="/login"
+      >Log in</a
+    >
+  </p>
+</form>

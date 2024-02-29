@@ -7,7 +7,7 @@
     <script src="../static/JS/Alpine.js" defer></script>
     <link rel="stylesheet" href="../static/CSS/app.css" />
   </head>
-  <body>
+  <body hx-boost="true">
     <% content_for("inner") %>
   </body>
 </html>

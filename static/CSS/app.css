@@ -1,5 +1,10 @@
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 
+:root {
+  --page-bg: rgb(228, 228, 228);
+  --button-radius: 0.3rem;
+}
+
 * {
   font-family:
     system-ui,
@@ -15,4 +20,33 @@
     sans-serif;
   margin: 0;
   padding: 0;
+  font-size: 1rem;
+}
+
+body {
+  height: 100svh;
+  width: 100vw;
+  overflow: clip;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+i {
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+  cursor: pointer;
 }

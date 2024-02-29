@@ -1,0 +1,43 @@
+<main>
+  <link rel="stylesheet" href="../../static/CSS/home.css" />
+  <div
+    class="sidebar"
+    x-data="{active: false}"
+    x-bind:class="active ? 'sidebar_active' : ''"
+  >
+    <div class="top">
+      <p x-show="active" x-transition>Logo</p>
+      <i class="nf nf-md-menu" @click="active = !active"></i>
+    </div>
+    <div class="bottom">
+      <a
+        href="/dashboard"
+        hx-target=".content"
+        hx-swap="innerHTML"
+        hx-push-url="false"
+        title="Dashboard"
+      >
+        <i class="nf nf-cod-home"></i>
+        <span x-show="active" x-transition>Dashboard</span>
+      </a>
+      <a
+        href="/achievements"
+        hx-target=".content"
+        hx-swap="innerHTML"
+        hx-push-url="false"
+        title="Achievements"
+      >
+        <i class="nf nf-fa-trophy"></i>
+        <span x-show="active" x-transition>Achievements</span>
+      </a>
+
+      <div class="nav-divider"></div>
+
+      <a href="/" hx-target="closest main" hx-push-url="true" title="Log out">
+        <i class="nf nf-md-logout"></i>
+        <span x-show="active" x-transition>Log out</span>
+      </a>
+    </div>
+  </div>
+  <div class="content" hx-get="<%= Current %>" hx-trigger="load"></div>
+</main>

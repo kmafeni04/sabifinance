@@ -1,0 +1,106 @@
+main {
+  background: var(--page-bg);
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.smooth {
+  transition: all 2s ease-in;
+}
+
+.content {
+  background: white;
+  height: 80svh;
+  width: 75vw;
+  display: flex;
+  border-radius: 0.7rem;
+  overflow: clip;
+  box-shadow: 5px 10px 15px 0 rgb(80, 80, 80);
+}
+
+.content .first-half {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content .first-half form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content .first-half form h1 {
+  font-size: 2rem;
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+
+.content .first-half form label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.content .first-half form input {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.content .first-half form button {
+  border: none;
+  background: black;
+  color: white;
+  font-weight: bold;
+  padding: 0.7rem 0;
+  border-radius: var(--button-radius);
+  margin-bottom: 0.5rem;
+}
+
+.content .first-half form p {
+  color: grey;
+}
+
+.content .first-half form p a,
+span {
+  color: black;
+}
+
+.content .second-half {
+  width: 50%;
+  background: black;
+}
+
+.signup-complete {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-complete h1 {
+  font-size: 2rem;
+  margin-bottom: 0.7rem;
+}
+.signup-complete button {
+  border: none;
+  background: black;
+  color: white;
+  padding: 0.7rem 2rem;
+  font-weight: bold;
+  border-radius: var(--button-radius);
+}
+
+@media only screen and (max-width: 900px) {
+  .content .first-half {
+    width: 100%;
+  }
+  .content .second-half {
+    display: none;
+  }
+}

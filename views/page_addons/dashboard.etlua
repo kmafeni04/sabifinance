@@ -1,0 +1,8 @@
+<div class="dashboard">
+  <link rel="stylesheet" href="../../static/CSS/dashboard.css" />
+  <div class="top">
+    <h1>Dashboard</h1>
+    <p><%= Username or "user" %></p>
+  </div>
+  <div class="bottom"></div>
+</div>
