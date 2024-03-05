@@ -1,73 +1,86 @@
-:root {
-  --transition-time: 0.2s;
-}
-
 main {
   display: flex;
 }
 
 .sidebar {
   height: 100svh;
-  width: 5%;
-  background: black;
-  color: white;
+  width: clamp(2rem, 5%, 7rem);
+  background: var(--primary-color);
+  color: var(--secondary-color);
   transition: var(--transition-time);
 }
 
 .sidebar i {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 1.5vw, 5rem);
 }
 
 .sidebar .top {
-  padding-top: 2rem;
-  padding-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  height: clamp(4rem, 10%, 7rem);
 }
 
+.sidebar .top img {
+  width: clamp(1rem, 15%, 2rem);
+}
 .sidebar .bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 90%;
 }
 
-.sidebar .bottom a {
-  padding: 0.7rem 1rem;
+.sidebar .bottom button {
+  width: 90%;
+  background: none;
+  color: var(--secondary-color);
+  border: none;
+  padding: 0.7rem clamp(0rem, 1.4vw, 2rem);
   margin-bottom: 0.3rem;
   border-radius: var(--button-radius);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
 }
 
-.sidebar .bottom a:hover {
+.sidebar .bottom button:hover {
   background: rgba(255, 255, 255, 0.2);
   transition: var(--transition-time);
 }
 
-.sidebar .bottom a span {
+.sidebar .bottom button i {
+  margin-right: 1rem;
+}
+.sidebar .bottom button span {
   font-weight: bold;
   font-size: 1.2rem;
 }
 
 .sidebar .bottom .nav-divider {
-  height: 20rem;
+  height: clamp(0rem, 50%, 40rem);
+}
+
+.sidebar .bottom .nav-divider-active {
+  height: clamp(0rem, 50%, 25rem);
 }
 .sidebar_active {
-  width: 15%;
+  width: clamp(2rem, 15%, 25rem);
   transition: var(--transition-time);
 }
 
 .content {
+  padding-top: 1rem;
+  padding-left: 1rem;
   width: 100%;
   background-color: var(--page-bg);
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 970px) {
   .sidebar_active {
     width: 100vw;
   }
+
   .sidebar_active + .content {
     display: none;
   }

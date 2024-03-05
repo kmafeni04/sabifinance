@@ -6,38 +6,77 @@
     x-bind:class="active ? 'sidebar_active' : ''"
   >
     <div class="top">
-      <p x-show="active" x-transition>Logo</p>
+      <img
+        x-show="active"
+        src="../../static/images/gold-nigerian-naira-coin-cartoon.svg"
+        x-transition
+      />
       <i class="nf nf-md-menu" @click="active = !active"></i>
     </div>
     <div class="bottom">
-      <a
-        href="/dashboard"
+      <button
+        hx-get="/dashboard"
         hx-target=".content"
         hx-swap="innerHTML"
-        hx-push-url="false"
+        @click="active = false"
         title="Dashboard"
       >
         <i class="nf nf-cod-home"></i>
         <span x-show="active" x-transition>Dashboard</span>
-      </a>
-      <a
-        href="/achievements"
+      </button>
+      <button
+        hx-get="/goals"
         hx-target=".content"
         hx-swap="innerHTML"
-        hx-push-url="false"
+        @click="active = false"
+        title="Goals"
+      >
+        <i class="nf nf-oct-goal"></i>
+        <span x-show="active" x-transition>Goals </span>
+      </button>
+      <button
+        hx-get="/achievements"
+        hx-target=".content"
+        hx-swap="innerHTML"
         title="Achievements"
+        @click="active = false"
       >
         <i class="nf nf-fa-trophy"></i>
         <span x-show="active" x-transition>Achievements</span>
-      </a>
+      </button>
+      <button
+        hx-get="/analytics"
+        hx-target=".content"
+        hx-swap="innerHTML"
+        @click="active = false"
+        title="Analytics"
+      >
+        <i class="nf nf-oct-graph"></i>
+        <span x-show="active" x-transition>Analytics</span>
+      </button>
 
-      <div class="nav-divider"></div>
+      <div x-bind:class="!active ? 'nav-divider' : 'nav-divider-active'"></div>
 
-      <a href="/" hx-target="closest main" hx-push-url="true" title="Log out">
+      <button
+        @click="active = false"
+        hx-get="/settings"
+        hx-target=".content"
+        hx-swap="innerHTML"
+        title="Settings"
+      >
+        <i class="nf nf-fa-gear"></i>
+        <span x-show="active" x-transition>Settings</span>
+      </button>
+      <button
+        hx-get="/"
+        hx-target="closest main"
+        hx-push-url="true"
+        title="Log out"
+      >
         <i class="nf nf-md-logout"></i>
         <span x-show="active" x-transition>Log out</span>
-      </a>
+      </button>
     </div>
   </div>
-  <div class="content" hx-get="<%= Current %>" hx-trigger="load"></div>
+  <div class="content" hx-get="/dashboard" hx-trigger="load"></div>
 </main>

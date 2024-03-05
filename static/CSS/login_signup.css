@@ -7,12 +7,8 @@ main {
   justify-content: center;
 }
 
-.smooth {
-  transition: all 2s ease-in;
-}
-
 .content {
-  background: white;
+  background: var(--secondary-color);
   height: 80svh;
   width: 75vw;
   display: flex;
@@ -36,9 +32,8 @@ main {
 }
 
 .content .first-half form h1 {
-  font-size: 2rem;
   align-self: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .content .first-half form label {
@@ -48,13 +43,12 @@ main {
 
 .content .first-half form input {
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
-
 .content .first-half form button {
   border: none;
-  background: black;
-  color: white;
+  background: var(--primary-color);
+  color: var(--secondary-color);
   font-weight: bold;
   padding: 0.7rem 0;
   border-radius: var(--button-radius);
@@ -67,12 +61,12 @@ main {
 
 .content .first-half form p a,
 span {
-  color: black;
+  color: var(--primary-color);
 }
 
 .content .second-half {
   width: 50%;
-  background: black;
+  background: var(--primary-color);
 }
 
 .signup-complete {
@@ -84,19 +78,18 @@ span {
 }
 
 .signup-complete h1 {
-  font-size: 2rem;
   margin-bottom: 0.7rem;
 }
 .signup-complete button {
   border: none;
-  background: black;
-  color: white;
+  background: var(--primary-color);
+  color: var(--secondary-color);
   padding: 0.7rem 2rem;
   font-weight: bold;
   border-radius: var(--button-radius);
 }
 
-@media only screen and (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .content .first-half {
     width: 100%;
   }

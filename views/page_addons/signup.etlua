@@ -5,19 +5,17 @@
   <label for="email">Email</label>
   <input type="email" name="email" />
   <label for="password">Password</label>
-  <input type="password" name="password" />
+  <input />
   <label for="confirm-password">Confirm password</label>
-  <input type="password" name="confirm-password" />
-  <p>
-    <input type="checkbox" />
-    <span>Remember me</span>
-  </p>
+  <input class="password" name="confirm-password" />
+  <p></p>
   <button>Sign up</button>
   <br />
   <p>
     Already have an account?
     <a
-      href="/login_addon"
+      hx-get="/login_addon"
+      href="/login"
       hx-target=".first-half"
       hx-swap="innerHTML"
       hx-push-url="/login"

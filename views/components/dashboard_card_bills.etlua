@@ -1,0 +1,4 @@
+<div class="card">
+  <h4><%= Header %>:</h4>
+  <h1>₦ <%= Paragraph %></h1>
+</div>

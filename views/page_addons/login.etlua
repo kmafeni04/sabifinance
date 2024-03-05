@@ -10,7 +10,7 @@
   <label for="password">Password</label>
   <input type="password" name="password" />
   <p>
-    <input type="checkbox" />
+    <input type="checkbox" name="remember-me" />
     <span>Remember me</span>
   </p>
   <button>Log in</button>
@@ -18,7 +18,8 @@
   <p>
     Dont have an account?
     <a
-      href="/signup_addon"
+      hx-get="/signup_addon"
+      href="/signup"
       hx-target=".first-half"
       hx-swap="innerHTML"
       hx-push-url="/signup"

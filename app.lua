@@ -20,9 +20,12 @@ app:get("/signup", function()
   return { render = "pages.login_signup" }
 end)
 
-app:get("/home", function()
-  Current = "/dashboard"
+app:get("/home", function(self)
   return { render = "pages.home" }
+end)
+
+app:get("/settings", function()
+  return { render = "pages.settings" }
 end)
 
 --- posts ---
@@ -46,17 +49,41 @@ app:get("/signup_addon", function()
 end)
 
 app:get("/dashboard", function(self)
-  self.params.username = "Kome"
-  Username = self.params.username
   return { render = "page_addons.dashboard" }
 end)
-
 
 app:get("/achievements", function()
   return { render = "page_addons.achievements" }
 end)
 
+app:get("/goals", function()
+  return { render = "page_addons.goals" }
+end)
+app:get("/analytics", function()
+  return { render = "page_addons.analytics" }
+end)
+
 --- components ---
+
+app:get("/bills_card1", function()
+  Header = "Balance"
+  Paragraph = "123456"
+  return { render = "components.dashboard_card_bills" }
+end)
+app:get("/bills_card2", function()
+  Header = "Income"
+  Paragraph = "123456"
+  return { render = "components.dashboard_card_bills" }
+end)
+app:get("/bills_card3", function()
+  Header = "Expenses"
+  Paragraph = "123456"
+  return { render = "components.dashboard_card_bills" }
+end)
+
+for i = 1,3  do
+	print(i)
+end
 
 
 return app

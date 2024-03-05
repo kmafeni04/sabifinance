@@ -1,6 +1,12 @@
-/luarocks
-/lua
-/lua_modules
-/.luarocks
 /logs
-mime*
+/lua
+/mime.types
+/.luarocks
+/luarocks
+/lua_modules
+/nginx.conf.compiled
+/scgi_temp
+/uwsgi_temp
+/proxy_temp
+/fastcgi_temp
+/client_body_temp

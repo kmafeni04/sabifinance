@@ -1,8 +1,13 @@
 <main>
   <link rel="stylesheet" href="../../static/CSS/index.css" />
   <div class="top">
-    <p>Logo</p>
-    <a href="/login">Log in</a>
+    <img
+      src="../../static/images/gold-nigerian-naira-coin-cartoon.svg"
+      alt=""
+    />
+    <button hx-get="/login" hx-push-url="true" hx-target="closest main">
+      Log in
+    </button>
   </div>
 
   <div class="bottom">
@@ -13,7 +18,9 @@
         unlock achievements as you conquer your financial journey. Join today
         and game your way to financial success!
       </p>
-      <a href="/signup">Get started <i class="nf nf-cod-arrow_right"></i></a>
+      <button hx-get="/signup" hx-push-url="true" hx-target="closest main">
+        Get started <i class="nf nf-cod-arrow_right"></i>
+      </button>
     </div>
     <div class="second-half">
       <img

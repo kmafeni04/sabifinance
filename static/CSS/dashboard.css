@@ -1,11 +1,17 @@
-.dashboard {
-  width: 100%;
+.dashboard .top {
+  padding-bottom: 2rem;
 }
 
-.top {
+.dashboard .bottom .first-row {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
 }
-.top h1 {
-  font-size: 2rem;
+
+.dashboard .bottom .first-row .card {
+  border: solid 0.0625rem var(--primary-color);
+  width: 30%;
+  height: 10rem;
+  margin-right: 1.5rem;
+  border-radius: var(--card-radius);
+  padding: 1rem;
 }
