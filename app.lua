@@ -20,7 +20,7 @@ app:get("/signup", function()
   return { render = "pages.login_signup" }
 end)
 
-app:get("/home", function(self)
+app:get("/home", function()
   return { render = "pages.home" }
 end)
 
@@ -48,7 +48,7 @@ app:get("/signup_addon", function()
   return { render = "page_addons.signup" }
 end)
 
-app:get("/dashboard", function(self)
+app:get("/dashboard", function()
   return { render = "page_addons.dashboard" }
 end)
 
@@ -61,6 +61,10 @@ app:get("/goals", function()
 end)
 app:get("/analytics", function()
   return { render = "page_addons.analytics" }
+end)
+
+app:get("/analytics_chart", function()
+  return { render = "page_addons.analytics_chart" }
 end)
 
 --- components ---

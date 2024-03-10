@@ -11,6 +11,8 @@
     <title><%= Page_title or "Finance Tracker" %></title>
     <script src="../static/JS/HTMX.js"></script>
     <script src="../static/JS/Alpine.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="../static/CSS/app.css" />
   </head>
   <body hx-boost="true">

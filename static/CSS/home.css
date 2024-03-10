@@ -3,7 +3,7 @@ main {
 }
 
 .sidebar {
-  height: 100svh;
+  min-height: 100svh;
   width: clamp(2rem, 5%, 7rem);
   background: var(--primary-color);
   color: var(--secondary-color);
@@ -54,15 +54,15 @@ main {
 }
 .sidebar .bottom button span {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: var(--font-small);
 }
 
 .sidebar .bottom .nav-divider {
-  height: clamp(0rem, 50%, 40rem);
+  height: clamp(0rem, 47vh, 50rem);
 }
 
 .sidebar .bottom .nav-divider-active {
-  height: clamp(0rem, 50%, 25rem);
+  height: clamp(0rem, 47vh, 50rem);
 }
 .sidebar_active {
   width: clamp(2rem, 15%, 25rem);
@@ -76,7 +76,7 @@ main {
   background-color: var(--page-bg);
 }
 
-@media only screen and (max-width: 970px) {
+@media only screen and (max-width: 900px) {
   .sidebar_active {
     width: 100vw;
   }

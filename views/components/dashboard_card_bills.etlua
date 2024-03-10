@@ -1,4 +1,4 @@
 <div class="card">
-  <h4><%= Header %>:</h4>
+  <p><%= Header %>:</p>
   <h1>₦ <%= Paragraph %></h1>
 </div>

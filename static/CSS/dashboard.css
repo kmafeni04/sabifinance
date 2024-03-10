@@ -1,17 +1,130 @@
+:root {
+  --card-box-shadow: 7px 5px 10px 0 rgb(80, 80, 80);
+}
+
+.dashboard button,
+select {
+  background: var(--primary-color);
+  border: none;
+  color: var(--secondary-color);
+  border-radius: var(--button-radius);
+  font-weight: bold;
+  padding: clamp(0.3rem, 0.5%, 7rem);
+}
+
 .dashboard .top {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.dashboard .bottom {
+  max-height: 85vh;
+  overflow: scroll;
 }
 
 .dashboard .bottom .first-row {
-  width: 100%;
+  width: 98.5%;
   display: flex;
+  gap: clamp(0rem, 2vw, 2rem);
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .dashboard .bottom .first-row .card {
-  border: solid 0.0625rem var(--primary-color);
-  width: 30%;
+  background: var(--secondary-color);
+  flex-grow: 2;
+  flex-basis: 29.5%;
   height: 10rem;
-  margin-right: 1.5rem;
   border-radius: var(--card-radius);
   padding: 1rem;
+  box-shadow: var(--card-box-shadow);
+}
+
+.dashboard .bottom .second-row {
+  display: flex;
+  justify-content: center;
+  width: 98.5%;
+  margin-bottom: 2rem;
+}
+
+.dashboard .bottom .second-row .transactions {
+  width: 100%;
+  box-shadow: var(--card-box-shadow);
+  padding: 1rem;
+  background: var(--secondary-color);
+  border-radius: var(--card-radius);
+}
+.dashboard .bottom .second-row .transactions .header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.dashboard .bottom .second-row .transactions table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.dashboard .bottom .second-row .transactions table th,
+td {
+  padding: 0.5rem 0;
+}
+
+.dashboard .bottom .second-row .transactions table tr th,
+td {
+  padding-left: 1rem;
+}
+
+.dashboard .bottom .second-row .transactions table tr:nth-child(2n) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dashboard .bottom .third-row {
+  display: flex;
+  justify-content: center;
+  width: 98.5%;
+  margin-bottom: 2rem;
+}
+
+.dashboard .bottom .third-row .analytics {
+  width: 100%;
+  box-shadow: var(--card-box-shadow);
+  padding: 1rem;
+  background: var(--secondary-color);
+  border-radius: var(--card-radius);
+}
+
+.dashboard .bottom .third-row .analytics .header {
+  margin-bottom: 1rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .dashboard .bottom .second-row .transactions table tr {
+    display: flex;
+    flex-direction: column;
+  }
+  .dashboard .bottom .second-row .transactions table th {
+    display: none;
+  }
+
+  .dashboard .bottom .second-row .transactions table td:nth-child(2) {
+    padding-top: 2rem;
+  }
+  .dashboard .bottom .second-row .transactions table td:last-child {
+    padding-bottom: 2rem;
+  }
+
+  .dashboard .bottom .second-row .transactions table td:first-child {
+    display: none;
+  }
+  .dashboard .bottom .second-row .transactions table td::before {
+    content: attr(data-cell) ": ";
+    font-weight: bold;
+  }
 }

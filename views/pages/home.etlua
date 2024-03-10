@@ -18,10 +18,11 @@
         hx-get="/dashboard"
         hx-target=".content"
         hx-swap="innerHTML"
+        hx-on::after-request="myLineChart.reset();"
         @click="active = false"
         title="Dashboard"
       >
-        <i class="nf nf-cod-home"></i>
+        <i class="nf nf-md-collage"></i>
         <span x-show="active" x-transition>Dashboard</span>
       </button>
       <button
