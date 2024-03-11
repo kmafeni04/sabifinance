@@ -1,4 +1,12 @@
-<div class="card">
-  <p><%= Header %>:</p>
-  <h1>₦ <%= Paragraph %></h1>
+<div class="card bills-card">
+  <p class="card-header"><%= Header %>:</p>
+  <h1 class="card-paragraph">₦ <%= Paragraph %></h1>
+  <div class="card-content"><%= Content or "" %></div>
 </div>
+
+<style>
+  .card {
+    height: 10rem;
+    padding: 1rem;
+  }
+</style>

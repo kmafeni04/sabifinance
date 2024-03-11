@@ -72,22 +72,54 @@ end)
 app:get("/bills_card1", function()
   Header = "Balance"
   Paragraph = "123456"
-  return { render = "components.dashboard_card_bills" }
+  return { render = "components.dashboard_card_bills"}
 end)
+
 app:get("/bills_card2", function()
   Header = "Income"
   Paragraph = "123456"
   return { render = "components.dashboard_card_bills" }
 end)
+
 app:get("/bills_card3", function()
   Header = "Expenses"
   Paragraph = "123456"
   return { render = "components.dashboard_card_bills" }
 end)
 
-for i = 1,3  do
-	print(i)
-end
+app:get("/home_content_dashboard", function()
+  Current = "dashboard"
+  Sub_heading = "Dashboard"
+  Sub_heading_desc = "Welcome, "
+  return { render = "components.home_content" }
+end)
 
+app:get("/home_content_goals", function()
+  Current = "goals"
+  Sub_heading = "Goals"
+  Sub_heading_desc = "Manage your goals"
+  return { render = "components.home_content" }
+end)
+
+app:get("/home_content_achievements", function()
+  Current = "achievements"
+  Sub_heading = "Achievments"
+  Sub_heading_desc = "View your achievements"
+  return { render = "components.home_content" }
+end)
+
+app:get("/home_content_analytics", function()
+  Current = "analytics"
+  Sub_heading = "Analytics"
+  Sub_heading_desc = "Analyze your balance"
+  return { render = "components.home_content" }
+end)
+
+app:get("/home_content_settings", function()
+  Current = "settings"
+  Sub_heading = "Settings"
+  Sub_heading_desc = "Manage your user preferences"
+  return { render = "components.home_content" }
+end)
 
 return app

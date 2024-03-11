@@ -15,10 +15,9 @@
     </div>
     <div class="bottom">
       <button
-        hx-get="/dashboard"
+        hx-get="/home_content_dashboard"
         hx-target=".content"
         hx-swap="innerHTML"
-        hx-on::after-request="myLineChart.reset();"
         @click="active = false"
         title="Dashboard"
       >
@@ -26,7 +25,7 @@
         <span x-show="active" x-transition>Dashboard</span>
       </button>
       <button
-        hx-get="/goals"
+        hx-get="/home_content_goals"
         hx-target=".content"
         hx-swap="innerHTML"
         @click="active = false"
@@ -36,7 +35,7 @@
         <span x-show="active" x-transition>Goals </span>
       </button>
       <button
-        hx-get="/achievements"
+        hx-get="/home_content_achievements"
         hx-target=".content"
         hx-swap="innerHTML"
         title="Achievements"
@@ -46,7 +45,7 @@
         <span x-show="active" x-transition>Achievements</span>
       </button>
       <button
-        hx-get="/analytics"
+        hx-get="/home_content_analytics"
         hx-target=".content"
         hx-swap="innerHTML"
         @click="active = false"
@@ -60,7 +59,7 @@
 
       <button
         @click="active = false"
-        hx-get="/settings"
+        hx-get="/home_content_settings"
         hx-target=".content"
         hx-swap="innerHTML"
         title="Settings"
@@ -79,5 +78,5 @@
       </button>
     </div>
   </div>
-  <div class="content" hx-get="/dashboard" hx-trigger="load"></div>
+  <div class="content" hx-get="/home_content_dashboard" hx-trigger="load"></div>
 </main>

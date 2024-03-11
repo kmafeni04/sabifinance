@@ -4,9 +4,10 @@
   --primary-color: black;
   --secondary-color: white;
   --tertiary-color: rgb(120, 120, 120);
-  --page-bg: rgb(228, 228, 228);
+  --quaternary-color: rgb(228, 228, 228);
   --button-radius: 0.3rem;
   --card-radius: 1rem;
+  --card-box-shadow: 7px 5px 10px 0 rgb(80, 80, 80);
   --transition-time: 0.2s;
   --font-extra-large: 6rem;
   --font-large: 4rem;
@@ -46,7 +47,6 @@ html {
 }
 
 body {
-  font-size: 1rem;
   overflow: clip;
 }
 
@@ -71,6 +71,13 @@ a:hover {
 
 button,
 select {
+  background-color: var(--primary-color);
+  border: solid 1px transparent;
+  border-radius: var(--button-radius);
+  font-weight: bold;
+  color: var(--secondary-color);
+  padding: clamp(0.3rem, 0.5%, 7rem);
+
   cursor: pointer;
 }
 
@@ -81,4 +88,10 @@ i {
 input {
   outline: none;
   cursor: pointer;
+}
+
+.card {
+  background: var(--secondary-color);
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-radius);
 }

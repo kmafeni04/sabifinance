@@ -1,0 +1,53 @@
+.goals {
+  width: 98.5%;
+}
+
+.goals .bottom .first-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.goals .bottom .first-row .bills-card {
+  width: 15vw;
+}
+
+.goals .cards {
+  flex-grow: 1;
+  flex-basis: 75%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 2rem;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
+  scroll-snap-type: x mandatory;
+}
+
+.goals .cards .card {
+  background: var(--secondary-color);
+  min-width: 15rem;
+  padding: 1rem;
+  scroll-snap-align: start;
+}
+
+.goals .cards .card .card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+}
+
+.goals .cards .card .card-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.goals .cards .card .card-body > * {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  flex-basis: 100%;
+  background-color: var(--quaternary-color);
+}

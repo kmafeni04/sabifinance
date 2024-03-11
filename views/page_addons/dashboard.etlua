@@ -1,93 +1,81 @@
-<div class="dashboard">
-  <link rel="stylesheet" href="../../static/CSS/dashboard.css" />
-  <div class="top">
-    <h2>Dashboard</h2>
-    <h4>Welcome, <%= Username or 'User' %></h4>
-  </div>
-  <div class="bottom">
-    <div class="first-row">
-      <% for i = 1,3 do %>
-      <div
-        hx-get="/bills_card<%= i %>"
-        hx-swap="outerHTML"
-        hx-trigger="load"
-      ></div>
-      <% end %>
+<link rel="stylesheet" href="../../static/CSS/dashboard.css" />
+<div class="first-row">
+  <% for i = 1,3 do %>
+  <div hx-get="/bills_card<%= i %>" hx-swap="outerHTML" hx-trigger="load"></div>
+  <% end %>
+</div>
+<div class="second-row">
+  <div class="transactions">
+    <div class="header">
+      <h3>Transactions</h3>
+      <div>
+        <select name="month" id="month">
+          <option value="january">January</option>
+          <option value="february">February</option>
+          <option value="march">March</option>
+          <option value="april">April</option>
+          <option value="may">May</option>
+          <option value="june">June</option>
+          <option value="july">July</option>
+          <option value="august">August</option>
+          <option value="september">September</option>
+          <option value="october">October</option>
+          <option value="november">November</option>
+          <option value="december">December</option>
+        </select>
+        <button>New Transaction +</button>
+      </div>
     </div>
-    <div class="second-row">
-      <div class="transactions">
-        <div class="header">
-          <h3>Transactions</h3>
-          <div>
-            <select name="month" id="month">
-              <option value="january">January</option>
-              <option value="february">February</option>
-              <option value="march">March</option>
-              <option value="april">April</option>
-              <option value="may">May</option>
-              <option value="june">June</option>
-              <option value="july">July</option>
-              <option value="august">August</option>
-              <option value="september">September</option>
-              <option value="october">October</option>
-              <option value="november">November</option>
-              <option value="december">December</option>
-            </select>
-            <button>New Transaction +</button>
-          </div>
-        </div>
 
-        <table>
-          <thead>
-            <th>#</th>
-            <th>Transaction Date:</th>
-            <th>Transaction Name:</th>
-            <th>Transaction Amount:</th>
-            <th>Transaction Type:</th>
-            <th>Transaction Desc:</th>
-            <th>Transaction Action:</th>
-          </thead>
-          <tbody>
-            <% for i = 1,30 do %>
-            <tr>
-              <td><%= i %>.</td>
-              <td data-cell="Transaction Date">28/08/2004</td>
-              <td data-cell="Transaction Name">Car</td>
-              <td data-cell="Transaction Amount">₦ 30000.00</td>
-              <td data-cell="Transaction Type">Income</td>
-              <td data-cell="Transaction Desc">Saving money for car</td>
-              <td data-cell="Transaction Action"><button>Edit</button></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="third-row">
-      <div
-        class="analytics"
-        hx-get="analytics_chart"
-        hx-swap="beforeend"
-        hx-trigger="load"
-      >
-        <div class="header">
-          <h3>Analytics</h3>
-          <select name="month" id="month">
-            <option value="january">January</option>
-            <option value="february">February</option>
-            <option value="march">March</option>
-            <option value="april">April</option>
-            <option value="may">May</option>
-            <option value="june">June</option>
-            <option value="july">July</option>
-            <option value="august">August</option>
-            <option value="september">September</option>
-            <option value="october">October</option>
-            <option value="november">November</option>
-            <option value="december">December</option>
-          </select>
-        </div>
-      </div>
+    <table>
+      <thead>
+        <th>#</th>
+        <th>Transaction Date:</th>
+        <th>Transaction Name:</th>
+        <th>Transaction Amount:</th>
+        <th>Transaction Type:</th>
+        <th>Transaction Desc:</th>
+        <th>Transaction Action:</th>
+      </thead>
+      <tbody>
+        <% for i = 1,30 do %>
+        <tr>
+          <td><%= i %>.</td>
+          <td data-cell="transaction date">28/08/2004</td>
+          <td data-cell="transaction name">Car</td>
+          <td data-cell="transaction amount">₦ 30000.00</td>
+          <td data-cell="transaction type">Income</td>
+          <td data-cell="transaction desc">Saving money for car</td>
+          <td data-cell="transaction action"><button>Edit</button></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="third-row">
+  <div
+    class="analytics"
+    hx-get="analytics_chart"
+    hx-swap="beforeend"
+    hx-trigger="load"
+  >
+    <div class="header">
+      <h3>Analytics</h3>
+      <select name="month" id="month">
+        <option value="january">January</option>
+        <option value="february">February</option>
+        <option value="march">March</option>
+        <option value="april">April</option>
+        <option value="may">May</option>
+        <option value="june">June</option>
+        <option value="july">July</option>
+        <option value="august">August</option>
+        <option value="september">September</option>
+        <option value="october">October</option>
+        <option value="november">November</option>
+        <option value="december">December</option>
+      </select>
     </div>
   </div>
 </div>

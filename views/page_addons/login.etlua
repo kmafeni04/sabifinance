@@ -1,6 +1,6 @@
 <form
   hx-post="/home"
-  hx-target="closest main"
+  hx-target="closest body"
   hx-push-url="true"
   hx-swap="outerHTML"
 >

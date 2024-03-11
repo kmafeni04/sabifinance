@@ -1,9 +1,9 @@
 main {
   display: flex;
+  height: 100svh;
 }
 
 .sidebar {
-  min-height: 100svh;
   width: clamp(2rem, 5%, 7rem);
   background: var(--primary-color);
   color: var(--secondary-color);
@@ -70,10 +70,9 @@ main {
 }
 
 .content {
-  padding-top: 1rem;
-  padding-left: 1rem;
-  width: 100%;
-  background-color: var(--page-bg);
+  padding: 2rem;
+  width: 92%;
+  background-color: var(--quaternary-color);
 }
 
 @media only screen and (max-width: 900px) {

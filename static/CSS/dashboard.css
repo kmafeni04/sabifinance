@@ -1,24 +1,6 @@
-:root {
-  --card-box-shadow: 7px 5px 10px 0 rgb(80, 80, 80);
-}
-
 .dashboard button,
 select {
-  background: var(--primary-color);
-  border: none;
-  color: var(--secondary-color);
-  border-radius: var(--button-radius);
-  font-weight: bold;
   padding: clamp(0.3rem, 0.5%, 7rem);
-}
-
-.dashboard .top {
-  padding-bottom: 1rem;
-}
-
-.dashboard .bottom {
-  max-height: 85vh;
-  overflow: scroll;
 }
 
 .dashboard .bottom .first-row {
@@ -31,13 +13,9 @@ select {
 }
 
 .dashboard .bottom .first-row .card {
-  background: var(--secondary-color);
   flex-grow: 2;
-  flex-basis: 29.5%;
   height: 10rem;
-  border-radius: var(--card-radius);
   padding: 1rem;
-  box-shadow: var(--card-box-shadow);
 }
 
 .dashboard .bottom .second-row {
@@ -125,6 +103,7 @@ td {
   }
   .dashboard .bottom .second-row .transactions table td::before {
     content: attr(data-cell) ": ";
+    text-transform: capitalize;
     font-weight: bold;
   }
 }
