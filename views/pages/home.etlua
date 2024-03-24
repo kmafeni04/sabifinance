@@ -55,8 +55,6 @@
         <span x-show="active" x-transition>Analytics</span>
       </button>
 
-      <div x-bind:class="!active ? 'nav-divider' : 'nav-divider-active'"></div>
-
       <button
         @click="active = false"
         hx-get="/home_content_settings"

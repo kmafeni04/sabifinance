@@ -1,5 +1,5 @@
 <div class="<%= Current %>">
-  <div class="top" style="padding-bottom: 2rem">
+  <div class="top">
     <h2><%= Sub_heading %></h2>
     <h4><%= Sub_heading_desc %></h4>
   </div>
@@ -10,15 +10,3 @@
     hx-trigger="load"
   ></div>
 </div>
-
-<style>
-  .top h2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .bottom {
-    height: 85vh;
-    overflow-y: auto;
-    border-radius: var(--card-radius);
-  }
-</style>

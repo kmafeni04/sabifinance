@@ -44,35 +44,38 @@ main {
   justify-content: start;
 }
 
+.sidebar .bottom button:nth-child(4) {
+  margin-bottom: auto;
+}
+.sidebar .bottom button:last-child {
+  margin-bottom: 1rem;
+}
+
 .sidebar .bottom button:hover {
   background: rgba(255, 255, 255, 0.2);
   transition: var(--transition-time);
 }
 
-.sidebar .bottom button i {
-  margin-right: 1rem;
-}
 .sidebar .bottom button span {
+  margin-left: 1rem;
   font-weight: bold;
   font-size: var(--font-small);
 }
 
-.sidebar .bottom .nav-divider {
-  height: clamp(0rem, 47vh, 50rem);
-}
-
-.sidebar .bottom .nav-divider-active {
-  height: clamp(0rem, 47vh, 50rem);
-}
 .sidebar_active {
   width: clamp(2rem, 15%, 25rem);
   transition: var(--transition-time);
 }
 
 .content {
+  overflow-y: scroll;
   padding: 2rem;
   width: 92%;
   background-color: var(--quaternary-color);
+}
+
+.content .top {
+  padding-bottom: 2rem;
 }
 
 @media only screen and (max-width: 900px) {

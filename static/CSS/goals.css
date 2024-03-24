@@ -1,11 +1,17 @@
 .goals {
   width: 98.5%;
 }
+.goals .header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
 
 .goals .bottom .first-row {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .goals .bottom .first-row .bills-card {
@@ -26,9 +32,12 @@
 
 .goals .cards .card {
   background: var(--secondary-color);
-  min-width: 15rem;
   padding: 1rem;
   scroll-snap-align: start;
+}
+
+.goals .cards .card:last-child {
+  margin-right: 70rem;
 }
 
 .goals .cards .card .card-top {
@@ -50,4 +59,34 @@
   border-radius: 0.25rem;
   flex-basis: 100%;
   background-color: var(--quaternary-color);
+}
+
+progress[value] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: 100%;
+  max-height: 0.4rem;
+  margin-block: 0.5rem;
+  border-radius: 1rem;
+  background: var(--quaternary-color);
+}
+progress[value]::-webkit-progress-bar {
+  border-radius: 1rem;
+  background: var(--quaternary-color);
+}
+progress[value]::-webkit-progress-value {
+  border-radius: 1rem;
+  background: var(--primary-color);
+}
+progress[value]::-moz-progress-bar {
+  border-radius: 1rem;
+  background: var(--primary-color);
+}
+
+.goals .cards .card .card-bottom .progress-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

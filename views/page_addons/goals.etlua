@@ -1,9 +1,14 @@
 <link rel="stylesheet" href="../../static/CSS/goals.css" />
 
+<div class="header">
+  <h3>Ongoing</h3>
+  <button>New goal+</button>
+</div>
+
 <div class="first-row">
-  <div hx-get="/bills_card1" hx-swap="outerHTML" hx-trigger="load"></div>
+  <div hx-get="/bills_card_balance" hx-swap="outerHTML" hx-trigger="load"></div>
   <div class="cards">
-    <% for card = 1,50 do %>
+    <% for card = 1,10 do %>
     <div class="card">
       <div class="card-top">
         <div>
@@ -24,10 +29,52 @@
       </div>
       <div class="card-bottom">
         <div class="progress">
-          <h4 class="progress-label">Progress:</h4>
+          <h4 class="progress-bar-label">Progress:</h4>
           <progress value="1000" max="3000"></progress>
-          <p class="left-till-goal-label">₦ 2000</p>
-          <p class="current-amount">₦ 1000</p>
+          <div class="progress-details">
+            <p class="amount-remaing"><b> Remaing:</b><br />₦ 2000</p>
+            <p><b>33%</b></p>
+            <p class="current-amount"><b>Current:</b><br />₦ 1000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="second-row">
+  <div class="header">
+    <h3>Completed</h3>
+  </div>
+  <div class="cards">
+    <% for card = 1,10 do %>
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <h3 class="card-header">Goal Name</h3>
+          <p class="card-paragraph">Goal desc</p>
+        </div>
+        <button class="card-button">Redo Goal</button>
+      </div>
+      <div class="card-body">
+        <div class="duration">
+          <p class="duration-header">Duration:</p>
+          <p class="duration-paragraph">2 months</p>
+        </div>
+        <div class="amount">
+          <p class="amount-header">Amount</p>
+          <p class="amount-header">₦ 3000</p>
+        </div>
+      </div>
+      <div class="card-bottom">
+        <div class="progress">
+          <h4 class="progress-bar-label">Progress:</h4>
+          <progress value="3000" max="3000"></progress>
+          <div class="progress-details">
+            <p class="amount-remaing"><b> Remaing:</b><br />₦ 0</p>
+            <p><b>100%</b></p>
+            <p class="current-amount"><b>Current:</b><br />₦ 3000</p>
+          </div>
         </div>
       </div>
     </div>

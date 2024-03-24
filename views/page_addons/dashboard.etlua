@@ -1,8 +1,12 @@
 <link rel="stylesheet" href="../../static/CSS/dashboard.css" />
 <div class="first-row">
-  <% for i = 1,3 do %>
-  <div hx-get="/bills_card<%= i %>" hx-swap="outerHTML" hx-trigger="load"></div>
-  <% end %>
+  <div hx-get="/bills_card_income" hx-swap="outerHTML" hx-trigger="load"></div>
+  <div
+    hx-get="/bills_card_expenses"
+    hx-swap="outerHTML"
+    hx-trigger="load"
+  ></div>
+  <div hx-get="/bills_card_balance" hx-swap="outerHTML" hx-trigger="load"></div>
 </div>
 <div class="second-row">
   <div class="transactions">

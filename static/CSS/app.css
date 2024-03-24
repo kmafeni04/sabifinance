@@ -91,6 +91,9 @@ input {
 }
 
 .card {
+  padding: 1rem;
+  min-height: 10rem;
+  min-width: 15rem;
   background: var(--secondary-color);
   box-shadow: var(--card-box-shadow);
   border-radius: var(--card-radius);

@@ -69,19 +69,19 @@ end)
 
 --- components ---
 
-app:get("/bills_card1", function()
+app:get("/bills_card_balance", function()
   Header = "Balance"
   Paragraph = "123456"
   return { render = "components.dashboard_card_bills"}
 end)
 
-app:get("/bills_card2", function()
+app:get("/bills_card_income", function()
   Header = "Income"
   Paragraph = "123456"
   return { render = "components.dashboard_card_bills" }
 end)
 
-app:get("/bills_card3", function()
+app:get("/bills_card_expenses", function()
   Header = "Expenses"
   Paragraph = "123456"
   return { render = "components.dashboard_card_bills" }
@@ -90,7 +90,7 @@ end)
 app:get("/home_content_dashboard", function()
   Current = "dashboard"
   Sub_heading = "Dashboard"
-  Sub_heading_desc = "Welcome, "
+  Sub_heading_desc = "Welcome, ".. (Username or "User")
   return { render = "components.home_content" }
 end)
 
