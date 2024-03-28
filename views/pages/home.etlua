@@ -11,10 +11,15 @@
         src="../../static/images/gold-nigerian-naira-coin-cartoon.svg"
         x-transition
       />
-      <i class="nf nf-md-menu" @click="active = !active"></i>
+      <button type="button">
+        <i class="nf nf-md-menu" x-show="!active" @click="active = !active"></i>
+        <i class="nf nf-md-close" x-show="active" @click="active = !active"></i>
+      </button>
     </div>
     <div class="bottom">
       <button
+        type="button"
+        class="nav-button"
         hx-get="/home_content_dashboard"
         hx-target=".content"
         hx-swap="innerHTML"
@@ -25,6 +30,8 @@
         <span x-show="active" x-transition>Dashboard</span>
       </button>
       <button
+        type="button"
+        class="nav-button"
         hx-get="/home_content_goals"
         hx-target=".content"
         hx-swap="innerHTML"
@@ -35,6 +42,8 @@
         <span x-show="active" x-transition>Goals </span>
       </button>
       <button
+        type="button"
+        class="nav-button"
         hx-get="/home_content_achievements"
         hx-target=".content"
         hx-swap="innerHTML"
@@ -45,6 +54,8 @@
         <span x-show="active" x-transition>Achievements</span>
       </button>
       <button
+        type="button"
+        class="nav-button"
         hx-get="/home_content_analytics"
         hx-target=".content"
         hx-swap="innerHTML"
@@ -56,6 +67,8 @@
       </button>
 
       <button
+        type="button"
+        class="nav-button"
         @click="active = false"
         hx-get="/home_content_settings"
         hx-target=".content"
@@ -66,10 +79,13 @@
         <span x-show="active" x-transition>Settings</span>
       </button>
       <button
+        type="button"
+        class="nav-button"
         hx-get="/"
         hx-target="closest main"
         hx-push-url="true"
         title="Log out"
+        hx-confirm="Are you sure you want to log out?"
       >
         <i class="nf nf-md-logout"></i>
         <span x-show="active" x-transition>Log out</span>

@@ -18,22 +18,16 @@ main {
   width: clamp(3rem, 3%, 3rem);
 }
 
-.top button {
+.top .login-btn {
   border: solid 1px var(--primary-color);
   color: var(--primary-color);
   padding: 0.7rem 1.3rem;
-  display: flex;
-  align-items: center;
-  border-radius: var(--button-radius);
-  font-size: var(--font-small);
-  font-weight: bold;
   background: none;
   transition: var(--transition-time);
 }
-.top button:hover {
+.top .login-btn:hover {
   color: var(--secondary-color);
   background: var(--primary-color);
-  border: none;
   transition: var(--transition-time);
 }
 
@@ -47,24 +41,18 @@ main {
   width: 50%;
 }
 
-.bottom .first-half h1 {
+.bottom .first-half .header {
   font-size: var(--font-large);
   margin-bottom: 2rem;
 }
 
-.bottom .first-half p {
-  font-size: var(--font-small);
+.bottom .first-half .paragraph {
   margin-bottom: 2rem;
   color: var(--tertiary-color);
 }
 
-.bottom .first-half button {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
+.bottom .first-half .get-started {
   padding: clamp(1rem, 1vw, 1rem) clamp(1rem, 2vw, 2rem);
-  border-radius: var(--button-radius);
-  font-size: var(--font-small);
-  font-weight: bold;
 }
 
 .bottom .second-half {

@@ -5,7 +5,7 @@
   --secondary-color: white;
   --tertiary-color: rgb(120, 120, 120);
   --quaternary-color: rgb(228, 228, 228);
-  --button-radius: 0.3rem;
+  --interact-radius: 0.3rem;
   --card-radius: 1rem;
   --card-box-shadow: 7px 5px 10px 0 rgb(80, 80, 80);
   --transition-time: 0.2s;
@@ -73,7 +73,7 @@ button,
 select {
   background-color: var(--primary-color);
   border: solid 1px transparent;
-  border-radius: var(--button-radius);
+  border-radius: var(--interact-radius);
   font-weight: bold;
   color: var(--secondary-color);
   padding: clamp(0.3rem, 0.5%, 7rem);
@@ -88,6 +88,15 @@ i {
 input {
   outline: none;
   cursor: pointer;
+  border: solid 1px var(--primary-color);
+  border-radius: var(--interact-radius);
+  font-size: var(--font-small);
+  padding: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+input {
+  cursor: initial;
 }
 
 .card {

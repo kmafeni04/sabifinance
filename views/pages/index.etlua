@@ -5,20 +5,30 @@
       src="../../static/images/gold-nigerian-naira-coin-cartoon.svg"
       alt=""
     />
-    <button hx-get="/login" hx-push-url="true" hx-target="closest main">
+    <button
+      class="login-btn"
+      hx-get="/login"
+      hx-push-url="true"
+      hx-target="closest main"
+    >
       Log in
     </button>
   </div>
 
   <div class="bottom">
     <div class="first-half">
-      <h1>Level Up Your Finances: Play, Plan, Prosper!</h1>
-      <p>
+      <h1 class="header">Level Up Your Finances: Play, Plan, Prosper!</h1>
+      <p class="paragraph">
         Welcome to your financial power-up! Track expenses, set goals, and
         unlock achievements as you conquer your financial journey. Join today
         and game your way to financial success!
       </p>
-      <button hx-get="/signup" hx-push-url="true" hx-target="closest main">
+      <button
+        class="get-started"
+        hx-get="/signup"
+        hx-push-url="true"
+        hx-target="closest main"
+      >
         Get started <i class="nf nf-cod-arrow_right"></i>
       </button>
     </div>

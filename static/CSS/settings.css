@@ -1,0 +1,33 @@
+.user-details .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-details .user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-label,
+.user-input {
+  margin-bottom: 1rem;
+}
+
+.user-form-buttons {
+  display: flex;
+  justify-content: right;
+}
+
+.user-form-button {
+  margin-right: 1rem;
+}
+
+.delete-account {
+  background: red;
+}
+
+.user-details .not-editable {
+  background: var(--quaternary-color);
+  color: var(--tertiary-color);
+  cursor: initial;
+}

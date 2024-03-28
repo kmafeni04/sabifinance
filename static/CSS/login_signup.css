@@ -43,19 +43,8 @@ main {
   margin-bottom: 0.2rem;
 }
 
-.content .first-half form input {
-  font-size: var(--font-small);
-  padding: 0.5rem;
-  margin-bottom: 0.8rem;
-}
 .content .first-half form button {
-  font-size: var(--font-small);
-  border: none;
-  background: var(--primary-color);
-  color: var(--secondary-color);
-  font-weight: bold;
   padding: 0.7rem 0;
-  border-radius: var(--button-radius);
   margin-bottom: 0.5rem;
 }
 
@@ -87,13 +76,7 @@ span {
   margin-bottom: 0.7rem;
 }
 .signup-complete button {
-  font-size: var(--font-small);
-  border: none;
-  background: var(--primary-color);
-  color: var(--secondary-color);
   padding: 0.7rem 2rem;
-  font-weight: bold;
-  border-radius: var(--button-radius);
 }
 
 @media screen and (max-width: 900px) {
