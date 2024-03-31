@@ -67,7 +67,6 @@ main {
   overflow-y: scroll;
   padding: 2rem;
   width: 92%;
-  background-color: var(--quaternary-color);
 }
 
 .content .top {

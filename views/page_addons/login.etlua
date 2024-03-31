@@ -3,16 +3,28 @@
   hx-target="closest body"
   hx-push-url="true"
   hx-swap="outerHTML"
+  x-data="{viewable : false}"
 >
   <h1>Welcome Back</h1>
   <label for="username">Username</label>
-  <input type="Username" name="username" />
+  <div class="user-input">
+    <input type="Username" name="username" />
+  </div>
   <label for="password">Password</label>
-  <input type="password" name="password" />
-  <p>
-    <input type="checkbox" name="remember-me" />
-    <span>Remember me</span>
-  </p>
+  <div class="user-input">
+    <input
+      class="password"
+      x-bind:type="viewable ?  'text' : 'password' "
+      name="confirm-password"
+    />
+    <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
+    <i
+      class="nf nf-fa-eye_slash"
+      x-show="!viewable"
+      @click="viewable = !viewable"
+    >
+    </i>
+  </div>
   <button>Log in</button>
   <br />
   <p>

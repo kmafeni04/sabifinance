@@ -42,7 +42,7 @@ main {
 }
 
 .bottom .first-half .header {
-  font-size: var(--font-large);
+  font-size: var(--font-extra-large);
   margin-bottom: 2rem;
 }
 

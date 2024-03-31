@@ -1,11 +1,11 @@
-<div class="<%= Current %>">
+<div class="<%= current %>">
   <div class="top">
-    <h2><%= Sub_heading %></h2>
-    <h4><%= Sub_heading_desc %></h4>
+    <h2><%= sub_heading %></h2>
+    <h4><%= sub_heading_desc %></h4>
   </div>
   <div
     class="bottom"
-    hx-get="/<%= Current %>"
+    hx-get="/<%= current %>"
     hx-swap="innerHTML"
     hx-trigger="load"
   ></div>

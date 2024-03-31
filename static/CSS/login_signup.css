@@ -32,13 +32,13 @@ main {
 }
 
 .content .first-half form h1 {
-  font-size: var(--font-normal);
+  font-size: var(--font-large);
   align-self: center;
   margin-bottom: 1rem;
 }
 
 .content .first-half form label {
-  font-size: var(--font-small);
+  font-size: var(--font-normal);
   font-weight: bold;
   margin-bottom: 0.2rem;
 }
@@ -49,12 +49,10 @@ main {
 }
 
 .content .first-half form p {
-  font-size: var(--font-small);
-  color: grey;
+  color: var(--tertiary-color);
 }
 
-.content .first-half form p a,
-span {
+.content .first-half form p a {
   color: var(--primary-color);
 }
 
@@ -72,7 +70,7 @@ span {
 }
 
 .signup-complete h1 {
-  font-size: var(--font-normal);
+  font-size: var(--font-large);
   margin-bottom: 0.7rem;
 }
 .signup-complete button {

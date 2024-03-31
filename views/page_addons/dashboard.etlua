@@ -47,10 +47,20 @@
           <td><%= i %>.</td>
           <td data-cell="transaction date">28/08/2004</td>
           <td data-cell="transaction name">Car</td>
-          <td data-cell="transaction amount">₦ 30000.00</td>
+          <td data-cell="transaction amount">
+            ₦ <%= math.random(1,100000)%>.00
+          </td>
           <td data-cell="transaction type">Income</td>
           <td data-cell="transaction desc">Saving money for car</td>
-          <td data-cell="transaction action"><button>Edit</button></td>
+          <td data-cell="transaction action">
+            <p>
+              <button>Edit</button>
+              <wbr />
+              <button hx-get="" hx-target="closest tr" hx-swap="delete">
+                Delete
+              </button>
+            </p>
+          </td>
         </tr>
         <% end %>
       </tbody>

@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="../../static/CSS/new-goal.css" />
+<div class="new-goal">
+  <div class="card">
+    <h3 class="header">New Goal</h3>
+
+    <form class="new-goal-form">
+      <label for="goal-name">Name:</label>
+
+      <div class="user-input">
+        <input type="text" id="goal-name" />
+      </div>
+
+      <label for="goal-desc">Description:</label>
+
+      <div class="user-input">
+        <input type="text" id="goal-desc" />
+      </div>
+
+      <label for="goal-end">End date:</label>
+
+      <div class="user-input">
+        <input type="date" id="goal-end" />
+      </div>
+
+      <label for="goal-amount">Amount:</label>
+
+      <div class="user-input">
+        <p class="input-prefix">₦</p>
+        <input type="number" min="1" id="goal-amount" hx-validate />
+      </div>
+
+      <div class="new-goal-btn">
+        <button
+          class="new-goal-btn"
+          type="button"
+          hx-get=""
+          hx-swap="delete"
+          hx-target=".new-goal"
+        >
+          Cancel
+        </button>
+        <button class="new-goal-btn">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

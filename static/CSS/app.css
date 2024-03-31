@@ -9,18 +9,18 @@
   --card-radius: 1rem;
   --card-box-shadow: 7px 5px 10px 0 rgb(80, 80, 80);
   --transition-time: 0.2s;
-  --font-extra-large: 6rem;
-  --font-large: 4rem;
-  --font-normal: 2rem;
-  --font-small: 1rem;
+  --font-extra-large: 3rem;
+  --font-large: 2rem;
+  --font-normal: 1rem;
+  --font-small: 0.8rem;
 }
 
 @media (max-width: 500px) {
   :root {
-    --font-extra-large: 4rem;
-    --font-large: 3rem;
-    --font-normal: 2rem;
-    --font-small: 1rem;
+    --font-extra-large: 2.8rem;
+    --font-large: 1.8rem;
+    --font-normal: 0.8rem;
+    --font-small: 0.6rem;
   }
 }
 
@@ -48,17 +48,18 @@ html {
 
 body {
   overflow: clip;
+  background-color: var(--quaternary-color);
 }
 
 h1 {
-  font-size: var(--font-normal);
+  font-size: var(--font-large);
 }
 p {
-  font-size: var(--font-small);
+  font-size: var(--font-normal);
 }
 
 th {
-  font-size: var(--font-small);
+  font-size: var(--font-normal);
 }
 
 a {
@@ -85,18 +86,25 @@ i {
   cursor: pointer;
 }
 
-input {
-  outline: none;
-  cursor: pointer;
+.user-input {
   border: solid 1px var(--primary-color);
   border-radius: var(--interact-radius);
-  font-size: var(--font-small);
   padding: 0.5rem;
+  height: 1.5rem;
   margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
 }
 
+.user-input .input-prefix {
+  margin-right: 0.5rem;
+}
 input {
+  font-size: var(--font-normal);
+  border: none;
+  outline: none;
   cursor: initial;
+  width: 100%;
 }
 
 .card {

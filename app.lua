@@ -4,6 +4,10 @@ app:enable("etlua")
 app.layout = require "views.layout"
 
 
+Username = nil or "kmafeni04"
+Email = nil or "komemafeni944@gmail.com"
+Password = nil or "aPassword*"
+
 --- routes ---
 
 app:get("/", function()
@@ -59,6 +63,11 @@ end)
 app:get("/goals", function()
   return { render = "page_addons.goals" }
 end)
+
+app:get("/goals/new_goal", function()
+  return { render = "page_addons.new_goal"}
+end)
+
 app:get("/analytics", function()
   return { render = "page_addons.analytics" }
 end)
@@ -69,56 +78,56 @@ end)
 
 --- components ---
 
-app:get("/bills_card_balance", function()
-  Header = "Balance"
-  Paragraph = "123456"
+app:get("/bills_card_balance", function(self)
+  self.header = "Balance"
+  self.paragraph = "123456"
   return { render = "components.dashboard_card_bills"}
 end)
 
-app:get("/bills_card_income", function()
-  Header = "Income"
-  Paragraph = "123456"
+app:get("/bills_card_income", function(self)
+  self.header = "Income"
+  self.paragraph = "123456"
   return { render = "components.dashboard_card_bills" }
 end)
 
-app:get("/bills_card_expenses", function()
-  Header = "Expenses"
-  Paragraph = "123456"
+app:get("/bills_card_expenses", function(self)
+  self.header = "Expenses"
+  self.paragraph = "123456"
   return { render = "components.dashboard_card_bills" }
 end)
 
-app:get("/home_content_dashboard", function()
-  Current = "dashboard"
-  Sub_heading = "Dashboard"
-  Sub_heading_desc = "Welcome, ".. (Username or "User")
+app:get("/home_content_dashboard", function(self)
+  self.current = "dashboard"
+  self.sub_heading = "Dashboard"
+  self.sub_heading_desc = "Welcome, ".. (Username or "User")
   return { render = "components.home_content" }
 end)
 
-app:get("/home_content_goals", function()
-  Current = "goals"
-  Sub_heading = "Goals"
-  Sub_heading_desc = "Manage your goals"
+app:get("/home_content_goals", function(self)
+  self.current= "goals"
+  self.sub_heading = "Goals"
+  self.sub_heading_desc = "Manage your goals"
   return { render = "components.home_content" }
 end)
 
-app:get("/home_content_achievements", function()
-  Current = "achievements"
-  Sub_heading = "Achievments"
-  Sub_heading_desc = "View your achievements"
+app:get("/home_content_achievements", function(self)
+  self.current= "achievements"
+  self.sub_heading = "Achievments"
+  self.sub_heading_desc = "View your achievements"
   return { render = "components.home_content" }
 end)
 
-app:get("/home_content_analytics", function()
-  Current = "analytics"
-  Sub_heading = "Analytics"
-  Sub_heading_desc = "Analyze your balance"
+app:get("/home_content_analytics", function(self)
+  self.current= "analytics"
+  self.sub_heading = "Analytics"
+  self.sub_heading_desc = "Analyze your balance"
   return { render = "components.home_content" }
 end)
 
-app:get("/home_content_settings", function()
-  Current = "settings"
-  Sub_heading = "Settings"
-  Sub_heading_desc = "Manage your user preferences"
+app:get("/home_content_settings", function(self)
+  self.current= "settings"
+  self.sub_heading = "Settings"
+  self.sub_heading_desc = "Manage your user preferences"
   return { render = "components.home_content" }
 end)
 

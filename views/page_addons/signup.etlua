@@ -1,13 +1,47 @@
-<form hx-post="/signup_complete" hx-target=".content">
+<form
+  hx-post="/signup_complete"
+  hx-target=".content"
+  x-data="{viewable : false}"
+>
   <h1>Create Your Account</h1>
   <label for="username">Username</label>
-  <input type="text" name="username" />
+  <div class="user-input">
+    <input type="text" name="username" />
+  </div>
   <label for="email">Email</label>
-  <input type="email" name="email" />
+  <div class="user-input">
+    <input type="email" name="email" />
+  </div>
   <label for="password">Password</label>
-  <input />
+  <div class="user-input">
+    <input
+      class="password"
+      x-bind:type="viewable ?  'text' : 'password' "
+      name="confirm-password"
+    />
+    <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
+    <i
+      class="nf nf-fa-eye_slash"
+      x-show="!viewable"
+      @click="viewable = !viewable"
+    >
+    </i>
+  </div>
   <label for="confirm-password">Confirm password</label>
-  <input class="password" name="confirm-password" />
+  <div class="user-input">
+    <input
+      class="confirm-password"
+      x-bind:type="viewable ?  'text' : 'password' "
+      name="confirm-password"
+    />
+    <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
+    <i
+      class="nf nf-fa-eye_slash"
+      x-show="!viewable"
+      @click="viewable = !viewable"
+    >
+    </i>
+  </div>
   <p></p>
   <button>Sign up</button>
   <br />

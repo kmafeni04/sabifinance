@@ -2,8 +2,11 @@
 
 <div class="header">
   <h3>Ongoing</h3>
-  <button>New goal +</button>
+  <button hx-get="/goals/new_goal" hx-target=".new-goal-placeholder">
+    New goal +
+  </button>
 </div>
+<div class="new-goal-placeholder"></div>
 
 <div class="first-row">
   <div hx-get="/bills_card_balance" hx-swap="outerHTML" hx-trigger="load"></div>

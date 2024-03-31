@@ -1,5 +1,4 @@
 <div class="card bills-card">
-  <p class="card-header"><%= Header %>:</p>
-  <h1 class="card-paragraph">₦ <%= Paragraph %></h1>
-  <div class="card-content"><%= Content or "" %></div>
+  <p class="card-header"><%= header %>:</p>
+  <h1 class="card-paragraph">₦ <%= paragraph %></h1>
 </div>
