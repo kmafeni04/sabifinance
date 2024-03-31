@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../../static/CSS/dashboard.css" />
+<div class="new-transaction-container"></div>
 <div class="first-row">
   <div hx-get="/bills_card_income" hx-swap="outerHTML" hx-trigger="load"></div>
   <div
@@ -27,7 +28,12 @@
           <option value="november">November</option>
           <option value="december">December</option>
         </select>
-        <button>New Transaction +</button>
+        <button
+          hx-get="/dashboard/new_transaction"
+          hx-target=".new-transaction-container"
+        >
+          New Transaction +
+        </button>
       </div>
     </div>
 

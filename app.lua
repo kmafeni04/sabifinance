@@ -56,6 +56,10 @@ app:get("/dashboard", function()
   return { render = "page_addons.dashboard" }
 end)
 
+app:get("/dashboard/new_transaction", function()
+  return { render = "page_addons.new_transaction"}
+end)
+
 app:get("/achievements", function()
   return { render = "page_addons.achievements" }
 end)

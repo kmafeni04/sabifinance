@@ -1,0 +1,56 @@
+<div class="new-transaction new-object">
+  <div class="card">
+    <h3 class="object-header">New Transaction</h3>
+
+    <form class="new-transaction-form">
+      <label for="transaction-date">Date:</label>
+
+      <div class="user-input">
+        <input
+          type="date"
+          id="transaction-date"
+          value="<%= os.date('%Y-%m-%d') %>"
+        />
+      </div>
+
+      <label for="transaction-name">Name:</label>
+
+      <div class="user-input">
+        <input type="text" id="transaction-name" />
+      </div>
+
+      <label for="transaction-amount">Amount:</label>
+
+      <div class="user-input">
+        <p class="input-prefix">₦</p>
+        <input type="number" min="1" id="transaction-amount" hx-validate />
+      </div>
+
+      <label for="transaction-type">Type:</label>
+
+      <select name="transaction-type" id="transaction-type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+
+      <label for="transaction-desc">Description:</label>
+
+      <div class="user-input">
+        <input type="text" id="transaction-desc" />
+      </div>
+
+      <div class="new-transaction-btn">
+        <button
+          class="new-transaction-btn"
+          type="button"
+          hx-get=""
+          hx-swap="delete"
+          hx-target=".new-transaction"
+        >
+          Cancel
+        </button>
+        <button class="new-transaction-btn">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

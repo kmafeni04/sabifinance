@@ -1,7 +1,6 @@
-<link rel="stylesheet" href="../../static/CSS/new-goal.css" />
-<div class="new-goal">
+<div class="new-goal new-object">
   <div class="card">
-    <h3 class="header">New Goal</h3>
+    <h3 class="object-header">New Goal</h3>
 
     <form class="new-goal-form">
       <label for="goal-name">Name:</label>
@@ -19,7 +18,7 @@
       <label for="goal-end">End date:</label>
 
       <div class="user-input">
-        <input type="date" id="goal-end" />
+        <input type="date" id="goal-end" value="<%= os.date('%Y-%m-%d') %>" />
       </div>
 
       <label for="goal-amount">Amount:</label>
