@@ -11,7 +11,7 @@
 <div class="first-row">
   <div hx-get="/bills_card_balance" hx-swap="outerHTML" hx-trigger="load"></div>
   <div class="cards">
-    <% for card = 1,10 do %>
+    <% for card = 1,5 do %>
     <div class="card">
       <div class="card-top">
         <div>
@@ -50,7 +50,7 @@
     <h3>Completed</h3>
   </div>
   <div class="cards">
-    <% for card = 1,10 do %>
+    <% for card = 1,5 do %>
     <div class="card">
       <div class="card-top">
         <div>

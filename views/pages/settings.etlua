@@ -7,38 +7,62 @@
   </div>
   <form
     class="first-row"
+    x-data="{viewable : false}"
     hx-post="/home"
     hx-target="closest body"
     hx-confirm="Are you sure you'd like to confirm these edits?"
   >
     <div class="user-form">
       <label for="username" class="user-label">Username:</label>
-      <input
+      <div
         class="user-input"
-        type="text"
-        id="username"
-        x-bind:value="!editable ? '<%= Username %>' : '<%= Username %>'"
-        x-bind:readonly="!editable ?  true : false"
-        x-bind:class="!editable ? 'not-editable' : '' "
-      />
+        x-bind:class="!editable ? 'not-editable' : 'editable' "
+      >
+        <input
+          type="text"
+          id="username"
+          x-bind:value="!editable ? '<%= Username %>' : '<%= Username %>'"
+          x-bind:readonly="!editable ?  true : false"
+          x-bind:class="!editable ? 'not-editable' : '' "
+        />
+      </div>
       <label for="username" class="user-label">Email:</label>
-      <input
+      <div
         class="user-input"
-        type="email"
-        id="email"
-        x-bind:value="editable ?  '<%= Email %>':'<%= Email %>'"
-        x-bind:readonly="!editable ?  true : false"
-        x-bind:class="!editable ? 'not-editable' : '' "
-      />
+        x-bind:class="!editable ? 'not-editable' : 'editable' "
+      >
+        <input
+          type="email"
+          id="email"
+          x-bind:value="editable ?  '<%= Email %>':'<%= Email %>'"
+          x-bind:readonly="!editable ?  true : false"
+          x-bind:class="!editable ? 'not-editable' : '' "
+        />
+      </div>
       <label for="password" class="user-label">Password:</label>
-      <input
+      <div
         class="user-input"
-        type="password"
-        id="password"
-        x-bind:value="!editable ?  '<%= Password %>' : '<%= Password %>'"
-        x-bind:readonly="!editable ?  true : false"
-        x-bind:class="!editable ? 'not-editable' : '' "
-      />
+        x-bind:class="!editable ? 'not-editable' : 'editable' "
+      >
+        <input
+          id="password"
+          x-bind:type="viewable ?  'text' : 'password' "
+          x-bind:value="!editable ?  '<%= Password %>' : '<%= Password %>'"
+          x-bind:readonly="!editable ?  true : false"
+          x-bind:class="!editable ? 'not-editable' : '' "
+        />
+        <i
+          class="nf nf-fa-eye"
+          x-show="viewable"
+          @click="viewable = !viewable"
+        ></i>
+        <i
+          class="nf nf-fa-eye_slash"
+          x-show="!viewable"
+          @click="viewable = !viewable"
+        >
+        </i>
+      </div>
       <div class="user-form-buttons">
         <button
           type="button"

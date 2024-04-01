@@ -18,12 +18,16 @@
   justify-content: right;
 }
 
-.user-form-button {
+.user-form-button:first-child {
   margin-right: 1rem;
 }
 
 .delete-account {
   background: red;
+}
+
+.user-details .editable {
+  background: var(--secondary-color);
 }
 
 .user-details .not-editable {
