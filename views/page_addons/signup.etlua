@@ -1,8 +1,4 @@
-<form
-  hx-post="/signup_complete"
-  hx-target=".content"
-  x-data="{viewable : false}"
->
+<form hx-post="/signup_complete" hx-target=".content" x-data="{viewable : false}">
   <h1>Create Your Account</h1>
   <label for="username">Username</label>
   <div class="user-input">
@@ -14,32 +10,16 @@
   </div>
   <label for="password">Password</label>
   <div class="user-input">
-    <input
-      class="password"
-      x-bind:type="viewable ?  'text' : 'password' "
-      name="confirm-password"
-    />
+    <input class="password" x-bind:type="viewable ?  'text' : 'password' " name="password" />
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
-    <i
-      class="nf nf-fa-eye_slash"
-      x-show="!viewable"
-      @click="viewable = !viewable"
-    >
+    <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable">
     </i>
   </div>
   <label for="confirm-password">Confirm password</label>
   <div class="user-input">
-    <input
-      class="confirm-password"
-      x-bind:type="viewable ?  'text' : 'password' "
-      name="confirm-password"
-    />
+    <input class="confirm-password" x-bind:type="viewable ?  'text' : 'password' " name="confirm_password" />
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
-    <i
-      class="nf nf-fa-eye_slash"
-      x-show="!viewable"
-      @click="viewable = !viewable"
-    >
+    <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable">
     </i>
   </div>
   <p></p>
@@ -47,13 +27,7 @@
   <br />
   <p>
     Already have an account?
-    <a
-      hx-get="/login_addon"
-      href="/login"
-      hx-target=".first-half"
-      hx-swap="innerHTML"
-      hx-push-url="/login"
-      >Log in</a
-    >
+    <a hx-get="/login_addon" href="/login" hx-target=".first-half" hx-swap="innerHTML" hx-push-url="/login">Log
+      in</a>
   </p>
 </form>

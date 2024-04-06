@@ -5,7 +5,18 @@ FROM openresty/openresty:alpine
 WORKDIR /app
 
 # Install LuaRocks and other necessary packages
-RUN apk add --no-cache lua5.1-dev openssl-dev gcc musl-dev make unzip openssl curl wget lf
+RUN apk add --no-cache \
+lua5.1-dev \
+openssl-dev \
+gcc \ 
+musl-dev \
+make \ 
+unzip \ 
+openssl \ 
+curl \ 
+wget \ 
+lf \
+sqlite
 
 # Download and install LuaRocks
 RUN wget https://luarocks.org/releases/luarocks-3.7.0.tar.gz && \
@@ -18,6 +29,7 @@ RUN wget https://luarocks.org/releases/luarocks-3.7.0.tar.gz && \
 # Install dependencies (if any extra)
 RUN luarocks install lapis 
 RUN luarocks install etlua 
+RUN luarocks install lsqlite
 
 # Copy your Lapis web app files into the container
 COPY . .
@@ -26,5 +38,5 @@ COPY . .
 EXPOSE 8080
 
 # Command to start your Lapis app
-CMD ["lapis", "server"]
+CMD ["lapis", "server", "production"]
 

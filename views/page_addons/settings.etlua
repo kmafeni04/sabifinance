@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="../../static/CSS/settings.css" />
+
+<div class="user-details" x-data="{editable:false}">
+  <div class="header">
+    <h3>User Details</h3>
+    <button @click="editable = true">Edit</button>
+  </div>
+  <form class="first-row" x-data="{viewable : false}" hx-post="/home" hx-target="closest body"
+    hx-confirm="Are you sure you'd like to confirm these edits?">
+    <div class="user-form">
+      <label for="username" class="user-label">Username:</label>
+      <div class="user-input" x-bind:class="!editable ? 'not-editable' : 'editable' ">
+        <input type="text" id="username" x-bind:value="!editable ? '<%= username %>' : '<%= username %>'"
+          x-bind:readonly="!editable ?  true : false" x-bind:class="!editable ? 'not-editable' : '' " />
+      </div>
+      <label for="username" class="user-label">Email:</label>
+      <div class="user-input" x-bind:class="!editable ? 'not-editable' : 'editable' ">
+        <input type="email" id="email" x-bind:value="editable ?  '<%= email %>':'<%= email %>'"
+          x-bind:readonly="!editable ?  true : false" x-bind:class="!editable ? 'not-editable' : '' " />
+      </div>
+      <label for="password" class="user-label">Password:</label>
+      <div class="user-input" x-bind:class="!editable ? 'not-editable' : 'editable' ">
+        <input id="password" x-bind:type="viewable ?  'text' : 'password' "
+          x-bind:value="!editable ?  '<%= password %>' : '<%= password %>'" x-bind:readonly="!editable ?  true : false"
+          x-bind:class="!editable ? 'not-editable' : '' " />
+        <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
+        <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable">
+        </i>
+      </div>
+      <div class="user-form-buttons">
+        <button type="button" class="user-form-button" x-show="editable" @click="editable = false">
+          Cancel
+        </button>
+        <button class="user-form-button" x-show="editable" @click="editable = false">
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+  <button class="delete-account" hx-delete="/" hx-get="/" hx-push-url="/" hx-target="closest body"
+    hx-confirm="Are you sure you'd like to delete your account?">
+    Delete account
+  </button>
+</div>
