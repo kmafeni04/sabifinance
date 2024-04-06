@@ -11,5 +11,8 @@ config("development", {
 
 config("production", {
   num_workers = 4,
-  code_cache = "on"
+  code_cache = "on",
+  sqlite = {
+    database = "personal_finance_app.sqlite",
+  }
 })

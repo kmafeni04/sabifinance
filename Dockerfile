@@ -16,7 +16,8 @@ openssl \
 curl \ 
 wget \ 
 lf \
-sqlite
+sqlite-dev \
+sqlite 
 
 # Download and install LuaRocks
 RUN wget https://luarocks.org/releases/luarocks-3.7.0.tar.gz && \
@@ -29,7 +30,7 @@ RUN wget https://luarocks.org/releases/luarocks-3.7.0.tar.gz && \
 # Install dependencies (if any extra)
 RUN luarocks install lapis 
 RUN luarocks install etlua 
-RUN luarocks install lsqlite
+RUN luarocks install lsqlite3
 
 # Copy your Lapis web app files into the container
 COPY . .
