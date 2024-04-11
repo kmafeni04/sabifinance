@@ -38,8 +38,6 @@ COPY . .
 # Expose the port your Lapis app runs on
 EXPOSE 8080
 
-RUN lapis migrate
-
 # Command to start your Lapis app
 CMD ["lapis", "server", "production"]
 
