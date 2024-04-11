@@ -5,7 +5,7 @@ config("development", {
   code_cache = "off",
   num_workers = "1",
   sqlite = {
-    database = "personal_finance_app.sqlite",
+    database = "app.sqlite",
   }
 })
 

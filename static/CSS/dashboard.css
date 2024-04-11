@@ -32,6 +32,7 @@ select {
   background: var(--secondary-color);
   border-radius: var(--card-radius);
 }
+
 .dashboard .bottom .second-row .transactions .header {
   display: flex;
   width: 100%;
@@ -45,6 +46,7 @@ select {
   border-collapse: collapse;
   text-align: left;
 }
+
 .dashboard .bottom .second-row .transactions table th,
 td {
   padding: 0.5rem 0;
@@ -87,6 +89,7 @@ td {
     display: flex;
     flex-direction: column;
   }
+
   .dashboard .bottom .second-row .transactions table th {
     display: none;
   }
@@ -94,6 +97,7 @@ td {
   .dashboard .bottom .second-row .transactions table td:nth-child(2) {
     padding-top: 2rem;
   }
+
   .dashboard .bottom .second-row .transactions table td:last-child {
     padding-bottom: 2rem;
   }
@@ -101,6 +105,7 @@ td {
   .dashboard .bottom .second-row .transactions table td:first-child {
     display: none;
   }
+
   .dashboard .bottom .second-row .transactions table td::before {
     content: attr(data-cell) ": ";
     text-transform: capitalize;

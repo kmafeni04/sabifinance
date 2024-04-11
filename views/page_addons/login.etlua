@@ -1,41 +1,24 @@
-<form
-  hx-post="/home"
-  hx-target="closest body"
-  hx-push-url="true"
-  hx-swap="outerHTML"
-  x-data="{viewable : false}"
->
+<form hx-post="/home" hx-push-url="true" hx-target="closest body" hx-swap="outerHTML" x-data="{viewable : false}">
   <h1>Welcome Back</h1>
   <label for="username">Username</label>
   <div class="user-input">
-    <input type="Username" name="username" />
+    <input type="text" name="username" id="username">
   </div>
+
   <label for="password">Password</label>
   <div class="user-input">
-    <input
-      class="password"
-      x-bind:type="viewable ?  'text' : 'password' "
-      name="confirm-password"
-    />
+    <input id="password" x-bind:type="viewable ?  'text' : 'password' " name="password" />
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
-    <i
-      class="nf nf-fa-eye_slash"
-      x-show="!viewable"
-      @click="viewable = !viewable"
-    >
+    <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable">
     </i>
   </div>
+
   <button>Log in</button>
   <br />
   <p>
     Dont have an account?
-    <a
-      hx-get="/signup_addon"
-      href="/signup"
-      hx-target=".first-half"
-      hx-swap="innerHTML"
-      hx-push-url="/signup"
-      >Sign up</a
-    >
+    <a hx-get="/signup_addon" href="/signup" hx-target=".first-half" hx-swap="innerHTML" hx-push-url="/signup">
+      Sign up
+    </a>
   </p>
 </form>

@@ -37,7 +37,7 @@
       </div>
     </div>
   </form>
-  <button class="delete-account" hx-delete="/" hx-get="/" hx-push-url="/" hx-target="closest body"
+  <button class="delete-account" hx-get="/delete_account" hx-target="main" hx-push-url="/"
     hx-confirm="Are you sure you'd like to delete your account?">
     Delete account
   </button>

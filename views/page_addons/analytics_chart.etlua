@@ -6,29 +6,29 @@
     type: "line",
     data: {
       labels: [
-      <% for i = 1,30 do %>
-      "<%= i %>",
+      <% for i = 1, 30 do %>
+        "<%= i %>",
       <% end %>
       ],
-      datasets: [
-        {
-          label:  "Balance",
-          data: [
+  datasets: [
+    {
+      label: "Balance",
+      data: [
 
-      <% for i = 1,30 do %>
-      "<%= math.random(i,1000000) %>",
+      <% for i = 1, 30 do %>
+        "<%= math.random(i,1000000) %>",
       <% end %>
           ],
-          borderWidth: 1,
+    borderWidth: 1,
         },
       ],
     },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
         },
-      },
     },
+  },
   });
 </script>

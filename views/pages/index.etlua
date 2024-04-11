@@ -10,7 +10,9 @@
   <div class="bottom">
     <div class="first-half">
       <h1 class="header">Level Up Your Finances: Play, Plan, Prosper!</h1>
+      <h3>Users:</h3>
       <ul>
+
         <% for _,user in pairs(users) do %>
           <li>
             <%= user.username %>

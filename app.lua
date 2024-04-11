@@ -5,50 +5,92 @@ local db = require("lapis.db")
 app:enable("etlua")
 app.layout = require "views.layout"
 
-local users = db.query("SELECT * FROM users")
-
 --- routes ---
 
-app:get("/", function(self)
-  self.users = users
+--- gets ---
+
+app:get("index", "/", function(self)
+  self.session.username = "kmafeni04"
+  self.users = db.query("SELECT * FROM users")
   return { render = "pages.index" }
 end)
 
-app:get("/login", function(self)
+app:get("login", "/login", function(self)
   self.load = "/login_addon"
   return { render = "pages.login_signup" }
 end)
 
-app:get("/signup", function(self)
+app:get("signup", "/signup", function(self)
   self.load = "/signup_addon"
   return { render = "pages.login_signup" }
 end)
 
-app:get("/home", function()
-  return { render = "pages.home" }
+app:get("/home", function(self)
+  if self.session.logged_in == true then
+    self.username = self.session.username
+    return { render = "pages.home" }
+  else
+    self:write({ redirect_to = self:url_for("index") })
+    return { render = "pages.home" }
+  end
+end
+)
+
+app:get("/logout", function(self)
+  self.session.logged_in = false
+  return { redirect_to = self:url_for("index") }
 end)
 
+app:get("/delete_account", function(self)
+  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+    username = self.session.username
+  }))
+  if next(users) ~= nil then
+    db.query("DELETE FROM users WHERE ?", db.clause({
+      username = self.session.username
+    }))
+    return { redirect_to = self:url_for("index") }
+  end
+end)
 
 --- posts ---
 
 app:post("/signup_complete", function(self)
-  self.username = self.params.username
-  self.email = self.params.email
-  self.password = self.params.password
-  self.confirm_password = self.params.confirm_password
-  if self.password == self.confirm_password then
-    db.insert("users", {
-      username = self.username,
-      email = self.email,
-      password = self.password,
-    })
-    return { render = "page_addons.signup_complete" }
+  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+    username = self.params.username,
+    password = self.params.password,
+    email = self.params.email
+  }))
+  if self.params.password == self.params.confirm_password then
+    if next(users) == nil then
+      db.insert("users", {
+        username = self.params.username,
+        password = self.params.password,
+        email = self.params.email
+      })
+      self.session.username = self.params.username
+      self.session.logged_in = true
+      return { render = "page_addons.signup_complete" }
+    else
+      return { redirect_to = self:url_for("signup") }
+    end
   end
 end)
 
-app:post("/home/:id", function()
-  return { render = "pages.home" }
+app:post("/home", function(self)
+  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+    username = self.params.username,
+    password = self.params.password
+  }))
+  if next(users) ~= nil then
+    self.session.username = self.params.username
+    self.session.logged_in = true
+    return { render = "pages.home" }
+  else
+    return { redirect_to = self:url_for("login") }
+  end
 end)
+
 
 --- addons ---
 
@@ -89,12 +131,15 @@ app:get("/analytics_chart", function()
 end)
 
 app:get("/settings", function(self)
-  self.user = users[1]
-  self.username = self.user.username
-  self.email = self.user.email
-  self.password = self.user.password
+  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+    username = self.session.username
+  }))
+  self.username = users[1].username
+  self.email = users[1].email
+  self.password = users[1].password
   return { render = "page_addons.settings" }
 end)
+
 --- components ---
 
 app:get("/bills_card_balance", function(self)
@@ -116,11 +161,9 @@ app:get("/bills_card_expenses", function(self)
 end)
 
 app:get("/home_content_dashboard", function(self)
-  self.user = users[1]
-  self.username = self.user.username
   self.current = "dashboard"
   self.sub_heading = "Dashboard"
-  self.sub_heading_desc = "Welcome, " .. self.username
+  self.sub_heading_desc = "Welcome, " .. tostring(self.session.username)
   return { render = "components.home_content" }
 end)
 
