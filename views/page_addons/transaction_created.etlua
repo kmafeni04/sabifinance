@@ -1,0 +1,8 @@
+<div class="object-created">
+  <h1 class="header">Transaction created</h1>
+  <div class="new-transaction-btn">
+    <button class="new-transaction-btn" type="button" hx-get="/home" hx-swap="outerHTML" hx-target="main">
+      Close
+    </button>
+  </div>
+</div>

@@ -9,9 +9,10 @@
 <div class="new-goal-container"></div>
 
 <div class="first-row">
-  <div hx-get="/bills_card_balance" hx-swap="outerHTML" hx-trigger="load"></div>
+  <% render("views.components.dashboard_card_bills", { header="Balance" ,
+  paragraph="123456" }) %>
   <div class="cards">
-    <% for card = 1,5 do %>
+    <% for card=1,5 do %>
     <div class="card">
       <div class="card-top">
         <div>
@@ -50,7 +51,7 @@
     <h3>Completed</h3>
   </div>
   <div class="cards">
-    <% for card = 1,5 do %>
+    <% for card=1,5 do %>
     <div class="card">
       <div class="card-top">
         <div>

@@ -31,6 +31,7 @@ RUN wget https://luarocks.org/releases/luarocks-3.7.0.tar.gz && \
 RUN luarocks install lapis 
 RUN luarocks install etlua 
 RUN luarocks install lsqlite3
+RUN luarocks install tableshape
 
 # Copy your Lapis web app files into the container
 COPY . .

@@ -6,8 +6,8 @@
     type: "line",
     data: {
       labels: [
-      <% for i = 1, 30 do %>
-        "<%= i %>",
+        <% for key,_ in pairs(transactions) do %>
+        "<%= key %>",
       <% end %>
       ],
   datasets: [
@@ -15,8 +15,8 @@
       label: "Balance",
       data: [
 
-      <% for i = 1, 30 do %>
-        "<%= math.random(i,1000000) %>",
+        <% for _,transaction in pairs(transactions) do %>
+        "<%= transaction.amount %>",
       <% end %>
           ],
     borderWidth: 1,

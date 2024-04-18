@@ -10,8 +10,8 @@ config("development", {
 })
 
 config("production", {
-  num_workers = 4,
   code_cache = "on",
+  num_workers = 4,
   sqlite = {
     database = "app.sqlite",
   }

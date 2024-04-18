@@ -15,6 +15,7 @@ dependencies = {
   "lua ~> 5.1",
   "lapis == 1.16.0",
   "lsqlite3"
+  "tableshape"
 }
 
 build = {

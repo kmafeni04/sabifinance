@@ -1,9 +1,13 @@
 local lapis = require("lapis")
 local app = lapis.Application()
 local db = require("lapis.db")
+local Model = require("lapis.db.model").Model
 
 app:enable("etlua")
 app.layout = require "views.layout"
+
+local Users = Model:extend("users")
+local Transactions = Model:extend("transactions")
 
 --- routes ---
 
@@ -11,7 +15,7 @@ app.layout = require "views.layout"
 
 app:get("index", "/", function(self)
   self.session.username = "kmafeni04"
-  self.users = db.query("SELECT * FROM users")
+  self.users = Users:select()
   return { render = "pages.index" }
 end)
 
@@ -25,13 +29,12 @@ app:get("signup", "/signup", function(self)
   return { render = "pages.login_signup" }
 end)
 
-app:get("/home", function(self)
+app:get("home", "/home", function(self)
   if self.session.logged_in == true then
     self.username = self.session.username
     return { render = "pages.home" }
   else
-    self:write({ redirect_to = self:url_for("index") })
-    return { render = "pages.home" }
+    return { redirect_to = self:url_for("index") }
   end
 end
 )
@@ -42,28 +45,29 @@ app:get("/logout", function(self)
 end)
 
 app:get("/delete_account", function(self)
-  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+  local user = Users:find({
     username = self.session.username
-  }))
-  if next(users) ~= nil then
-    db.query("DELETE FROM users WHERE ?", db.clause({
+  })
+  if next(user) ~= nil then
+    user:delete(db.clause({
       username = self.session.username
     }))
     return { redirect_to = self:url_for("index") }
   end
 end)
 
+
 --- posts ---
 
 app:post("/signup_complete", function(self)
-  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+  local user = Users:select("WHERE ?", db.clause({
     username = self.params.username,
     password = self.params.password,
     email = self.params.email
   }))
   if self.params.password == self.params.confirm_password then
-    if next(users) == nil then
-      db.insert("users", {
+    if next(user) == nil then
+      Users:create({
         username = self.params.username,
         password = self.params.password,
         email = self.params.email
@@ -77,12 +81,12 @@ app:post("/signup_complete", function(self)
   end
 end)
 
-app:post("/home", function(self)
-  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+app:post("home", "/home", function(self)
+  local user = Users:select("WHERE ?", db.clause({
     username = self.params.username,
     password = self.params.password
   }))
-  if next(users) ~= nil then
+  if next(user) ~= nil then
     self.session.username = self.params.username
     self.session.logged_in = true
     return { render = "pages.home" }
@@ -91,6 +95,18 @@ app:post("/home", function(self)
   end
 end)
 
+app:post("/new_transaction", function(self)
+  Transactions:create({
+    date = self.params.date,
+    name = self.params.name,
+    amount = self.params.amount,
+    type = self.params.type,
+    description = self.params.description
+  })
+
+
+  return { render = "page_addons.transaction_created" }
+end)
 
 --- addons ---
 
@@ -102,12 +118,20 @@ app:get("/signup_addon", function()
   return { render = "page_addons.signup" }
 end)
 
-app:get("/dashboard", function()
+app:get("/dashboard", function(self)
+  self.test = self.params.transaction_name
+  self.transactions = Transactions:select()
   return { render = "page_addons.dashboard" }
 end)
 
 app:get("/dashboard/new_transaction", function()
   return { render = "page_addons.new_transaction" }
+end)
+
+app:get("/delete_transaction/:name", function(self)
+  Transactions:delete(db.clause({
+    name = self.params.name
+  }))
 end)
 
 app:get("/achievements", function()
@@ -131,34 +155,16 @@ app:get("/analytics_chart", function()
 end)
 
 app:get("/settings", function(self)
-  local users = db.query("SELECT * FROM users WHERE ?", db.clause({
+  local user = Users:select(db.clause({
     username = self.session.username
   }))
-  self.username = users[1].username
-  self.email = users[1].email
-  self.password = users[1].password
+  self.username = user[1].username
+  self.email = user[1].email
+  self.password = user[1].password
   return { render = "page_addons.settings" }
 end)
 
 --- components ---
-
-app:get("/bills_card_balance", function(self)
-  self.header = "Balance"
-  self.paragraph = "123456"
-  return { render = "components.dashboard_card_bills" }
-end)
-
-app:get("/bills_card_income", function(self)
-  self.header = "Income"
-  self.paragraph = "123456"
-  return { render = "components.dashboard_card_bills" }
-end)
-
-app:get("/bills_card_expenses", function(self)
-  self.header = "Expenses"
-  self.paragraph = "123456"
-  return { render = "components.dashboard_card_bills" }
-end)
 
 app:get("/home_content_dashboard", function(self)
   self.current = "dashboard"

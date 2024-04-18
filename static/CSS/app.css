@@ -54,6 +54,7 @@ body {
 h1 {
   font-size: var(--font-large);
 }
+
 p {
   font-size: var(--font-normal);
 }
@@ -66,6 +67,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -99,12 +101,19 @@ i {
 .user-input .input-prefix {
   margin-right: 0.5rem;
 }
+
 input {
   font-size: var(--font-normal);
   border: none;
   outline: none;
   cursor: initial;
   width: 100%;
+}
+
+.form-select {
+  font-size: var(--font-normal);
+  padding: 0.5rem;
+  height: 2.7rem;
 }
 
 .card {
@@ -130,6 +139,9 @@ input {
 }
 
 .new-object .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 30%;
   max-height: 75%;
   overflow-y: scroll;
@@ -146,4 +158,16 @@ input {
 
 .new-object .card form label {
   margin-bottom: 0.5rem;
+}
+
+.new-object .object-created {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-object .object-created .header {
+  margin-bottom: 1rem;
 }

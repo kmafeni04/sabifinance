@@ -24,6 +24,7 @@ main {
 .sidebar .top img {
   width: clamp(1rem, 15%, 2rem);
 }
+
 .sidebar .bottom {
   display: flex;
   flex-direction: column;
@@ -33,7 +34,7 @@ main {
 
 .sidebar .bottom .nav-button {
   width: 90%;
-  padding: 0.7rem clamp(0rem, 1.4vw, 2rem);
+  padding: 0.7rem clamp(0rem, 1.35vw, 2rem);
   margin-bottom: 0.3rem;
   display: flex;
   align-items: center;
@@ -43,6 +44,7 @@ main {
 .sidebar .bottom .nav-button:nth-child(4) {
   margin-bottom: auto;
 }
+
 .sidebar .bottom .nav-button:last-child {
   margin-bottom: 1rem;
 }

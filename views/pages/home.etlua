@@ -42,6 +42,8 @@
       </button>
     </div>
   </div>
-  <div class="content" hx-get="/home_content_dashboard" hx-trigger="load"></div>
+  <div class="content">
+    <% render("views.components.home_content", { current="dashboard" , sub_heading="Dashboard" ,
+      sub_heading_desc="Welcome, " .. tostring(username) }) %>
   </div>
 </main>

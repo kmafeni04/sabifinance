@@ -1,8 +1,8 @@
-<form hx-post="/signup_complete" hx-target="main" x-data="{viewable : false}">
+<form hx-post="/signup_complete" hx-target="main" hx-swap="outerHTML" x-data="{viewable : false}">
   <h1>Create Your Account</h1>
   <label for="username">Username</label>
   <div class="user-input">
-    <input type="text" name="username" />
+    <input type="text" name="username" minlength="5" maxlength="20" />
   </div>
   <label for="email">Email</label>
   <div class="user-input">
@@ -10,13 +10,15 @@
   </div>
   <label for="password">Password</label>
   <div class="user-input">
-    <input class="password" x-bind:type="viewable ?  'text' : 'password' " name="password" />
+    <input class="password" x-bind:type="viewable ?  'text' : 'password' " name="password" minlength="8"
+      maxlength="30" />
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
     <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable"></i>
   </div>
   <label for="confirm-password">Confirm password</label>
   <div class="user-input">
-    <input class="confirm-password" x-bind:type="viewable ?  'text' : 'password' " name="confirm_password" />
+    <input class="confirm-password" x-bind:type="viewable ?  'text' : 'password' " name="confirm_password" minlength="8"
+      maxlength="30" />
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
     <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable"></i>
   </div>
