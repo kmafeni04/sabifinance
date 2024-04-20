@@ -29,9 +29,10 @@ app:get("signup", "/signup", function(self)
   return { render = "pages.login_signup" }
 end)
 
-app:get("home", "/home", function(self)
+app:get("home", "/home/:page", function(self)
   if self.session.logged_in == true then
     self.username = self.session.username
+    self.page = self.params.page
     return { render = "pages.home" }
   else
     return { redirect_to = self:url_for("index") }
@@ -81,12 +82,13 @@ app:post("/signup_complete", function(self)
   end
 end)
 
-app:post("home", "/home", function(self)
+app:post("/home", function(self)
   local user = Users:select("WHERE ?", db.clause({
     username = self.params.username,
     password = self.params.password
   }))
   if next(user) ~= nil then
+    self.page = "dashboard"
     self.session.username = self.params.username
     self.session.logged_in = true
     return { render = "pages.home" }

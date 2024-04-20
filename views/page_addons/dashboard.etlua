@@ -82,6 +82,7 @@
         <% end %>
       </select>
     </div>
+   
     <% render("views.page_addons.analytics_chart") %>
   </div>
 </div>

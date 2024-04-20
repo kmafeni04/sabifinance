@@ -1,7 +1,12 @@
 <main>
-  <link rel="stylesheet" href="../../static/CSS/login_signup.css" />
+  <link rel="stylesheet" href="../../static/CSS/login_signup.css"/>
   <div class="content">
-    <div class="first-half" hx-get="<%= load %>" hx-swap="innerHTML" hx-trigger="load"></div>
+    <div
+      class="first-half"
+      hx-get="<%= load %>"
+      hx-swap="innerHTML"
+      hx-trigger="load"
+    ></div>
     <div class="second-half"></div>
   </div>
 </main>

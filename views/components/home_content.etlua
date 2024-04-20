@@ -7,5 +7,11 @@
       <%= sub_heading_desc %>
     </h4>
   </div>
-  <div class="bottom" hx-get="/<%= current %>" hx-swap="innerHTML" hx-trigger="load"></div>
+  <div
+    class="bottom"
+    hx-get="/<%= current %>"
+    hx-swap="innerHTML"
+    hx-trigger="load"
+    hx-push-url="/home/<%= current %>"
+  ></div>
 </div>

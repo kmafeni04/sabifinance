@@ -1,9 +1,9 @@
 <main>
-  <link rel="stylesheet" href="../../static/CSS/login_signup.css" />
+  <link rel="stylesheet" href="../../static/CSS/login_signup.css"/>
   <div class="content">
     <div class="signup-complete">
       <h1>Sign up complete</h1>
-      <button hx-get="/home" hx-target="closest body" hx-push-url="true">
+      <button hx-get="/home/dashboard" hx-target="closest body" hx-push-url="true">
         Proceed to Home Page
       </button>
     </div>
