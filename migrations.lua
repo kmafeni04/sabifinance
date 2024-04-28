@@ -1,10 +1,12 @@
 local db = require("lapis.db")
 local schema = require("lapis.db.schema")
 local types = schema.types
+local create_table = schema.create_table
+local create_index = schema.create_index
 
 return {
 	[1] = function()
-		schema.create_table("users", {
+		create_table("users", {
 			{ "id",       types.serial },
 			{ "username", types.varchar },
 			{ "email",    types.varchar },
@@ -12,14 +14,17 @@ return {
 
 			"PRIMARY KEY (id)"
 		})
+		create_index("users", "username", { unique = true })
+		create_index("users", "email", { unique = true })
 		db.insert("users", {
+			id = "1",
 			username = "kmafeni04",
 			email = "komemafeni944@gmail.com",
 			password = "aPassword*"
 		})
 	end,
 	[2] = function()
-		schema.create_table("transactions", {
+		create_table("transactions", {
 			{ "id",          types.serial },
 			{ "date",        types.date },
 			{ "name",        types.varchar },
@@ -32,7 +37,7 @@ return {
 			"PRIMARY KEY (id)"
 		})
 
-		schema.create_table("goals", {
+		create_table("goals", {
 			{ "id",          types.serial },
 			{ "name",        types.varchar },
 			{ "description", types.text },

@@ -1,9 +1,10 @@
-<link rel="stylesheet" href="../../static/CSS/dashboard.css" />
+
+    <link rel="stylesheet" href="../../static/CSS/dashboard.css"/>
 <div class="new-transaction-container"></div>
 <div class="first-row">
-  <% render("views.components.dashboard_card_bills", { header="Income" , paragraph="123456" }) %> 
-  <% render("views.components.dashboard_card_bills", { header="Expense" , paragraph="123456" }) %> 
-  <% render("views.components.dashboard_card_bills", { header="Balance" , paragraph="123456" }) %>
+  <% render("views.components.card_bills", { header="Income" , paragraph="123456" }) %> 
+  <% render("views.components.card_bills", { header="Expense" , paragraph="123456" }) %> 
+  <% render("views.components.card_bills", { header="Balance" , paragraph="123456" }) %>
 </div>
 <div class="second-row">
   <div class="transactions">
@@ -48,6 +49,7 @@
           <td data-cell="transaction type"><%= transaction.type %></td>
           <td data-cell="transaction desc"><%= transaction.description %></td>
           <td data-cell="transaction action">
+          <%= transaction.user_id %>
             <p>
               <button>Edit</button>
               <wbr />
@@ -68,7 +70,6 @@
   </div>
 </div>
 <div class="third-row">
-  <div class="page"></div>
   <div class="analytics">
     <div class="header">
       <h3>Analytics</h3>
@@ -83,6 +84,6 @@
       </select>
     </div>
    
-    <% render("views.page_addons.analytics_chart") %>
+    <% render("views.components.analytics_chart") %>
   </div>
 </div>

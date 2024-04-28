@@ -1,0 +1,14 @@
+<div class="object-created">
+  <h1 class="header">Goal created</h1>
+  <div class="new-goal-btn">
+    <button
+      class="new-goal-btn"
+      type="button"
+      hx-get="/home/goals"
+      hx-swap="outerHTML"
+      hx-target="main"
+    >
+      Close
+    </button>
+  </div>
+</div>

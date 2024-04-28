@@ -2,30 +2,43 @@
   <div class="card">
     <h3 class="object-header">New Goal</h3>
 
-    <form class="new-goal-form">
+    <form hx-post="/goal_created" class="new-goal-form" hx-target=".card">
       <label for="goal-name">Name:</label>
 
       <div class="user-input">
-        <input type="text" id="goal-name" />
+        <input name="name" type="text" id="goal-name" minlength="3" required/>
       </div>
 
       <label for="goal-desc">Description:</label>
 
       <div class="user-input">
-        <input type="text" id="goal-desc" />
+        <input name="description" type="text" id="goal-desc" minlength="3" required/>
       </div>
 
       <label for="goal-end">End date:</label>
 
       <div class="user-input">
-        <input type="date" id="goal-end" value="<%= os.date('%Y-%m-%d') %>" />
+        <input
+          name="end_date"
+          type="date"
+          id="goal-end"
+          value="<%= os.date('%Y-%m-%d') %>"
+          required
+        />
       </div>
 
       <label for="goal-amount">Amount:</label>
 
       <div class="user-input">
         <p class="input-prefix">₦</p>
-        <input type="number" step="0.05" min="1" id="goal-amount" hx-validate />
+        <input
+          name="amount"
+          type="number"
+          step="0.05"
+          min="1"
+          id="goal-amount"
+          required
+        />
       </div>
 
       <div class="new-goal-btn">
