@@ -12,6 +12,12 @@
       </select>
     </div>
 
-    <% render("views.components.analytics_chart") %>
+    <% if next(transactions) ~= nil then %>
+      <% render("views.components.analytics_chart") %>
+    <% else %>
+      <div>
+        <h1>No transactions yet</h1>
+      </div>
+    <% end %>
   </div>
 </div>

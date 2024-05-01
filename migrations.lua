@@ -7,15 +7,17 @@ local create_index = schema.create_index
 return {
 	[1] = function()
 		create_table("users", {
-			{ "id",       types.serial },
-			{ "username", types.varchar },
-			{ "email",    types.varchar },
-			{ "password", types.varchar },
+			{ "id",       types.integer },
+			{ "username", types.text },
+			{ "email",    types.text },
+			{ "password", types.text },
 
 			"PRIMARY KEY (id)"
 		})
+
 		create_index("users", "username", { unique = true })
 		create_index("users", "email", { unique = true })
+
 		db.insert("users", {
 			id = "1",
 			username = "kmafeni04",
@@ -25,25 +27,25 @@ return {
 	end,
 	[2] = function()
 		create_table("transactions", {
-			{ "id",          types.serial },
-			{ "date",        types.date },
-			{ "name",        types.varchar },
-			{ "amount",      types.double },
-			{ "type",        types.varchar },
+			{ "id",          types.integer },
+			{ "date",        types.text },
+			{ "name",        types.text },
+			{ "amount",      types.real },
+			{ "type",        types.text },
 			{ "description", types.text },
-			{ "user_id",     types.foreign_key },
+			{ "user_id",     types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
 			"PRIMARY KEY (id)"
 		})
 
 		create_table("goals", {
-			{ "id",          types.serial },
-			{ "name",        types.varchar },
+			{ "id",          types.integer },
+			{ "name",        types.text },
 			{ "description", types.text },
-			{ "end_date",    types.date },
-			{ "amount",      types.double },
-			{ "user_id",     types.foreign_key },
+			{ "end_date",    types.text },
+			{ "amount",      types.real },
+			{ "user_id",     types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
 			"PRIMARY KEY (id)"

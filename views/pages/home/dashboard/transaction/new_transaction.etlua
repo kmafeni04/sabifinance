@@ -6,20 +6,41 @@
       <label for="transaction-date">Date:</label>
 
       <div class="user-input">
-        <input name="date" type="date" id="transaction-date" value="<%= os.date('%Y-%m-%d') %>" required />
+        <input
+          name="date"
+          type="date"
+          id="transaction-date"
+          value="<%= os.date("%Y-%m-%d") %>"
+          min="<%= os.date("%Y-%m-%d") %>"
+          required
+        />
       </div>
 
       <label for="transaction-name">Name:</label>
 
       <div class="user-input">
-        <input name="name" type="text" id="transaction-name" required minlength="3" maxlength="20" />
+        <input
+          name="name"
+          type="text"
+          id="transaction-name"
+          required
+          minlength="3"
+          maxlength="20"
+        />
       </div>
 
       <label for="transaction-amount">Amount:</label>
 
       <div class="user-input">
         <p class="input-prefix">₦</p>
-        <input name="amount" type="number" step="0.05" min="1" id="transaction-amount" required />
+        <input
+          name="amount"
+          type="number"
+          step="0.05"
+          min="1"
+          id="transaction-amount"
+          required
+        />
       </div>
 
       <label for="transaction-type">Type:</label>
@@ -32,11 +53,17 @@
       <label for="transaction-desc">Description:</label>
 
       <div class="user-input">
-        <input name="description" type="text" id="transaction-desc" required />
+        <input name="description" type="text" id="transaction-desc" required/>
       </div>
 
       <div class="new-transaction-btn">
-        <button class="new-transaction-btn" type="button" hx-get="" hx-swap="delete" hx-target=".new-transaction">
+        <button
+          class="new-transaction-btn"
+          type="button"
+          hx-get=""
+          hx-swap="delete"
+          hx-target=".new-transaction"
+        >
           Cancel
         </button>
         <button class="new-transaction-btn">Save</button>

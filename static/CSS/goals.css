@@ -37,6 +37,15 @@
   scroll-snap-align: start;
 }
 
+.goals .cards .no-goals-created {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.goals .cards .no-goals-created h2 {
+  margin-bottom: 0.5rem;
+}
 .goals .cards .card:last-child {
   margin-right: 70rem;
 }
@@ -90,4 +99,9 @@ progress[value]::-moz-progress-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.goals .cards .card .card-bottom .delete-goal {
+  width: 100%;
 }

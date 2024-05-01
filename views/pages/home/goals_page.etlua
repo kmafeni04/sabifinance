@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="../../static/CSS/goals.css"/>
+<div class="header">
+  <h3>Ongoing</h3>
+  <button hx-get="/new_goal" hx-target=".new-goal-container">
+    New goal +
+  </button>
+</div>
+<div class="new-goal-container"></div>
+
+<div class="first-row">
+  <% render("views.components.card_bills", { header = "Balance", paragraph = balance }) %>
+  <div class="cards">
+    <% if next(goals) ~= nil then %>
+      <% for _,goal in pairs(goals) do %>
+        <div class="card goal-card">
+          <div class="card-top">
+            <div>
+              <h3 class="card-header"><%= goal.name %></h3>
+              <p class="card-paragraph"><%= goal.description %></p>
+            </div>
+            <button class="card-button" hx-get="/edit_goal/<%= goal.id %>">Edit Goal</button>
+          </div>
+          <div class="card-body">
+            <div class="duration">
+              <p class="duration-header">Duration:</p>
+              <p class="duration-paragraph">
+              <% local date_string = goal.end_date %>
+              <% local year, month, day = date_string:match("(%d+)-(%d+)-(%d+)") %>
+              <% local dateTable = { year = tonumber(year), month = tonumber(month), day = tonumber(day),} %>
+              <% local timestamp = os.time(dateTable) %>
+<%= math.floor((timestamp - os.time()) / (7 * 24 * 60 * 60)) %> weeks
+              </p>
+            </div>
+            <div class="amount">
+              <p class="amount-header">Amount /w</p>
+              <p class="amount-header">₦ <%= goal.amount %></p>
+            </div>
+          </div>
+          <div class="card-bottom">
+            <div class="progress">
+              <h4 class="progress-bar-label">Progress:</h4>
+              <progress value="1000" max="3000"></progress>
+              <div class="progress-details">
+                <p class="amount-remaing"><b>
+                    Remaing:</b><br/>₦ 2000</p>
+                <p><b>33%</b></p>
+                <p class="current-amount"><b>Current:</b><br/>₦ 1000</p>
+              </div>
+            </div>
+            <button
+              class="delete-goal"
+              hx-get="/delete_goal/<%= goal.id %>"
+              hx-confirm="Are you sure you would like to delete this goal?"
+              hx-target="closest .goal-card"
+              hx-swap="delete"
+            >Delete Goal</button>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="card no-goals-created">
+        <h2>Create a new goal</h2>
+
+        <button hx-get="/new_goal" hx-target=".new-goal-container">
+          New goal +
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="second-row">
+  <div class="header">
+    <h3>Completed</h3>
+  </div>
+  <div class="cards">
+    <% for card=1,5 do %>
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3 class="card-header">Goal Name</h3>
+            <p class="card-paragraph">Goal desc</p>
+          </div>
+          <button class="card-button">Redo Goal</button>
+        </div>
+        <div class="card-body">
+          <div class="duration">
+            <p class="duration-header">Duration:</p>
+            <p class="duration-paragraph">2 months</p>
+          </div>
+          <div class="amount">
+            <p class="amount-header">Amount</p>
+            <p class="amount-header">₦ 3000</p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="progress">
+            <h4 class="progress-bar-label">Progress:</h4>
+            <progress value="3000" max="3000"></progress>
+            <div class="progress-details">
+              <p class="amount-remaing"><b>
+                  Remaing:</b><br/>₦ 0</p>
+              <p><b>100%</b></p>
+              <p class="current-amount"><b>Current:</b><br/>₦ 3000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

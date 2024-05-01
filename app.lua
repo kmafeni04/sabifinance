@@ -15,12 +15,12 @@ local Users = Model:extend("users", {
 })
 local Transactions = Model:extend("transactions", {
   relations = {
-    { "user", belongs_to = "Users" }
+    { "user", belongs_to = "Users" },
   }
 })
 local Goals = Model:extend("goals", {
   relations = {
-    { "user", belongs_to = "Users" }
+    { "user", belongs_to = "Users" },
   }
 })
 
@@ -97,7 +97,6 @@ app:get("home", "/home/:page", function(self)
 end
 )
 
---@CHECK remove "WHERE ?" from the front of db.clause
 app:post("/home", function(self)
   local user = Users:select(db.clause({
     username = self.params.username,
@@ -150,13 +149,38 @@ end)
 --- dashboard ---
 
 app:get("/dashboard", function(self)
-  self.test = self.params.transaction_name
-  self.transactions = Transactions:select()
+  local user = Users:find(db.clause({
+    username = self.session.username
+  }))
+  self.transactions = Transactions:select(db.clause({
+    user_id = user.id
+  }))
+  local balance = 0
+  local income = 0
+  local expense = 0
+  local transactions = self.transactions
+  for _, transaction in pairs(transactions) do
+    if transaction.type == "Income" then
+      income = income + tonumber(transaction.amount)
+      balance = balance + tonumber(transaction.amount)
+    elseif transaction.type == "Expense" then
+      expense = expense + tonumber(transaction.amount)
+      balance = balance - tonumber(transaction.amount)
+    elseif transaction.type == "Goal" then
+      expense = expense + tonumber(transaction.amount)
+      balance = balance - tonumber(transaction.amount)
+    end
+  end
+
+  self.balance = balance
+  self.income = income
+  self.expense = expense
+
   return { render = "pages.home.dashboard.dashboard_page" }
 end)
 
 app:post("/new_transaction", function(self)
-  local user = Users:select(db.clause({
+  local user = Users:find(db.clause({
     username = self.session.username
   }))
   Transactions:create({
@@ -165,7 +189,7 @@ app:post("/new_transaction", function(self)
     amount = self.params.amount,
     type = self.params.type,
     description = self.params.description,
-    user_id = user[1].id
+    user_id = user.id
   })
   return { render = "pages.home.dashboard.transaction.transaction_created" }
 end)
@@ -174,10 +198,10 @@ app:get("/dashboard/new_transaction", function()
   return { render = "pages.home.dashboard.transaction.new_transaction" }
 end)
 
-app:get("/delete_transaction/:name", function(self)
-  Transactions:delete(db.clause({
-    name = self.params.name
-  }))
+app:get("/delete_transaction/:id", function(self)
+  local transaction = Transactions:find(self.params.id)
+  transaction:delete()
+  return { redirect_to = "/home/dashboard" }
 end)
 
 ----------------
@@ -193,7 +217,27 @@ end)
 --- goals ---
 
 app:get("/goals", function(self)
-  self.goals = Goals:select()
+  local user = Users:find(db.clause({
+    username = self.session.username
+  }))
+  self.goals = Goals:select(db.clause {
+    user_id = user.id
+  })
+  -- self.text = math.floor((os.time(os.date()) - os.time()) / (7 * 24 * 60 * 60))
+  self.transactions = Transactions:select(db.clause({
+    user_id = user.id
+  }))
+  local balance = 0
+  local transactions = self.transactions
+  for _, transaction in pairs(transactions) do
+    if transaction.type == "Income" then
+      balance = balance + tonumber(transaction.amount)
+    elseif transaction.type == "Expense" then
+      balance = balance - tonumber(transaction.amount)
+    end
+  end
+
+  self.balance = balance
   return { render = "pages.home.goals.goals_page" }
 end)
 
@@ -202,7 +246,7 @@ app:get("/new_goal", function()
 end)
 
 app:post("/goal_created", function(self)
-  local user = Users:select(db.clause({
+  local user = Users:find(db.clause({
     username = self.session.username
   }))
   Goals:create {
@@ -210,17 +254,41 @@ app:post("/goal_created", function(self)
     description = self.params.description,
     end_date = self.params.end_date,
     amount = self.params.amount,
-    user_id = user[1].id
+    user_id = user.id
   }
+  Transactions:create({
+    date = os.date("%Y-%m-%d"),
+    name = self.params.name,
+    amount = self.params.amount,
+    type = "Goal",
+    description = self.params.description,
+    user_id = user.id
+  })
   return { render = "pages.home.goals.goal_created" }
 end)
 
+app:get("/delete_goal/:id", function(self)
+  local goal = Goals:find(self.params.id)
+  goal:delete()
+  return { redirect_to = "/home/goals" }
+end
+)
+
+app:get("/edit_goal/:id", function(self)
+  self.goal = Goals:find(self.params.id)
+  return { render = "pages.home.goals.edit_goal" }
+end)
 ------------
 
 --- analytics ---
 
 app:get("/analytics", function(self)
-  self.transactions = Transactions:select()
+  local user = Users:find(db.clause({
+    username = self.session.username
+  }))
+  self.transactions = Transactions:select(db.clause({
+    user_id = user.id
+  }))
   return { render = "pages.home.analytics.analytics_page" }
 end)
 

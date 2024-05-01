@@ -1,10 +1,9 @@
-
-    <link rel="stylesheet" href="../../static/CSS/dashboard.css"/>
+<link rel="stylesheet" href="../../static/CSS/dashboard.css"/>
 <div class="new-transaction-container"></div>
 <div class="first-row">
-  <% render("views.components.card_bills", { header="Income" , paragraph="123456" }) %> 
-  <% render("views.components.card_bills", { header="Expense" , paragraph="123456" }) %> 
-  <% render("views.components.card_bills", { header="Balance" , paragraph="123456" }) %>
+<% render("views.components.card_bills", { header = "Income" , paragraph = income }) %> 
+<% render("views.components.card_bills", { header = "Expense" , paragraph = expense }) %> 
+<% render("views.components.card_bills", { header = "Balance" , paragraph = balance }) %>
 </div>
 <div class="second-row">
   <div class="transactions">
@@ -12,12 +11,10 @@
       <h3>Transactions</h3>
       <div>
         <select name="month" id="month">
-          <% local currentMonth=tonumber(os.date('%m')) %> 
+          <% local currentMonth = tonumber(os.date("%m")) %>
           <% for i=1, 12 do %>
-            <option value="<%= i %>"
-              <% if i == currentMonth then %>selected<% end %>> 
-              <%= os.date('%B',
-              os.time{year=os.date('%Y'), month=i, day=1}) %>
+            <option value="<%= i %>" <% if i == currentMonth then %>selected<% end %>>
+              <%= os.date("%B", os.time { year = os.date("%Y"), month = i, day = 1 }) %>
             </option>
           <% end %>
         </select>
@@ -29,44 +26,57 @@
         </button>
       </div>
     </div>
-    <table>
-      <thead>
-        <th>#</th>
-        <th>Transaction Date:</th>
-        <th>Transaction Name:</th>
-        <th>Transaction Amount:</th>
-        <th>Transaction Type:</th>
-        <th>Transaction Desc:</th>
-        <th>Transaction Action:</th>
-      </thead>
-      <tbody>
-        <% for key,transaction in pairs(transactions) do %>
-        <tr>
-          <td><%= key %>.</td>
-          <td data-cell="transaction date"><%= transaction.date %></td>
-          <td data-cell="transaction name"><%= transaction.name %></td>
-          <td data-cell="transaction amount">₦ <%= transaction.amount %></td>
-          <td data-cell="transaction type"><%= transaction.type %></td>
-          <td data-cell="transaction desc"><%= transaction.description %></td>
-          <td data-cell="transaction action">
-          <%= transaction.user_id %>
-            <p>
-              <button>Edit</button>
-              <wbr />
-              <button
-                hx-get="/delete_transaction/<%= transaction.name %>"
-                hx-target="closest tr"
-                hx-swap="delete"
-                data-transaction_name="<%= transaction.name %>"
-              >
-                Delete
-              </button>
-            </p>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if next(transactions) ~= nil then %>
+      <table>
+        <thead>
+          <th>#</th>
+          <th>Transaction Date:</th>
+          <th>Transaction Name:</th>
+          <th>Transaction Amount:</th>
+          <th>Transaction Type:</th>
+          <th>Transaction Desc:</th>
+          <th>Transaction Action:</th>
+        </thead>
+        <tbody>
+          <% for key, transaction in pairs(transactions) do %>
+            <tr>
+              <td><%= key %>.</td>
+              <td data-cell="transaction date"><%= transaction.date %></td>
+              <td data-cell="transaction name"><%= transaction.name %></td>
+              <td data-cell="transaction amount">₦
+                <%= transaction.amount %></td>
+              <td data-cell="transaction type"><%= transaction.type %></td>
+              <td data-cell="transaction desc"><%= transaction.description %></td>
+              <td data-cell="transaction action">
+                <p>
+                  <button>Edit</button>
+                  <wbr/>
+                  <button
+                    hx-get="/delete_transaction/<%= transaction.id %>"
+                    hx-confirm="Are you sure you would like to delete this transaction"
+                    hx-target="main"
+                    hx-swap="outerHTML"
+                    data-transaction_name="<%= transaction.name %>"
+                  >
+                    Delete
+                  </button>
+                </p>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="no-transactions-created">
+        <h1>Create a new transaction</h1>
+        <button
+          hx-get="/dashboard/new_transaction"
+          hx-target=".new-transaction-container"
+        >
+          New transaction +
+        </button>
+      </div>
+    <% end %>
   </div>
 </div>
 <div class="third-row">
@@ -74,16 +84,21 @@
     <div class="header">
       <h3>Analytics</h3>
       <select name="month" id="month">
-        <% local currentMonth=tonumber(os.date('%m')) %> <% for i=1, 12 do %>
-        <option value="<%= i %>"
-          <% if i==currentMonth then %>selected<% end %>
-          > <%= os.date('%B',
-          os.time{year=os.date('%Y'), month=i, day=1}) %>
-        </option>
+        <% local currentMonth = tonumber(os.date("%m")) %>
+        <% for i=1, 12 do %>
+          <option value="<%= i %>" <% if i==currentMonth then %>selected<% end %>>
+            <%= os.date("%B", os.time { year = os.date("%Y"), month = i, day = 1 }) %>
+          </option>
         <% end %>
       </select>
     </div>
-   
-    <% render("views.components.analytics_chart") %>
+
+    <% if next(transactions) ~= nil then %>
+      <% render("views.components.analytics_chart") %>
+    <% else %>
+      <div>
+        <h1>No transactions yet</h1>
+      </div>
+    <% end %>
   </div>
 </div>

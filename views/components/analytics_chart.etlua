@@ -1,34 +1,48 @@
-<canvas id="myChart" style="width: 100%; max-height: 40rem"></canvas>
+<canvas id="myChart" style="max-width: 100%; max-height: 40rem"></canvas>
 <script>
-  const ctx = document.getElementById("myChart");
+try {
+    Chart.getChart('myChart').destroy();
+} catch {
+    const ctx = document.getElementById("myChart");
 
-  const myChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: [
-        <% for key,_ in pairs(transactions) do %>
-        "<%= key %>",
-      <% end %>
-      ],
-  datasets: [
-    {
-      label: "Balance",
-      data: [
-
-        <% for _,transaction in pairs(transactions) do %>
-        "<%= transaction.amount %>",
-      <% end %>
-          ],
-    borderWidth: 1,
+    const myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: [
+                <% for key,_ in pairs(transactions) do %>
+                    "<%= key %>",
+                <% end %>
+            ],
+            datasets: [{
+                label: "Transactions",
+                data: [
+                    <% for _,transaction in pairs(transactions) do %>
+                        <%= transaction.amount %>,
+                    <% end %>
+                ],
+                borderWidth: 1,
+            }, ],
         },
-      ],
-    },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Transaction'
+                    }
+                },
+                y: {
+                    display: true,
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Amount'
+                    }
+                },
+            },
         },
-    },
-  },
-  });
+    });
+}
 </script>

@@ -41,6 +41,18 @@ select {
   margin-bottom: 1rem;
 }
 
+.dashboard .bottom .second-row .transactions .no-transactions-created {
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard .bottom .second-row .transactions .no-transactions-created h1 {
+  margin-bottom: 0.5rem;
+}
+
 .dashboard .bottom .second-row .transactions table {
   width: 100%;
   border-collapse: collapse;
