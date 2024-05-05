@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../static/CSS/dashboard.css"/>
+<link rel="stylesheet" href="/static/CSS/dashboard.css"/>
 <div class="new-transaction-container"></div>
 <div class="first-row">
 <% render("views.components.card_bills", { header = "Income" , paragraph = income }) %> 
@@ -19,7 +19,7 @@
           <% end %>
         </select>
         <button
-          hx-get="/dashboard/new_transaction"
+          hx-get="/new_transaction"
           hx-target=".new-transaction-container"
         >
           New transaction +
@@ -70,7 +70,7 @@
       <div class="no-transactions-created">
         <h1>Create a new transaction</h1>
         <button
-          hx-get="/dashboard/new_transaction"
+          hx-get="/new_transaction"
           hx-target=".new-transaction-container"
         >
           New transaction +

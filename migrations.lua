@@ -33,7 +33,7 @@ return {
 			{ "amount",      types.real },
 			{ "type",        types.text },
 			{ "description", types.text },
-			{ "user_id",     types.integer },
+			{ "user_id",     types.text },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
 			"PRIMARY KEY (id)"
@@ -51,4 +51,27 @@ return {
 			"PRIMARY KEY (id)"
 		})
 	end,
+	[3] = function()
+		create_table("tasks", {
+			{ "id",          types.integer },
+			{ "name",        types.text },
+			{ "description", types.text },
+			{ "progress",    types.integer },
+			{ "total",       types.integer },
+			{ "user_id",     types.integer },
+
+			"FOREIGN KEY (user_id) REFERENCES users(id)",
+			"PRIMARY KEY (id)"
+		})
+		create_table("achievements", {
+			{ "id",          types.integer },
+			{ "name",        types.text },
+			{ "description", types.text },
+			{ "completed",   types.text },
+			{ "user_id",     types.integer },
+
+			"FOREIGN KEY (user_id) REFERENCES users(id)",
+			"PRIMARY KEY (id)"
+		})
+	end
 }

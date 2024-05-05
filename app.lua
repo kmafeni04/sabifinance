@@ -1,340 +1,98 @@
 local lapis = require("lapis")
 local app = lapis.Application()
-local db = require("lapis.db")
-local Model = require("lapis.db.model").Model
 
+local generic_controller = require("controllers.generic_controller")
+local user_controller = require("controllers.user_controller")
+local home_controller = require("controllers.home_controller")
+local transaction_controller = require("controllers.transaction_controller")
+local goal_controller = require("controllers.goal_controller")
+local component_controller = require("controllers.component_controller")
+local task_controller = require("controllers.task_controller")
+local achievement_controller = require("controllers.achievement_controller")
 
 app:enable("etlua")
 app.layout = require "views.layout"
-
-local Users = Model:extend("users", {
-  relations = {
-    { "transactions", has_many = "Transactions" },
-    { "goals",        has_many = "Goals" }
-  }
-})
-local Transactions = Model:extend("transactions", {
-  relations = {
-    { "user", belongs_to = "Users" },
-  }
-})
-local Goals = Model:extend("goals", {
-  relations = {
-    { "user", belongs_to = "Users" },
-  }
-})
 
 --- routes ---
 
 --- index ---
 
-app:get("index", "/", function(self)
-  self.session.username = "kmafeni04"
-  self.users = Users:select()
-  return { render = "pages.index" }
-end)
-
--------------
+app:get("index", "/", generic_controller.index)
 
 --- login ---
 
-app:get("login", "/login", function(self)
-  self.load = "/login_page"
-  return { render = "pages.login_signup.login_signup_page" }
-end)
+app:get("login", "/login", user_controller.login)
 
-app:get("/login_page", function()
-  return { render = "pages.login_signup.login.login_page" }
-end)
-
-------------
+app:get("/login_page", user_controller.login_page)
 
 --- signup ---
 
-app:get("signup", "/signup", function(self)
-  self.load = "/signup_page"
-  return { render = "pages.login_signup.login_signup_page" }
-end)
+app:get("signup", "/signup", user_controller.signup)
 
-app:get("/signup_page", function()
-  return { render = "pages.login_signup.signup.signup_page" }
-end)
+app:get("/signup_page", user_controller.signup_page)
 
-app:post("/signup_complete", function(self)
-  local user = Users:select("WHERE ?", db.clause({
-    username = self.params.username,
-    password = self.params.password,
-    email = self.params.email
-  }))
-  if self.params.password == self.params.confirm_password then
-    if next(user) == nil then
-      Users:create({
-        username = self.params.username,
-        password = self.params.password,
-        email = self.params.email
-      })
-      self.session.username = self.params.username
-      self.session.logged_in = true
-      return { render = "pages.login_signup.signup.signup_complete" }
-    else
-      return { redirect_to = self:url_for("signup") }
-    end
-  end
-end)
-
--------------
+app:post("/signup_complete", user_controller.signup_complete)
 
 --- home ---
 
-app:get("home", "/home/:page", function(self)
-  if self.session.logged_in == true then
-    self.username = self.session.username
-    self.page = self.params.page
-    return { render = "pages.home.home_page" }
-  else
-    return { redirect_to = self:url_for("index") }
-  end
-end
-)
+app:get("home", "/home/:page", home_controller.home)
 
-app:post("/home", function(self)
-  local user = Users:select(db.clause({
-    username = self.params.username,
-    password = self.params.password
-  }))
-  if next(user) ~= nil then
-    self.page = "dashboard"
-    self.session.username = self.params.username
-    self.session.logged_in = true
-    return { render = "pages.home.home_page" }
-  else
-    return { redirect_to = self:url_for("login") }
-  end
-end)
+app:post("/home", home_controller.home_post)
 
------------
+app:get("/logout", user_controller.logout)
 
 --- settings ---
 
-app:get("/settings", function(self)
-  local user = Users:select(db.clause({
-    username = self.session.username
-  }))
-  self.username = user[1].username
-  self.email = user[1].email
-  self.password = user[1].password
-  return { render = "pages.home.settings.settings_page" }
-end)
+app:get("/settings", home_controller.settings)
 
-app:get("/logout", function(self)
-  self.session.logged_in = false
-  return { redirect_to = self:url_for("index") }
-end)
-
-app:get("/delete_account", function(self)
-  local user = Users:find({
-    username = self.session.username
-  })
-  if next(user) ~= nil then
-    user:delete(db.clause({
-      username = self.session.username
-    }))
-    return { redirect_to = self:url_for("index") }
-  end
-end)
-
-----------------
-
+app:get("/delete_account", user_controller.delete_account)
 
 --- dashboard ---
 
-app:get("/dashboard", function(self)
-  local user = Users:find(db.clause({
-    username = self.session.username
-  }))
-  self.transactions = Transactions:select(db.clause({
-    user_id = user.id
-  }))
-  local balance = 0
-  local income = 0
-  local expense = 0
-  local transactions = self.transactions
-  for _, transaction in pairs(transactions) do
-    if transaction.type == "Income" then
-      income = income + tonumber(transaction.amount)
-      balance = balance + tonumber(transaction.amount)
-    elseif transaction.type == "Expense" then
-      expense = expense + tonumber(transaction.amount)
-      balance = balance - tonumber(transaction.amount)
-    elseif transaction.type == "Goal" then
-      expense = expense + tonumber(transaction.amount)
-      balance = balance - tonumber(transaction.amount)
-    end
-  end
+app:get("/dashboard", home_controller.dashboard)
 
-  self.balance = balance
-  self.income = income
-  self.expense = expense
+app:get("/new_transaction", transaction_controller.new_transaction)
 
-  return { render = "pages.home.dashboard.dashboard_page" }
-end)
+app:post("/new_transaction", transaction_controller.new_transaction_post)
 
-app:post("/new_transaction", function(self)
-  local user = Users:find(db.clause({
-    username = self.session.username
-  }))
-  Transactions:create({
-    date = self.params.date,
-    name = self.params.name,
-    amount = self.params.amount,
-    type = self.params.type,
-    description = self.params.description,
-    user_id = user.id
-  })
-  return { render = "pages.home.dashboard.transaction.transaction_created" }
-end)
+app:get("/delete_transaction/:id", transaction_controller.delete_transaction)
 
-app:get("/dashboard/new_transaction", function()
-  return { render = "pages.home.dashboard.transaction.new_transaction" }
-end)
+--- tasks ---
 
-app:get("/delete_transaction/:id", function(self)
-  local transaction = Transactions:find(self.params.id)
-  transaction:delete()
-  return { redirect_to = "/home/dashboard" }
-end)
+app:get("/tasks", task_controller.tasks_page)
 
-----------------
+-------------
 
 --- achievements ---
 
-app:get("/achievements", function()
-  return { render = "pages.home.achievements.achievements_page" }
-end)
-
--------------------
+app:get("/achievements", achievement_controller.achievements_page)
 
 --- goals ---
 
-app:get("/goals", function(self)
-  local user = Users:find(db.clause({
-    username = self.session.username
-  }))
-  self.goals = Goals:select(db.clause {
-    user_id = user.id
-  })
-  -- self.text = math.floor((os.time(os.date()) - os.time()) / (7 * 24 * 60 * 60))
-  self.transactions = Transactions:select(db.clause({
-    user_id = user.id
-  }))
-  local balance = 0
-  local transactions = self.transactions
-  for _, transaction in pairs(transactions) do
-    if transaction.type == "Income" then
-      balance = balance + tonumber(transaction.amount)
-    elseif transaction.type == "Expense" then
-      balance = balance - tonumber(transaction.amount)
-    end
-  end
+app:get("/goals", goal_controller.goal_page)
 
-  self.balance = balance
-  return { render = "pages.home.goals.goals_page" }
-end)
+app:get("/new_goal", goal_controller.new_goal)
 
-app:get("/new_goal", function()
-  return { render = "pages.home.goals.new_goal" }
-end)
-
-app:post("/goal_created", function(self)
-  local user = Users:find(db.clause({
-    username = self.session.username
-  }))
-  Goals:create {
-    name = self.params.name,
-    description = self.params.description,
-    end_date = self.params.end_date,
-    amount = self.params.amount,
-    user_id = user.id
-  }
-  Transactions:create({
-    date = os.date("%Y-%m-%d"),
-    name = self.params.name,
-    amount = self.params.amount,
-    type = "Goal",
-    description = self.params.description,
-    user_id = user.id
-  })
-  return { render = "pages.home.goals.goal_created" }
-end)
-
-app:get("/delete_goal/:id", function(self)
-  local goal = Goals:find(self.params.id)
-  goal:delete()
-  return { redirect_to = "/home/goals" }
-end
-)
-
-app:get("/edit_goal/:id", function(self)
-  self.goal = Goals:find(self.params.id)
-  return { render = "pages.home.goals.edit_goal" }
-end)
-------------
-
---- analytics ---
-
-app:get("/analytics", function(self)
-  local user = Users:find(db.clause({
-    username = self.session.username
-  }))
-  self.transactions = Transactions:select(db.clause({
-    user_id = user.id
-  }))
-  return { render = "pages.home.analytics.analytics_page" }
-end)
+app:post("/goal_created", goal_controller.goal_created)
 
 
-----------------
+app:get("/delete_goal/:id", goal_controller.delete_goal)
+
+app:get("/edit_goal/:id", goal_controller.edit_goal)
 
 
 --- components ---
 
-app:get("/analytics_chart", function()
-  return { render = "components.analytics_chart" }
-end)
+app:get("/analytics_chart", component_controller.analytics_chart)
 
-app:get("/home_content_dashboard", function(self)
-  self.current = "dashboard"
-  self.sub_heading = "Dashboard"
-  self.sub_heading_desc = "Welcome, " .. tostring(self.session.username)
-  return { render = "components.home_content" }
-end)
+app:get("/home_content_dashboard", component_controller.home_content_dashboard)
 
-app:get("/home_content_goals", function(self)
-  self.current = "goals"
-  self.sub_heading = "Goals"
-  self.sub_heading_desc = "Manage your goals"
-  return { render = "components.home_content" }
-end)
+app:get("goals", "/home_content_goals", component_controller.home_content_goals)
 
-app:get("/home_content_achievements", function(self)
-  self.current = "achievements"
-  self.sub_heading = "Achievments"
-  self.sub_heading_desc = "View your achievements"
-  return { render = "components.home_content" }
-end)
+app:get("/home_content_tasks", component_controller.home_content_tasks)
 
-app:get("/home_content_analytics", function(self)
-  self.current = "analytics"
-  self.sub_heading = "Analytics"
-  self.sub_heading_desc = "Analyze your balance"
-  return { render = "components.home_content" }
-end)
+app:get("/home_content_achievements", component_controller.home_content_achievements)
 
-app:get("/home_content_settings", function(self)
-  self.current = "settings"
-  self.sub_heading = "Settings"
-  self.sub_heading_desc = "Manage your user preferences"
-  return { render = "components.home_content" }
-end)
+app:get("/home_content_settings", component_controller.home_content_settings)
 
 return app

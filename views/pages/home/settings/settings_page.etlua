@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../static/CSS/settings.css"/>
+<link rel="stylesheet" href="/static/CSS/settings.css"/>
 <div class="user-details" x-data="{editable:false}">
   <div class="header">
     <h3>User Details</h3>

@@ -1,5 +1,5 @@
 <main>
-  <link rel="stylesheet" href="../../static/CSS/index.css"/>
+  <link rel="stylesheet" href="/static/CSS/index.css"/>
   <div class="top">
     <img src="../../static/images/gold-nigerian-naira-coin-cartoon.svg" alt=""/>
     <button

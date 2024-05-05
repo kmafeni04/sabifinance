@@ -88,6 +88,30 @@ i {
   cursor: pointer;
 }
 
+progress[value] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: 100%;
+  max-height: 0.4rem;
+  margin-block: 0.5rem;
+  border-radius: 1rem;
+  background: var(--quaternary-color);
+}
+progress[value]::-webkit-progress-bar {
+  border-radius: 1rem;
+  background: var(--quaternary-color);
+}
+progress[value]::-webkit-progress-value {
+  border-radius: 1rem;
+  background: var(--primary-color);
+}
+progress[value]::-moz-progress-bar {
+  border-radius: 1rem;
+  background: var(--primary-color);
+}
+
 .user-input {
   border: solid 1px var(--primary-color);
   border-radius: var(--interact-radius);
@@ -170,4 +194,22 @@ input {
 
 .new-object .object-created .header {
   margin-bottom: 1rem;
+}
+
+.horizontal-cards {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 2rem;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
+  scroll-snap-type: x mandatory;
+}
+
+.horizontal-cards .card {
+  scroll-snap-align: start;
+}
+
+.horizontal-cards .card:last-child {
+  margin-right: 70rem;
 }

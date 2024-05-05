@@ -1,5 +1,5 @@
 <main>
-  <link rel="stylesheet" href="../../static/CSS/login_signup.css"/>
+  <link rel="stylesheet" href="/static/CSS/login_signup.css"/>
   <div class="content">
     <div
       class="first-half"

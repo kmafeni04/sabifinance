@@ -1,5 +1,5 @@
 <main>
-  <link rel="stylesheet" href="../../static/CSS/home.css"/>
+  <link rel="stylesheet" href="/static/CSS/home.css"/>
   <div
     class="sidebar"
     x-data="{active: false}"
@@ -43,6 +43,19 @@
         </span>
       </button>
       <button
+        class="nav-button"
+        class="nav-button"
+        hx-get="/home_content_tasks"
+        hx-target=".content"
+        hx-swap="innerHTML"
+        @click="active = false"
+        title="Daily Tasks"
+      >
+        <i class="nf nf-fa-tasks"></i>
+        <span x-show="active" x-transition>Daily Tasks
+        </span>
+      </button>
+      <button
         type="button"
         class="nav-button"
         hx-get="/home_content_achievements"
@@ -54,19 +67,6 @@
         <i class="nf nf-fa-trophy"></i>
         <span x-show="active" x-transition>Achievements</span>
       </button>
-      <button
-        type="button"
-        class="nav-button"
-        hx-get="/home_content_analytics"
-        hx-target=".content"
-        hx-swap="innerHTML"
-        @click="active = false"
-        title="Analytics"
-      >
-        <i class="nf nf-oct-graph"></i>
-        <span x-show="active" x-transition>Analytics</span>
-      </button>
-
       <button
         type="button"
         class="nav-button"
