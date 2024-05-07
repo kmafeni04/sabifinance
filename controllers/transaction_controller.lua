@@ -1,7 +1,7 @@
 local Model = require("lapis.db.model").Model
 local db = require("lapis.db")
 
-local Users = Model:extend("users")
+local Users = require("models.users")
 local Transactions = Model:extend("transactions")
 
 return {
@@ -9,16 +9,14 @@ return {
     return { render = "pages.home.dashboard.transaction.new_transaction" }
   end,
   new_transaction_post = function(self)
-    local user = Users:find(db.clause({
-      username = self.session.username
-    }))
+    local user_info = Users:get_user_info(self.session.username)
     Transactions:create({
       date = self.params.date,
       name = self.params.name,
       amount = self.params.amount,
       type = self.params.type,
       description = self.params.description,
-      user_id = user.id
+      user_id = user_info.id
     })
     return { render = "pages.home.dashboard.transaction.transaction_created" }
   end,

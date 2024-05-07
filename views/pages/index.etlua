@@ -15,17 +15,6 @@
   <div class="bottom">
     <div class="first-half">
       <h1 class="header">Level Up Your Finances: Play, Plan, Prosper!</h1>
-      <h3>Users:</h3>
-      <ul>
-
-        <% for _,user in pairs(users) do %>
-          <li>
-            <%= user.username %>
-            <%= user.password %>
-          </li>
-        <% end %>
-      </ul>
-
       <p class="paragraph">
         Welcome to your financial power-up! Track expenses, set goals, and
         unlock achievements as you conquer your financial journey. Join today

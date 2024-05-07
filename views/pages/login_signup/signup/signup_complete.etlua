@@ -3,7 +3,11 @@
   <div class="content">
     <div class="signup-complete">
       <h1>Sign up complete</h1>
-      <button hx-get="/home/dashboard" hx-target="closest body" hx-push-url="true">
+      <button
+        hx-get="<%= url_for("dashboard") %>"
+        hx-target="closest body"
+        hx-push-url="true"
+      >
         Proceed to Home Page
       </button>
     </div>

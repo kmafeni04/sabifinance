@@ -13,6 +13,10 @@ local achievement_controller = require("controllers.achievement_controller")
 app:enable("etlua")
 app.layout = require "views.layout"
 
+
+app:get("/test", function()
+  return { render = "goals_page_old" }
+end)
 --- routes ---
 
 --- index ---
@@ -31,25 +35,26 @@ app:get("signup", "/signup", user_controller.signup)
 
 app:get("/signup_page", user_controller.signup_page)
 
-app:post("/signup_complete", user_controller.signup_complete)
+app:post("signup_complete", "/signup_complete", user_controller.signup_complete)
 
 --- home ---
 
-app:get("home", "/home/:page", home_controller.home)
+app:get("home", "/:page", home_controller.home)
 
-app:post("/home", home_controller.home_post)
 
 app:get("/logout", user_controller.logout)
 
 --- settings ---
 
-app:get("/settings", home_controller.settings)
+app:get("settings", "/settings", home_controller.settings)
 
 app:get("/delete_account", user_controller.delete_account)
 
 --- dashboard ---
 
-app:get("/dashboard", home_controller.dashboard)
+app:get("dashboard", "/dashboard", home_controller.dashboard)
+
+app:post("dashboard", "/dashboard", home_controller.home_post)
 
 app:get("/new_transaction", transaction_controller.new_transaction)
 
@@ -59,17 +64,19 @@ app:get("/delete_transaction/:id", transaction_controller.delete_transaction)
 
 --- tasks ---
 
-app:get("/tasks", task_controller.tasks_page)
+app:get("tasks", "/tasks", task_controller.tasks_page)
+
+task_controller.tasks_delete()
 
 -------------
 
 --- achievements ---
 
-app:get("/achievements", achievement_controller.achievements_page)
+app:get("achievements", "/achievements", achievement_controller.achievements_page)
 
 --- goals ---
 
-app:get("/goals", goal_controller.goal_page)
+app:get("goals", "/goals", goal_controller.goal_page)
 
 app:get("/new_goal", goal_controller.new_goal)
 
@@ -84,15 +91,5 @@ app:get("/edit_goal/:id", goal_controller.edit_goal)
 --- components ---
 
 app:get("/analytics_chart", component_controller.analytics_chart)
-
-app:get("/home_content_dashboard", component_controller.home_content_dashboard)
-
-app:get("goals", "/home_content_goals", component_controller.home_content_goals)
-
-app:get("/home_content_tasks", component_controller.home_content_tasks)
-
-app:get("/home_content_achievements", component_controller.home_content_achievements)
-
-app:get("/home_content_settings", component_controller.home_content_settings)
 
 return app

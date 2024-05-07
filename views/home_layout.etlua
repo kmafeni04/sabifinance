@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link
+      rel="icon"
+      href="../static/images/gold-nigerian-naira-coin-cartoon.svg"
+      type="image/svg+xml"
+    />
+    <title><%= Page_title or "SabiFinance" %></title>
+    <script src="/static/JS/HTMX.js"></script>
+    <script src="/static/JS/Alpine.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="/static/CSS/app.css"/>
+  </head>
+  <body hx-boost="true">
+    <main>
+      <link rel="stylesheet" href="/static/CSS/home.css"/>
+      <div
+        class="sidebar"
+        x-data="{active: false}"
+        x-bind:class="active ? 'sidebar_active' : ''"
+      >
+        <div class="top">
+          <img
+            x-show="active"
+            src="../../static/images/gold-nigerian-naira-coin-cartoon.svg"
+            x-transition
+          />
+          <button type="button">
+            <i class="nf nf-md-menu" x-show="!active" @click="active = !active"></i>
+            <i class="nf nf-md-close" x-show="active" @click="active = !active"></i>
+          </button>
+        </div>
+        <div class="bottom">
+          <a
+            href="<%= url_for('dashboard')%>"
+            class="nav-button"
+            x-bind:class="active ? 'nav-button-opened' : ''"
+            @click="active = false"
+            title="Dashboard"
+          >
+            <i class="nf nf-md-collage"></i>
+            <span x-show="active" x-transition>Dashboard</span>
+          </a>
+          <a
+            href="<%= url_for('goals')%>"
+            class="nav-button"
+            x-bind:class="active ? 'nav-button-opened' : ''"
+            @click="active = false"
+            title="Goals"
+          >
+            <i class="nf nf-oct-goal"></i>
+            <span x-show="active" x-transition>Goals</span>
+          </a>
+          <a
+            href="<%= url_for('tasks')%>"
+            class="nav-button"
+            x-bind:class="active ? 'nav-button-opened' : ''"
+            @click="active = false"
+            title="Daily Tasks"
+          >
+            <i class="nf nf-fa-tasks"></i>
+            <span x-show="active" x-transition>Daily Tasks</span>
+          </a>
+          <a
+            href="<%= url_for('achievements')%>"
+            class="nav-button"
+            x-bind:class="active ? 'nav-button-opened' : ''"
+            title="Achievements"
+            @click="active = false"
+          >
+            <i class="nf nf-fa-trophy"></i>
+            <span x-show="active" x-transition>Achievements</span>
+          </a>
+          <a
+            href="<%= url_for('settings')%>"
+            class="nav-button"
+            x-bind:class="active ? 'nav-button-opened' : ''"
+            @click="active = false"
+            title="Settings"
+          >
+            <i class="nf nf-fa-gear"></i>
+            <span x-show="active" x-transition>Settings</span>
+          </a>
+          <a
+            hx-get="/logout"
+            hx-target="body"
+            hx-push-url = "/"
+            hx-boost="false"
+            class="nav-button"
+            x-bind:class="active ? 'nav-button-opened' : ''"
+            title="Log out"
+            hx-confirm="Are you sure you want to log out?"
+          >
+            <i class="nf nf-md-logout"></i>
+            <span x-show="active" x-transition>Log out</span>
+          </a>
+        </div>
+      </div>
+      <div class="content">
+        <% content_for("inner") %>
+      </div>
+    </main>
+  </body>
+</html>

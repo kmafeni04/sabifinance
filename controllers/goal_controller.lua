@@ -2,7 +2,7 @@ local db = require("lapis.db")
 local Model = require("lapis.db.model").Model
 local Users = Model:extend("users")
 local Transactions = Model:extend("transactions")
-local Goals = Model:extend("goals")
+local Goals = require("models.goals")
 
 return {
   goal_page = function(self)
@@ -34,35 +34,18 @@ return {
     end
 
     self.balance = balance
-    return { render = "pages.home.goals.goals_page" }
+    return { render = "pages.home.goals.goals_page", layout = "home_layout" }
   end,
   new_goal = function()
     return { render = "pages.home.goals.new_goal" }
   end,
   goal_created = function(self)
-    local user = Users:find(db.clause({
-      username = self.session.username
-    }))
-    Goals:create {
-      name = self.params.name,
-      description = self.params.description,
-      end_date = self.params.end_date,
-      amount = self.params.amount,
-      user_id = user.id
-    }
-    Transactions:create({
-      date = os.date("%Y-%m-%d"),
-      name = self.params.name,
-      amount = self.params.amount,
-      type = "Goal",
-      description = self.params.description,
-      user_id = user.id
-    })
+    Goals:create_goal(self.session.username, self.params.name, self.params.description, self.params.end_date,
+      self.params.amount)
     return { render = "pages.home.goals.goal_created" }
   end,
   delete_goal = function(self)
-    local goal = Goals:find(self.params.id)
-    goal:delete()
+    Goals:delete_goal(self.params.id)
     return { redirect_to = self:url_for("goals") }
   end,
   edit_goal = function(self)

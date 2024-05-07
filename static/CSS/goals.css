@@ -2,16 +2,9 @@
   width: 98.5%;
 }
 
-.goals .header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
 .goals .bottom .first-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  flex-direction: column;
   margin-bottom: 2rem;
 }
 
@@ -64,10 +57,4 @@
 
 .goals .cards .card .card-bottom .delete-goal {
   width: 100%;
-}
-
-.non-completed {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

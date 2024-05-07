@@ -1,5 +1,5 @@
 local Model = require("lapis.db.model").Model
-local Users = Model:extend("users")
+local Users = require("models.users")
 local db = require("lapis.db")
 
 return {
@@ -18,20 +18,11 @@ return {
     return { render = "pages.login_signup.signup.signup_page" }
   end,
   signup_complete = function(self)
-    local user = Users:select("WHERE ?", db.clause({
-      username = self.params.username,
-      password = self.params.password,
-      email = self.params.email
-    }))
     if self.params.password == self.params.confirm_password then
-      if next(user) == nil then
-        Users:create({
-          username = self.params.username,
-          password = self.params.password,
-          email = self.params.email
-        })
+      local user_info = Users:get_user_info(self.params.username)
+      if user_info == nil then
+        Users:create_user(self.params.username, self.params.email, self.params.password)
         self.session.username = self.params.username
-        self.session.logged_in = true
         return { render = "pages.login_signup.signup.signup_complete" }
       else
         return { redirect_to = self:url_for("signup") }

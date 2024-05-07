@@ -1,5 +1,5 @@
 <form
-  hx-post="/home"
+  hx-post="/dashboard"
   hx-push-url="true"
   hx-target="closest body"
   hx-swap="outerHTML"

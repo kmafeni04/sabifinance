@@ -4,7 +4,7 @@
     <button
       class="new-goal-btn"
       type="button"
-      hx-get="/home/goals"
+      hx-get="<%= url_for("goals") %>"
       hx-swap="outerHTML"
       hx-target="main"
     >

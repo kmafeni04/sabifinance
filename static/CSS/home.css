@@ -10,6 +10,10 @@ main {
   transition: var(--transition-time);
 }
 
+.sidebar a {
+  text-decoration: none;
+}
+
 .sidebar i {
   font-size: clamp(1rem, 1.5vw, 5rem);
 }
@@ -33,11 +37,16 @@ main {
 }
 
 .sidebar .bottom .nav-button {
-  width: 90%;
+  width: 30%;
   padding: 0.7rem clamp(0rem, 1.35vw, 2rem);
+  border-radius: 0.3rem;
   margin-bottom: 0.3rem;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.sidebar .bottom .nav-button-opened {
+  width: 70%;
   justify-content: start;
 }
 
@@ -73,6 +82,13 @@ main {
 
 .content .top {
   padding-bottom: 2rem;
+}
+
+.content .bottom .header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 900px) {

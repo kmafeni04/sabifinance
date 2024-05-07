@@ -1,7 +1,7 @@
 local Model = require("lapis.db.model").Model
 local db = require("lapis.db")
 
-local Users = Model:extend("users")
+local Users = require("models.users")
 local Transactions = Model:extend("transactions")
 local Goals = Model:extend("goals")
 
@@ -10,7 +10,7 @@ return {
     if self.session.logged_in == true then
       self.username = self.session.username
       self.page = self.params.page
-      return { render = "pages.home.home_page" }
+      return { render = "dashboard" }
     else
       return { redirect_to = self:url_for("index") }
     end
@@ -24,12 +24,14 @@ return {
       self.page = "dashboard"
       self.session.username = self.params.username
       self.session.logged_in = true
-      return { render = "pages.home.home_page" }
+      return { redirect_to = self:url_for("dashboard") }
     else
       return { redirect_to = self:url_for("login") }
     end
   end,
   dashboard = function(self)
+    self.username = self.session.username
+
     local user = Users:find(db.clause({
       username = self.session.username
     }))
@@ -57,7 +59,7 @@ return {
     self.income = income
     self.expense = expense
 
-    return { render = "pages.home.dashboard.dashboard_page" }
+    return { render = "pages.home.dashboard.dashboard_page", layout = "home_layout" }
   end,
   settings = function(self)
     local user = Users:find(db.clause({
@@ -66,6 +68,6 @@ return {
     self.username = user.username
     self.email = user.email
     self.password = user.password
-    return { render = "pages.home.settings.settings_page" }
+    return { render = "pages.home.settings.settings_page", layout = "home_layout" }
   end
 }

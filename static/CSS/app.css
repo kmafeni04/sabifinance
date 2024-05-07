@@ -213,3 +213,13 @@ input {
 .horizontal-cards .card:last-child {
   margin-right: 70rem;
 }
+
+.none-completed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.none-completed h2 {
+  text-align: center;
+}

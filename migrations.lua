@@ -40,12 +40,16 @@ return {
 		})
 
 		create_table("goals", {
-			{ "id",          types.integer },
-			{ "name",        types.text },
-			{ "description", types.text },
-			{ "end_date",    types.text },
-			{ "amount",      types.real },
-			{ "user_id",     types.integer },
+			{ "id",              types.integer },
+			{ "name",            types.text },
+			{ "description",     types.text },
+			{ "end_date",        types.text },
+			{ "amount_per_week", types.real },
+			{ "current_amount",  types.real },
+			{ "date_created",    types.text },
+			{ "progress",        types.integer },
+			{ "completed",       types.text },
+			{ "user_id",         types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
 			"PRIMARY KEY (id)"
@@ -58,6 +62,7 @@ return {
 			{ "description", types.text },
 			{ "progress",    types.integer },
 			{ "total",       types.integer },
+			{ "completed",   types.text },
 			{ "user_id",     types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
