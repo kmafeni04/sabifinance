@@ -23,6 +23,7 @@ return {
       if user_info == nil then
         Users:create_user(self.params.username, self.params.email, self.params.password)
         self.session.username = self.params.username
+        self.session.logged_in = true
         return { render = "pages.login_signup.signup.signup_complete" }
       else
         return { redirect_to = self:url_for("signup") }
@@ -31,6 +32,7 @@ return {
   end,
   logout = function(self)
     self.session.logged_in = false
+    self.session.username = nil
     return { redirect_to = self:url_for("index") }
   end,
   delete_account = function(self)
@@ -41,6 +43,8 @@ return {
       user:delete(db.clause({
         username = self.session.username
       }))
+      self.session.logged_in = false
+      self.session.username = nil
       return { redirect_to = self:url_for("index") }
     end
   end

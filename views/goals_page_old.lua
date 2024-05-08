@@ -2,8 +2,8 @@ local Widget = require("lapis.html").Widget
 local db = require("lapis.db")
 local Model = require("lapis.db.model").Model
 local Users = Model:extend("users")
-local Transactions = Model:extend("transactions")
-local Goals = Model:extend("goals")
+-- local Transactions = Model:extend("transactions")
+-- local Goals = Model:extend("goals")
 
 return Widget:extend(function(self)
   div({ class = "goals" }, function()

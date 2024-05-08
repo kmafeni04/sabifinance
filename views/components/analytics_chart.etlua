@@ -1,4 +1,4 @@
-<canvas id="myChart" style="max-width: 100%; max-height: 40rem"></canvas>
+<canvas id="myChart" style="max-width: 100%; max-height: 40rem;"></canvas>
 <script>
 try {
     Chart.getChart('myChart').destroy();
@@ -8,40 +8,49 @@ try {
     const myChart = new Chart(ctx, {
         type: "line",
         data: {
-            labels: [
-                <% for key,_ in pairs(transactions) do %>
-                    "<%= key %>",
-                <% end %>
-            ],
             datasets: [{
-                label: "Transactions",
+                label: "Income",
                 data: [
-                    <% for _,transaction in pairs(transactions) do %>
-                        <%= transaction.amount %>,
+                    <% for _, transaction in pairs(transactions) do %>
+                        <% if transaction.type == "Income" then %>
+                            <%= transaction.amount %>,
+                        <% end %>
                     <% end %>
                 ],
                 borderWidth: 1,
-            }, ],
+                borderColor: 'rgba(253, 216, 53, 50%)',
+                backgroundColor: 'rgba(253, 216, 53, 50%)',
+            },
+            {
+                label: "Expense",
+                data: [
+                    <% for _, transaction in pairs(transactions) do %>
+                        <% if transaction.type == "Expense" or transaction.type == "Goal" then %>
+                            <%= transaction.amount %>,
+                        <% end %>
+                    <% end %>
+                ],
+                borderWidth: 1,
+                borderColor: 'rgba(100, 100, 100, 50%)',
+                backgroundColor: 'rgba(100, 100, 100, 50%)'
+            }],
         },
         options: {
             responsive: true,
             scales: {
-                x: {
-                    display: true,
-                    title: {
+                xAxes: [{
+                    scaleLabel: {
                         display: true,
-                        text: 'Transaction'
+                        labelString: 'Index'
                     }
-                },
-                y: {
-                    display: true,
-                    beginAtZero: true,
-                    title: {
+                }],
+                yAxes: [{
+                    scaleLabel: {
                         display: true,
-                        text: 'Amount'
+                        labelString: 'Amount (₦)'
                     }
-                },
-            },
+                }]
+            }
         },
     });
 }

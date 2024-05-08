@@ -23,6 +23,6 @@ return {
   delete_transaction = function(self)
     local transaction = Transactions:find(self.params.id)
     transaction:delete()
-    return { redirect_to = "/home/dashboard" }
+    return { redirect_to = self:url_for("dashboard") }
   end
 }

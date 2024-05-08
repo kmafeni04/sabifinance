@@ -1,6 +1,8 @@
 return {
   index = function(self)
-    self.session.username = "kmafeni04"
+    if self.session.logged_in == true then
+      return { redirect_to = self:url_for("dashboard") }
+    end
     return { render = "pages.index" }
-  end
+  end,
 }

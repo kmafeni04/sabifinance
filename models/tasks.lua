@@ -15,7 +15,7 @@ function Tasks_mt:create_tasks(username)
       name = "No-Spend Day",
       description = "Challenge yourself to avoid spending any money",
       progress = "0",
-      total = "24",
+      total = "1",
       completed = "false",
       user_id = user.id
     })

@@ -4,7 +4,7 @@
     <button
       class="new-transaction-btn"
       type="button"
-      hx-get="/home/dashboard"
+      hx-get="<%= url_for('dashboard') %>"
       hx-swap="outerHTML"
       hx-target="main"
     >

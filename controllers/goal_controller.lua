@@ -12,7 +12,6 @@ return {
     self.goals = Goals:select(db.clause {
       user_id = user.id
     })
-    -- self.text = math.floor((os.time(os.date()) - os.time()) / (7 * 24 * 60 * 60))
     self.transactions = Transactions:select(db.clause({
       user_id = user.id
     }))
