@@ -7,11 +7,11 @@
   <h1>Create Your Account</h1>
   <label for="username">Username</label>
   <div class="user-input">
-    <input type="text" name="username" minlength="5" maxlength="20"/>
+    <input type="text" name="username" minlength="5" maxlength="20" required/>
   </div>
   <label for="email">Email</label>
   <div class="user-input">
-    <input type="email" name="email"/>
+    <input type="email" name="email" required/>
   </div>
   <label for="password">Password</label>
   <div class="user-input">
@@ -21,6 +21,7 @@
       name="password"
       minlength="8"
       maxlength="30"
+      required
     />
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
     <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable"></i>
@@ -33,10 +34,12 @@
       name="confirm_password"
       minlength="8"
       maxlength="30"
+      required
     />
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
     <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable"></i>
   </div>
+  <small><%= session.signup_errors or "" %></small>
   <button>Sign up</button>
   <br/>
   <p>

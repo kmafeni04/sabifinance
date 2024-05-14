@@ -23,7 +23,6 @@ function Goals_mt:create_goal(username, goal_name, goal_description, goal_end_da
     total_amount = goal_amount * weeks_left,
     weeks_left = weeks_left,
     progress = goal_amount,
-    completed = "false",
     user_id = user_info.id,
   }
   Transactions:create_transaction(username, goal_name, goal_amount, goal_description)

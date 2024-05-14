@@ -2,6 +2,7 @@ local Model = require("lapis.db.model").Model
 local db = require("lapis.db")
 
 local Users = require("models.users")
+local Goals = require("models.goals")
 local Transactions = Model:extend("transactions")
 
 return {
@@ -22,6 +23,9 @@ return {
   end,
   delete_transaction = function(self)
     local transaction = Transactions:find(self.params.id)
+    if transaction.type == "Goal" then
+
+    end
     transaction:delete()
     return { redirect_to = self:url_for("dashboard") }
   end

@@ -28,6 +28,8 @@ return {
       else
         return { redirect_to = self:url_for("signup") }
       end
+    else
+      return { redirect_to = self:url_for("signup") }
     end
   end,
   logout = function(self)
@@ -45,7 +47,7 @@ return {
       }))
       self.session.logged_in = false
       self.session.username = nil
-      return { redirect_to = self:url_for("index") }
+      return { render = "pages.index" }
     end
   end
 }

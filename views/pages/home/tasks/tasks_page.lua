@@ -12,7 +12,7 @@ return Widget:extend(function(self)
         h3({ class = "header" }, "Ongoing")
         div({ class = "horizontal-cards ongoing" }, function()
           for _, task in pairs(self.tasks) do
-            if task.completed == "false" then
+            if task.progress < task.total then
               div({ class = "card" }, function()
                 h3(task.name)
                 p(task.description)
@@ -46,7 +46,7 @@ return Widget:extend(function(self)
         div({ class = "horizontal-cards completed" }, function()
           local none_completed = false
           for _, task in pairs(self.tasks) do
-            if task.completed == "true" then
+            if task.progress == task.total then
               div({ class = "card" }, function()
                 h3(task.name)
                 p(task.description)

@@ -13,8 +13,8 @@
       <form
         class="first-row"
         x-data="{viewable : false}"
-        hx-post="/home"
-        hx-target="closest body"
+        hx-post="<%= url_for('settings') %>"
+        hx-target="body"
         hx-confirm="Are you sure you'd like to confirm these edits?"
       >
         <div class="user-form">
@@ -23,6 +23,7 @@
             <input
               type="text"
               id="username"
+              name="username"
               x-bind:value="!editable ? '<%= username %>' : '<%= username %>'"
               x-bind:readonly="!editable ? true : false"
               x-bind:class="!editable ? 'not-editable' : ''"
@@ -33,6 +34,7 @@
             <input
               type="email"
               id="email"
+              name="email"
               x-bind:value="editable ? '<%= email %>':'<%= email %>'"
               x-bind:readonly="!editable ? true : false"
               x-bind:class="!editable ? 'not-editable' : ''"
@@ -42,6 +44,25 @@
           <div class="user-input" x-bind:class="!editable ? 'not-editable' : 'editable' ">
             <input
               id="password"
+              name="password"
+              x-bind:type="viewable ? 'text' : 'password'"
+              x-bind:value="!editable ? '<%= password %>' : '<%= password %>'"
+              x-bind:readonly="!editable ? true : false"
+              x-bind:class="!editable ? 'not-editable' : ''"
+            />
+            <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
+            <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable">
+            </i>
+          </div>
+          <label for="confirm-password" class="user-label" x-show="editable">Confirm Password:</label>
+          <div
+            class="user-input"
+            x-bind:class="!editable ? 'not-editable' : 'editable'"
+            x-show="editable"
+          >
+            <input
+              id="confirm-password"
+              name="confirm_password"
               x-bind:type="viewable ? 'text' : 'password'"
               x-bind:value="!editable ? '<%= password %>' : '<%= password %>'"
               x-bind:readonly="!editable ? true : false"
@@ -60,7 +81,7 @@
             >
               Cancel
             </button>
-            <button class="user-form-button" x-show="editable" @click="editable = false">
+            <button class="user-form-button" x-show="editable">
               Save
             </button>
           </div>
@@ -68,8 +89,8 @@
       </form>
       <button
         class="delete-account"
-        hx-get="/delete_account"
-        hx-target="main"
+        hx-delete="/delete_account"
+        hx-target="body"
         hx-push-url="/"
         hx-confirm="Are you sure you'd like to delete your account?"
       >

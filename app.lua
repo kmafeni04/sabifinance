@@ -41,14 +41,15 @@ app:post("signup_complete", "/signup_complete", user_controller.signup_complete)
 
 app:get("home", "/:page", home_controller.home)
 
-
 app:get("/logout", user_controller.logout)
 
 --- settings ---
 
 app:get("settings", "/settings", home_controller.settings)
 
-app:get("/delete_account", user_controller.delete_account)
+app:post("settings", "/settings", home_controller.settings_post)
+
+app:delete("/delete_account", user_controller.delete_account)
 
 --- dashboard ---
 

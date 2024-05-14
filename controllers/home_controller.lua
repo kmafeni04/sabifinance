@@ -1,9 +1,7 @@
-local Model = require("lapis.db.model").Model
 local db = require("lapis.db")
 
 local Users = require("models.users")
-local Transactions = Model:extend("transactions")
-local Goals = Model:extend("goals")
+local Transactions = require("models.transactions")
 
 return {
   home = function(self)
@@ -21,7 +19,6 @@ return {
       password = self.params.password
     }))
     if next(user) ~= nil then
-      self.page = "dashboard"
       self.session.username = self.params.username
       self.session.logged_in = true
       return { redirect_to = self:url_for("dashboard") }
@@ -32,11 +29,9 @@ return {
   dashboard = function(self)
     self.username = self.session.username
 
-    local user = Users:find(db.clause({
-      username = self.session.username
-    }))
+    local user_info = Users:get_user_info(self.username)
     self.transactions = Transactions:select(db.clause({
-      user_id = user.id
+      user_id = user_info.id
     }))
     local balance = 0
     local income = 0
@@ -62,12 +57,22 @@ return {
     return { render = "pages.home.dashboard.dashboard_page", layout = "home_layout" }
   end,
   settings = function(self)
-    local user = Users:find(db.clause({
-      username = self.session.username
-    }))
+    local user = Users:get_user_info(self.session.username)
     self.username = user.username
     self.email = user.email
     self.password = user.password
     return { render = "pages.home.settings.settings_page", layout = "home_layout" }
+  end,
+  settings_post = function(self)
+    local user = Users:get_user_info(self.session.username)
+    if self.params.password == self.params.confirm_password then
+      user:update({
+        username = self.params.username,
+        email = self.params.email,
+        password = self.params.password
+      })
+      self.session.username = self.params.username
+      return { redirect_to = self:url_for("settings") }
+    end
   end
 }

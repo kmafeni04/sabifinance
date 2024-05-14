@@ -51,7 +51,6 @@ return {
 			{ "total_amount",     types.real },
 			{ "weeks_left",       types.integer },
 			{ "progress",         types.integer },
-			{ "completed",        types.text },
 			{ "user_id",          types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
@@ -65,7 +64,6 @@ return {
 			{ "description", types.text },
 			{ "progress",    types.integer },
 			{ "total",       types.integer },
-			{ "completed",   types.text },
 			{ "user_id",     types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",

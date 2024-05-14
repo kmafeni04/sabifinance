@@ -22,7 +22,92 @@ return Widget:extend(function(self)
           end)
           div({ class = "horizontal-cards cards ongoing" }, function()
             render("views.components.card_bills", { header = "Balance", paragraph = self.balance })
+            local no_goal = false
             for _, goal in pairs(self.goals) do
+              if goal.remaining_amount > 0 then
+                div({ class = "card goal-card" }, function()
+                  div({ class = "card-top" }, function()
+                    div(function()
+                      h3({ class = "card-header" }, goal.name)
+                      p({ class = "card-paragraph" }, goal.description)
+                    end)
+                    button(
+                      {
+                        class = "card-button",
+                        ["hx-get"] = "/edit_goal/" .. goal.id,
+                        ["hx-target"] =
+                        ".new-goal-container"
+                      },
+                      "Edit goal")
+                  end)
+                  div({ class = "card-body" }, function()
+                    div({
+                      class = "duration",
+                      function()
+                        p({ class = "duration-header" }, "Duration")
+                        p({ class = "duration-paragraph" }, goal.weeks_left)
+                      end
+                    })
+                    div({ class = "amount" }, function()
+                      p({ class = "amount-header" }, "Amount /w")
+                      p({ class = "amount-paragraph" }, "₦ " .. goal.amount_per_week)
+                    end)
+                  end)
+                  div({ class = "card-bottom" }, function()
+                    div({ class = "progress" }, function()
+                      h4({ class = "progress-bar-label" }, "Progress:")
+                      progress({ value = goal.progress, max = goal.total_amount })
+                      div({ class = "progress-details" }, function()
+                        p({ class = "amount-remainig" }, function()
+                          b("Remaining:")
+                          br()
+                          if goal.remaining_amount < 0 then
+                            goal.remaining_amount = 0
+                          end
+                          text("₦ " .. goal.remaining_amount)
+                        end)
+                        p(function()
+                          b(math.floor((goal.total_amount / goal.current_amount) * 10) .. "%")
+                        end)
+                        p({ class = "current-amount" }, function()
+                          b("Current:")
+                          br()
+                          text("₦ " .. goal.current_amount)
+                        end)
+                      end)
+                    end)
+                    button({
+                      class = "delete-goal",
+                      ["hx-get"] = "/delete_goal/" .. goal.id,
+                      ["hx-confirm"] = "Are you sure you would like to delete this goal?",
+                      ["hx-target"] = "body",
+                      ["hx-swap"] = "outerHTML"
+                    }, "Delete Goal")
+                  end)
+                end)
+              else
+                if no_goal == false then
+                  div({ class = "none-completed card" }, function()
+                    h2("Create a new goal")
+                    button({ ["hx-get"] = "/new_goal", ["hx-target"] = ".new-goal-container" }, "New goal +")
+                  end)
+                  no_goal = true
+                end
+              end
+            end
+          end)
+        end)
+        div({ class = "second-row" }, function()
+          div({ class = "header" }, function()
+            h3("Completed")
+          end)
+        end)
+        div({ class = "horizontal-cards cards" }, function()
+          local none_completed = false
+          for _, goal in pairs(self.goals) do
+            none_completed = true
+            if goal.remaining_amount < 0 then
+              print("AAAAAAAAAAAAAA" .. goal.remaining_amount)
               div({ class = "card goal-card" }, function()
                 div({ class = "card-top" }, function()
                   div(function()
@@ -36,7 +121,7 @@ return Widget:extend(function(self)
                       ["hx-target"] =
                       ".new-goal-container"
                     },
-                    "Edit goal")
+                    "Redo goal")
                 end)
                 div({ class = "card-body" }, function()
                   div({
@@ -59,6 +144,9 @@ return Widget:extend(function(self)
                       p({ class = "amount-remainig" }, function()
                         b("Remaining:")
                         br()
+                        if goal.remaining_amount < 0 then
+                          goal.remaining_amount = 0
+                        end
                         text("₦ " .. goal.remaining_amount)
                       end)
                       p(function()
@@ -70,33 +158,19 @@ return Widget:extend(function(self)
                         text("₦ " .. goal.current_amount)
                       end)
                     end)
+                    button({
+                      class = "delete-goal",
+                      ["hx-get"] = "/delete_goal/" .. goal.id,
+                      ["hx-confirm"] = "Are you sure you would like to delete this goal?",
+                      ["hx-target"] = "body",
+                      ["hx-swap"] = "outerHTML"
+                    }, "Delete Goal")
                   end)
-                  button({
-                    class = "delete-goal",
-                    ["hx-get"] = "/delete_goal/" .. goal.id,
-                    ["hx-confirm"] = "Are you sure you would like to delete this goal?",
-                    ["hx-target"] = "body",
-                    ["hx-swap"] = "outerHTML"
-                  }, "Delete Goal")
                 end)
               end)
-            end
-          end)
-        end)
-        div({ class = "second-row" }, function()
-          div({ class = "header" }, function()
-            h3("Completed")
-          end)
-        end)
-        div({ class = "horizontal-cards  ongoing" }, function()
-          local none_completed = false
-          for _, goal in pairs(self.goals) do
-            if goal.completed == "true" then
-              div({ class = "none-completed card" }, function()
-                h2("No completed Goals")
-              end)
+              none_completed = true
             else
-              if none_completed ~= true then
+              if none_completed == false then
                 div({ class = "none-completed card" }, function()
                   h2("No completed Goals")
                 end)

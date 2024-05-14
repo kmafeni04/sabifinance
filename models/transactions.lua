@@ -14,4 +14,8 @@ function Transactions_mt:create_transaction(username, transaction_name, transact
   })
 end
 
+function Transactions_mt:delete_transaction()
+
+end
+
 return Transactions

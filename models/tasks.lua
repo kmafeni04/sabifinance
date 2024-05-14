@@ -1,23 +1,20 @@
 local Model = require("lapis.db.model").Model
-local db = require("lapis.db")
 
 local Tasks, Tasks_mt = Model:extend("tasks")
-local Users = Model:extend("users")
+local Users = require("models.users")
 
 function Tasks_mt:create_tasks(username)
   local tasks = Tasks:select()
   if next(tasks) == nil then
-    local user = Users:find(db.clause({
-      username = username
-    }))
+    local user_info = Users:get_user_info(username)
+
     Tasks:create({
       id = "1",
       name = "No-Spend Day",
       description = "Challenge yourself to avoid spending any money",
       progress = "0",
       total = "1",
-      completed = "false",
-      user_id = user.id
+      user_id = user_info.id
     })
     Tasks:create({
       id = "2",
@@ -25,8 +22,7 @@ function Tasks_mt:create_tasks(username)
       description = "Record at least one transaction for the day",
       progress = "0",
       total = "1",
-      completed = "false",
-      user_id = user.id
+      user_id = user_info.id
     })
     Tasks:create({
       id = "3",
@@ -34,8 +30,7 @@ function Tasks_mt:create_tasks(username)
       description = "Record at least 3 transactions for the day",
       progress = "0",
       total = "3",
-      completed = "false",
-      user_id = user.id
+      user_id = user_info.id
     })
     Tasks:create({
       id = "4",
@@ -43,8 +38,7 @@ function Tasks_mt:create_tasks(username)
       description = "Record at least 5 transactions for the day",
       progress = "0",
       total = "5",
-      completed = "false",
-      user_id = user.id
+      user_id = user_info.id
     })
   end
 end
