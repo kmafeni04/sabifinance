@@ -14,22 +14,32 @@ return {
     self.load = "/signup_page"
     return { render = "pages.login_signup.login_signup_page" }
   end,
-  signup_page = function()
+  signup_page = function(self)
+    self.errors = {}
     return { render = "pages.login_signup.signup.signup_page" }
   end,
   signup_complete = function(self)
-    if self.params.password == self.params.confirm_password then
-      local user_info = Users:get_user_info(self.params.username)
-      if user_info == nil then
-        Users:create_user(self.params.username, self.params.email, self.params.password)
-        self.session.username = self.params.username
-        self.session.logged_in = true
-        return { render = "pages.login_signup.signup.signup_complete" }
-      else
-        return { redirect_to = self:url_for("signup") }
-      end
+    self.errors = {}
+    local user_info = Users:get_user_info(self.params.username)
+    if string.len(self.params.username) < 5 then
+      table.insert(self.errors, "Username must be more than 5 characters")
+    end
+    if user_info ~= nil then
+      table.insert(self.errors, "This user already exists")
+    end
+    -- if string.lower(user_info.email) == string.lower(self.params.email) then
+    --   table.insert(self.errors, "This email is already in use")
+    -- end
+    if self.params.password ~= self.params.confirm_password then
+      table.insert(self.errors, "Passwords do not match")
+    end
+    if #self.errors > 0 then
+      return { render = "pages.login_signup.signup.signup_page" }
     else
-      return { redirect_to = self:url_for("signup") }
+      Users:create_user(self.params.username, self.params.email, self.params.password)
+      self.session.username = self.params.username
+      self.session.logged_in = true
+      return { render = "pages.login_signup.signup.signup_complete" }
     end
   end,
   logout = function(self)

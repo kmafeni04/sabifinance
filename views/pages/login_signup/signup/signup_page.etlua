@@ -1,6 +1,6 @@
 <form
   hx-post="/signup_complete"
-  hx-target="main"
+  hx-target="this"
   hx-swap="outerHTML"
   x-data="{viewable : false}"
 >
@@ -39,7 +39,13 @@
     <i class="nf nf-fa-eye" x-show="viewable" @click="viewable = !viewable"></i>
     <i class="nf nf-fa-eye_slash" x-show="!viewable" @click="viewable = !viewable"></i>
   </div>
-  <small><%= session.signup_errors or "" %></small>
+  <% if #errors > 0 then %>
+    <div class="form-errors">
+      <% for _,error in pairs(errors) do %>
+        <p class="form-error"><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
   <button>Sign up</button>
   <br/>
   <p>

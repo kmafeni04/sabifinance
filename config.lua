@@ -1,18 +1,18 @@
 local config = require("lapis.config")
 
-config("development", {
+config({ "development", "production" }, {
   server = "nginx",
-  code_cache = "off",
-  num_workers = "1",
   sqlite = {
     database = "app.sqlite",
   }
 })
 
+config("development", {
+  code_cache = "off",
+  num_workers = 1,
+})
+
 config("production", {
   code_cache = "on",
-  num_workers = 4,
-  sqlite = {
-    database = "app.sqlite",
-  }
+  -- num_workers = 4,
 })

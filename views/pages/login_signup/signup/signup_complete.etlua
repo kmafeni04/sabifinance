@@ -1,15 +1,13 @@
-<main>
-  <link rel="stylesheet" href="/static/CSS/login_signup.css"/>
-  <div class="content">
-    <div class="signup-complete">
-      <h1>Sign up complete</h1>
-      <button
-        hx-get="<%= url_for("dashboard") %>"
-        hx-target="closest body"
-        hx-push-url="true"
-      >
-        Proceed to Home Page
-      </button>
-    </div>
-  </div>
-</main>
+<!--
+<link rel="stylesheet" href="/static/CSS/login_signup.css"/>
+-->
+<div class="signup-complete">
+  <h1>Sign up complete</h1>
+  <button
+    hx-get="<%= url_for("dashboard") %>"
+    hx-target="closest body"
+    hx-push-url="true"
+  >
+    Proceed to Home Page
+  </button>
+</div>

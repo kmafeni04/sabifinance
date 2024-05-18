@@ -59,6 +59,7 @@ return {
   settings = function(self)
     local user = Users:get_user_info(self.session.username)
     self.errors = {}
+    self.to_render = false
     self.username = user.username
     self.email = user.email
     self.password = user.password
@@ -68,6 +69,7 @@ return {
     self.errors = {}
     local user = Users:get_user_info(self.session.username)
     if self.params.password == self.params.confirm_password then
+      self.to_render = false
       user:update({
         username = self.params.username,
         email = self.params.email,
@@ -76,6 +78,7 @@ return {
       self.session.username = self.params.username
       return { redirect_to = self:url_for("settings") }
     else
+      self.to_render = true
       table.insert(self.errors, "Passwords do not match")
       self.username = user.username
       self.email = user.email

@@ -14,7 +14,11 @@
         class="first-row"
         x-data="{viewable : false}"
         hx-post="<%= url_for('settings') %>"
+        <% if to_render == false then %>
         hx-target=".settings"
+        <% else %>
+        hx-target="body"
+        <% end %>
         hx-confirm="Are you sure you'd like to confirm these edits?"
       >
         <div class="user-form">
@@ -87,9 +91,11 @@
           </div>
         </div>
         <% if #errors > 0 then %>
-          <% for _,error in pairs(errors) do %>
-            <p><%= error %></p>
-          <% end %>
+          <div class="form-errors">
+            <% for _,error in pairs(errors) do %>
+              <p class="form-error"><%= error %></p>
+            <% end %>
+          </div>
         <% end %>
       </form>
       <button
