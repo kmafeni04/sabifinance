@@ -33,7 +33,7 @@ return {
 			{ "amount",      types.real },
 			{ "type",        types.text },
 			{ "description", types.text },
-			{ "user_id",     types.text },
+			{ "user_id",     types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
 			"PRIMARY KEY (id)"

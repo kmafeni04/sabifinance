@@ -1,0 +1,14 @@
+# flyctl launch added from .gitignore
+logs
+lua
+.luarocks
+luarocks
+lua_modules
+nginx.conf.compiled
+scgi_temp
+uwsgi_temp
+proxy_temp
+fastcgi_temp
+client_body_temp
+**/*.sqlite
+fly.toml
