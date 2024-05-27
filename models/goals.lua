@@ -25,7 +25,7 @@ function Goals_mt:create_goal(username, goal_name, goal_description, goal_end_da
     progress = goal_amount,
     user_id = user_info.id,
   }
-  Transactions:create_transaction(username, goal_name, goal_amount, goal_description)
+  Transactions:create_goal_transaction(username, goal_name, goal_amount, goal_description)
 end
 
 function Goals_mt:delete_goal(goal_id)

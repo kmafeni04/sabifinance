@@ -1,5 +1,5 @@
 <form
-  hx-post="/dashboard"
+  hx-post="<%= url_for('dashboard') %>"
   hx-push-url="true"
   hx-target="closest body"
   hx-swap="outerHTML"

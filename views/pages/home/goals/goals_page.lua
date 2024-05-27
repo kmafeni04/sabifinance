@@ -58,7 +58,7 @@ return Widget:extend(function(self)
                       h4({ class = "progress-bar-label" }, "Progress:")
                       progress({ value = goal.progress, max = goal.total_amount })
                       div({ class = "progress-details" }, function()
-                        p({ class = "amount-remainig" }, function()
+                        p({ class = "amount-remaining" }, function()
                           b("Remaining:")
                           br()
                           if goal.remaining_amount < 0 then
@@ -67,7 +67,11 @@ return Widget:extend(function(self)
                           text("₦ " .. goal.remaining_amount)
                         end)
                         p(function()
-                          b(math.floor((goal.total_amount / goal.current_amount) * 10) .. "%")
+                          local percentage = math.floor((goal.total_amount / goal.current_amount) * 10)
+                          if percentage == math.huge then
+                            percentage = 0
+                          end
+                          b(percentage .. "%")
                         end)
                         p({ class = "current-amount" }, function()
                           b("Current:")

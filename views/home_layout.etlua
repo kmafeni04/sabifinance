@@ -59,10 +59,10 @@
             class="nav-button"
             x-bind:class="active ? 'nav-button-opened' : ''"
             @click="active = false"
-            title="Daily Tasks"
+            title="Tasks"
           >
             <i class="nf nf-fa-tasks"></i>
-            <span x-show="active" x-transition>Daily Tasks</span>
+            <span x-show="active" x-transition>Tasks</span>
           </a>
           <a
             href="<%= url_for('achievements')%>"
@@ -85,7 +85,7 @@
             <span x-show="active" x-transition>Settings</span>
           </a>
           <a
-            hx-get="/logout"
+            hx-post="/logout"
             hx-target="body"
             hx-push-url = "/"
             hx-boost="false"

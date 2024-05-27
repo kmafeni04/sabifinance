@@ -3,8 +3,8 @@ local Widget = require("lapis.html").Widget
 return Widget:extend(function(self)
   div({ class = "tasks" }, function()
     div({ class = "top" }, function()
-      h2("Daily Tasks")
-      h4("View all your daily tasks")
+      h2("Tasks")
+      h4("View all your tasks")
     end)
     div({ class = "bottom" }, function()
       link({ rel = "stylesheet", href = "/static/CSS/tasks.css" })
@@ -25,7 +25,7 @@ return Widget:extend(function(self)
                     label(function() b("Remaining:") end)
                     p(task.total - task.progress)
                   end)
-                  local task_percentage = math.floor((task.total / task.progress) * 10)
+                  local task_percentage = math.floor((task.progress / task.total) * 100)
                   print(task_percentage)
                   if task_percentage == math.huge then
                     task_percentage = 0
@@ -46,12 +46,35 @@ return Widget:extend(function(self)
         div({ class = "horizontal-cards completed" }, function()
           local none_completed = false
           for _, task in pairs(self.tasks) do
+            if task.progress > task.total then
+              task.progress = task.total
+            end
             if task.progress == task.total then
               div({ class = "card" }, function()
                 h3(task.name)
                 p(task.description)
+                p(function()
+                  b("Progress:")
+                end)
                 progress({ value = task.progress, max = task.total })
+                div({ class = "progress-details" }, function()
+                  div(function()
+                    label(function() b("Remaining:") end)
+                    p(task.total - task.progress)
+                  end)
+                  local task_percentage = math.floor((task.progress / task.total) * 100)
+                  print(task_percentage)
+                  if task_percentage == math.huge then
+                    task_percentage = 0
+                  end
+                  p(function() b(task_percentage .. "%") end)
+                  div(function()
+                    label(function() b("Current:") end)
+                    p(task.progress)
+                  end)
+                end)
               end)
+              none_completed = true
             else
               if none_completed == false then
                 div({ class = "card none-completed" }, function()

@@ -19,7 +19,6 @@ return {
 		create_index("users", "email", { unique = true })
 
 		db.insert("users", {
-			id = "1",
 			username = "kmafeni04",
 			email = "komemafeni944@gmail.com",
 			password = "aPassword*"

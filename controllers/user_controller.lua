@@ -1,4 +1,4 @@
-local Model = require("lapis.db.model").Model
+-- local Model = require("lapis.db.model").Model
 local Users = require("models.users")
 local db = require("lapis.db")
 
@@ -27,9 +27,6 @@ return {
     if user_info ~= nil then
       table.insert(self.errors, "This user already exists")
     end
-    -- if string.lower(user_info.email) == string.lower(self.params.email) then
-    --   table.insert(self.errors, "This email is already in use")
-    -- end
     if self.params.password ~= self.params.confirm_password then
       table.insert(self.errors, "Passwords do not match")
     end

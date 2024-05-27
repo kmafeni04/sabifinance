@@ -7,7 +7,6 @@ return {
   home = function(self)
     if self.session.logged_in == true then
       self.username = self.session.username
-      self.page = self.params.page
       return { render = "dashboard" }
     else
       return { redirect_to = self:url_for("index") }

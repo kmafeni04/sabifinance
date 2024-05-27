@@ -1,7 +1,9 @@
-local Model = require("lapis.db.model").Model
-
-local Tasks, Tasks_mt = Model:extend("tasks")
+local Transactions = require("models.transactions")
 local Users = require("models.users")
+
+local Model = require("lapis.db.model").Model
+local Tasks, Tasks_mt = Model:extend("tasks")
+
 
 function Tasks_mt:create_tasks(username)
   local tasks = Tasks:select()
@@ -9,37 +11,35 @@ function Tasks_mt:create_tasks(username)
     local user_info = Users:get_user_info(username)
 
     Tasks:create({
-      id = "1",
-      name = "No-Spend Day",
-      description = "Challenge yourself to avoid spending any money",
-      progress = "0",
-      total = "1",
-      user_id = user_info.id
-    })
-    Tasks:create({
-      id = "2",
-      name = "And 1",
+      name = "At least you tried",
       description = "Record at least one transaction for the day",
-      progress = "0",
-      total = "1",
+      progress = 0,
+      total = 1,
       user_id = user_info.id
     })
     Tasks:create({
-      id = "3",
       name = "3 of The Best",
       description = "Record at least 3 transactions for the day",
-      progress = "0",
-      total = "3",
+      progress = 0,
+      total = 3,
       user_id = user_info.id
     })
     Tasks:create({
-      id = "4",
-      name = "From Deep",
+      name = "Deep Pockets",
       description = "Record at least 5 transactions for the day",
-      progress = "0",
-      total = "5",
+      progress = 0,
+      total = 5,
       user_id = user_info.id
     })
+  end
+end
+
+function Tasks_mt:update_tasks(username)
+  local user_info = Users:get_user_info(username)
+  local tasks = Tasks:select({ user_id = user_info.id })
+  local transactions = Transactions:select()
+  for _, task in ipairs(tasks) do
+    task:update({ progress = tonumber(#transactions) })
   end
 end
 

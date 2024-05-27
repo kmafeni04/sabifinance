@@ -1,8 +1,7 @@
 <div class="dashboard">
   <div class="top">
     <h2>Dashboard</h2>
-    <h4>Welcome,
-      <%= username or "user" %></h4>
+    <h4>Welcome,<%= username %></h4>
   </div>
   <div class="bottom">
     <link rel="stylesheet" href="/static/CSS/dashboard.css"/>
@@ -17,21 +16,6 @@
         <div class="header">
           <h3>Transactions</h3>
           <div>
-            <% local currentMonth = tonumber(os.date("%m")) %>
-            <select name="month" id="month">
-              <% for i=1, 12 do %>
-                <option value="<%= i %>" <% if i == currentMonth then %>selected<% end %>>
-                  <%= os.date("%B", os.time { year = os.date("%Y"), month = i, day = 1 }) %>
-                </option>
-              <% end %>
-            </select>
-            <select name="year" id="year">
-              <% for i = 24, 99 do %>
-                <option>
-                  20<%= i %>
-                </option>
-              <% end %>
-            </select>
             <button hx-get="/new_transaction" hx-target=".new-transaction-container">
               New transaction +
             </button>
@@ -91,23 +75,6 @@
       <div class="analytics">
         <div class="header">
           <h3>Analytics</h3>
-          <div>
-            <select name="month" id="month">
-              <% local currentMonth = tonumber(os.date("%m")) %>
-              <% for i=1, 12 do %>
-                <option value="<%= i %>" <% if i==currentMonth then %>selected<% end %>>
-                  <%= os.date("%B", os.time { year = os.date("%Y"), month = i, day = 1 }) %>
-                </option>
-              <% end %>
-            </select>
-            <select name="year" id="year">
-              <% for i = 24, 99 do %>
-                <option>
-                  20<%= i %>
-                </option>
-              <% end %>
-            </select>
-          </div>
         </div>
 
         <% if next(transactions) ~= nil then %>
