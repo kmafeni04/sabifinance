@@ -14,10 +14,12 @@ return Widget:extend(function(self)
         end)
         div({ class = "horizontal-cards cards" }, function()
           for _, achievement in pairs(self.achievements) do
-            div({ class = "card" }, function()
-              h3(achievement.name)
-              p(achievement.description)
-            end)
+            if achievement.progress < achievement.total then
+              div({ class = "card" }, function()
+                h3(achievement.name)
+                p(achievement.description)
+              end)
+            end
           end
         end)
       end)
@@ -28,11 +30,12 @@ return Widget:extend(function(self)
         div({ class = "horizontal-cards cards" }, function()
           local none_completed = false
           for _, achievement in pairs(self.achievements) do
-            if achievement.completed == "true" then
+            if achievement.progress >= achievement.total then
               div({ class = "card" }, function()
                 h3(achievement.name)
                 p(achievement.description)
               end)
+              none_completed = true
             else
               if none_completed == false then
                 div({ class = "card" }, function()

@@ -1,5 +1,5 @@
 <div class="object-created">
-  <h1 class="header">Goal created</h1>
+  <h1 class="object-created-header">Goal created</h1>
   <div class="new-goal-btn">
     <button
       class="new-goal-btn"

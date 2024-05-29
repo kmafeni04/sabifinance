@@ -1,43 +1,46 @@
 local Model = require("lapis.db.model").Model
-local db = require("lapis.db")
+
+local Users = require("models.users")
+local Goals = require("models.goals")
 
 local Achievements, Achievements_mt = Model:extend("achievements")
-local Users = Model:extend("users")
 
 function Achievements_mt:create_achievements(username)
   local achievements = Achievements:select()
   if next(achievements) == nil then
-    local user = Users:find(db.clause({
+    local user = Users:find({
       username = username
-    }))
+    })
     Achievements:create({
-      id = "1",
-      name = "Too Consistent",
-      description = "Achieve a streak of 10 days, consistently updating your transactions",
-      completed = "false",
+      name = "First of many",
+      description = "Create and complete your first goal",
+      progress = 0,
+      total = 1,
       user_id = user.id
     })
     Achievements:create({
-      id = "2",
-      name = "Profit Surge",
-      description = "Have your income be more than your expense for at least a week",
-      completed = "false",
-      user_id = user.id
-    })
-    Achievements:create({
-      id = "3",
       name = "Goal Getter",
-      description = "Create and complete at least 5 goals",
-      completed = "false",
+      description = "Create and complete 3 goals",
+      progress = 0,
+      total = 3,
       user_id = user.id
     })
     Achievements:create({
-      id = "4",
-      name = "Staying Afloat",
-      description = "Ensure your balance doesn't hit negative for at least a wekk",
-      completed = "false",
+      name = "An eye for goal",
+      description = "Create and complete 5 goals",
+      progress = 0,
+      total = 5,
       user_id = user.id
     })
+  end
+end
+
+function Achievements_mt:update_achievements(username)
+  local user_info = Users:get_user_info(username)
+  local achievements = Achievements:select({ user_id = user_info.id })
+  local goals = Goals:select("where progress >= total_amount")
+  for _, achievement in ipairs(achievements) do
+    achievement:update({ progress = tonumber(#goals) })
   end
 end
 

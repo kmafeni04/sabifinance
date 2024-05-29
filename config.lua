@@ -16,6 +16,6 @@ config("production", {
   code_cache = "on",
   num_workers = 2,
   sqlite = {
-    database = os.getenv("DATABASE_URL"),
+    database = "app.sqlite",
   }
 })

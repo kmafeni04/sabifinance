@@ -24,7 +24,7 @@ return Widget:extend(function(self)
             render("views.components.card_bills", { header = "Balance", paragraph = self.balance })
             local no_goal = false
             for _, goal in pairs(self.goals) do
-              if goal.remaining_amount > 0 then
+              if goal.progress < goal.total_amount then
                 div({ class = "card goal-card" }, function()
                   div({ class = "card-top" }, function()
                     div(function()
@@ -109,8 +109,7 @@ return Widget:extend(function(self)
         div({ class = "horizontal-cards cards" }, function()
           local none_completed = false
           for _, goal in pairs(self.goals) do
-            none_completed = true
-            if goal.remaining_amount < 0 then
+            if goal.progress > goal.total_amount then
               print("AAAAAAAAAAAAAA" .. goal.remaining_amount)
               div({ class = "card goal-card" }, function()
                 div({ class = "card-top" }, function()

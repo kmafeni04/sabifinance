@@ -190,9 +190,10 @@ input {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 }
 
-.new-object .object-created .header {
+.new-object .object-created .object-created-header {
   margin-bottom: 1rem;
 }
 
@@ -219,6 +220,7 @@ input {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 }
 .none-completed h2 {
   text-align: center;

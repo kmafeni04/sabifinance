@@ -2,6 +2,7 @@ local Goals = require("models.goals")
 local Users = require("models.users")
 local Transactions = require("models.transactions")
 local Tasks = require("models.tasks")
+local Achievements = require("models.achievements")
 
 return {
   goal_page = function(self)
@@ -41,11 +42,13 @@ return {
     Goals:create_goal(self.session.username, self.params.name, self.params.description, self.params.end_date,
       self.params.amount)
     Tasks:update_tasks(self.session.username)
+    Achievements:update_achievements(self.session.username)
     return { render = "pages.home.goals.goal_created" }
   end,
   delete_goal = function(self)
     Goals:delete_goal(self.params.id)
     Tasks:update_tasks(self.session.username)
+    Achievements:update_achievements(self.session.username)
     return { redirect_to = self:url_for("goals") }
   end,
   edit_goal = function(self)

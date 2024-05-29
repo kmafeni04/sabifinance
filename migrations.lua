@@ -72,7 +72,8 @@ return {
 			{ "id",          types.integer },
 			{ "name",        types.text },
 			{ "description", types.text },
-			{ "completed",   types.text },
+			{ "progress",    types.integer },
+			{ "total",       types.integer },
 			{ "user_id",     types.integer },
 
 			"FOREIGN KEY (user_id) REFERENCES users(id)",
