@@ -6,7 +6,7 @@ config({ "development", "production" }, {
 
 config("development", {
   code_cache = "off",
-  num_workers = 1,
+  num_workers = "1",
   sqlite = {
     database = "app.sqlite",
   }
@@ -14,8 +14,13 @@ config("development", {
 
 config("production", {
   code_cache = "on",
-  num_workers = 2,
-  sqlite = {
-    database = "app.sqlite",
+  num_workers = "auto",
+  postgress = {
+    host = os.getenv("PGHOST"),
+    port = os.getenv("PGPORT"),
+    user = os.getenv("PGUSER"),
+    password = os.getenv("PGPASSWORD"),
+    database = os.getenv("PGDATABASE"),
   }
+
 })
