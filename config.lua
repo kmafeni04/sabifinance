@@ -15,12 +15,11 @@ config("development", {
 config("production", {
   code_cache = "on",
   num_workers = "auto",
-  postgress = {
+  postgres = {
     host = os.getenv("PGHOST"),
     port = os.getenv("PGPORT"),
     user = os.getenv("PGUSER"),
     password = os.getenv("PGPASSWORD"),
     database = os.getenv("PGDATABASE"),
   }
-
 })
