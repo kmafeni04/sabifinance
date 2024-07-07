@@ -1,9 +1,9 @@
 <form
-  hx-post="<%= url_for('dashboard') %>"
+  hx-post="<%= url_for('login') %>"
   hx-push-url="true"
   hx-target="closest body"
   hx-swap="outerHTML"
-  x-data="{viewable : false}"
+  x-data="{viewable: false}"
 >
   <h1>Welcome Back</h1>
   <label for="username">Username</label>

@@ -19,9 +19,9 @@ return {
 		create_index("users", "email", { unique = true })
 
 		db.insert("users", {
-			username = "kmafeni04",
-			email = "komemafeni944@gmail.com",
-			password = "aPassword*"
+			username = "testuser",
+			email = "testuser@test.com",
+			password = "testpassword"
 		})
 	end,
 	[2] = function()

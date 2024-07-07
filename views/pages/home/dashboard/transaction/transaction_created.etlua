@@ -1,5 +1,5 @@
 <div class="object-created">
-  <h1 class="header">Transaction created</h1>
+  <h1 class="object-created-header">Transaction created</h1>
   <div class="new-transaction-btn">
     <button
       class="new-transaction-btn"

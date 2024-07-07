@@ -2,12 +2,7 @@
   <div class="card">
     <h3 class="object-header">New Transaction</h3>
 
-    <form
-      action="/new_transaction"
-      method="POST"
-      hx-target=".card"
-      class="new-transaction-form"
-    >
+    <form hx-post="/new_transaction" hx-target=".card" class="new-transaction-form">
       <label for="transaction-date">Date:</label>
 
       <div class="user-input">

@@ -1,7 +1,7 @@
 <div class="dashboard">
   <div class="top">
     <h2>Dashboard</h2>
-    <h4>Welcome,<%= username %></h4>
+    <h4>Welcome, <%= username %></h4>
   </div>
   <div class="bottom">
     <link rel="stylesheet" href="/static/CSS/dashboard.css"/>
@@ -43,9 +43,7 @@
                   <td data-cell="transaction type"><%= transaction.type %></td>
                   <td data-cell="transaction desc"><%= transaction.description %></td>
                   <td data-cell="transaction action">
-                    <p>
-                      <button>Edit</button>
-                      <wbr/>
+                    <p >
                       <button
                         hx-get="/delete_transaction/<%= transaction.id %>"
                         hx-confirm="Are you sure you would like to delete this transaction"

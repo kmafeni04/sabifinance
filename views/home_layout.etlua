@@ -85,9 +85,9 @@
             <span x-show="active" x-transition>Settings</span>
           </a>
           <a
-            hx-post="/logout"
+            hx-post="<%= url_for("logout") %>"
             hx-target="body"
-            hx-push-url = "/"
+            hx-push-url = "true"
             hx-boost="false"
             class="nav-button"
             x-bind:class="active ? 'nav-button-opened' : ''"

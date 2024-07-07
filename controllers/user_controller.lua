@@ -1,4 +1,3 @@
--- local Model = require("lapis.db.model").Model
 local Users = require("models.users")
 local db = require("lapis.db")
 
@@ -9,6 +8,19 @@ return {
   end,
   login_page = function()
     return { render = "pages.login_signup.login.login_page" }
+  end,
+  login_post = function(self)
+    local user = Users:select(db.clause({
+      username = self.params.username,
+      password = self.params.password
+    }))
+    if next(user) ~= nil then
+      self.session.username = self.params.username
+      self.session.logged_in = true
+      return { redirect_to = self:url_for("dashboard") }
+    else
+      return { redirect_to = self:url_for("login") }
+    end
   end,
   signup = function(self)
     self.load = "/signup_page"
@@ -40,8 +52,8 @@ return {
     end
   end,
   logout = function(self)
-    self.session.logged_in = false
     self.session.username = nil
+    self.session.logged_in = false
     return { redirect_to = self:url_for("index") }
   end,
   delete_account = function(self)

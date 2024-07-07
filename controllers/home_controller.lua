@@ -5,25 +5,7 @@ local Transactions = require("models.transactions")
 
 return {
   home = function(self)
-    if self.session.logged_in == true then
-      self.username = self.session.username
-      return { render = "dashboard" }
-    else
-      return { redirect_to = self:url_for("index") }
-    end
-  end,
-  home_post = function(self)
-    local user = Users:select(db.clause({
-      username = self.params.username,
-      password = self.params.password
-    }))
-    if next(user) ~= nil then
-      self.session.username = self.params.username
-      self.session.logged_in = true
-      return { redirect_to = self:url_for("dashboard") }
-    else
-      return { redirect_to = self:url_for("login") }
-    end
+    return { render = "dashboard" }
   end,
   dashboard = function(self)
     self.username = self.session.username

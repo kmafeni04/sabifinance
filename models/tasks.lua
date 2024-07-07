@@ -12,21 +12,21 @@ function Tasks_mt:create_tasks(username)
 
     Tasks:create({
       name = "At least you tried",
-      description = "Record at least one transaction for the day",
+      description = "Record at least one transaction",
       progress = 0,
       total = 1,
       user_id = user_info.id
     })
     Tasks:create({
       name = "3 of The Best",
-      description = "Record at least 3 transactions for the day",
+      description = "Record at least 3 transactions",
       progress = 0,
       total = 3,
       user_id = user_info.id
     })
     Tasks:create({
       name = "Deep Pockets",
-      description = "Record at least 5 transactions for the day",
+      description = "Record at least 5 transactions",
       progress = 0,
       total = 5,
       user_id = user_info.id

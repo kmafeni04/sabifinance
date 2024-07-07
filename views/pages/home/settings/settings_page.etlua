@@ -5,14 +5,15 @@
     <h4>Mannage your user settings</h4>
   </div>
   <div class="bottom">
-    <div class="user-details" x-data="{editable:false}">
+    <div class="user-details" x-data="{editable: false}">
       <div class="header">
         <h3>User Details</h3>
         <button @click="editable = true">Edit</button>
       </div>
       <form
         class="first-row"
-        x-data="{viewable : false}"
+        x-data="{viewable: false}"
+        x-bind:onkeydown="!editable ? 'return event.key != \'Enter\'' : ''"
         hx-post="<%= url_for('settings') %>"
         <% if to_render == false then %>
         hx-target=".settings"

@@ -13,6 +13,30 @@ local achievement_controller = require("controllers.achievement_controller")
 app:enable("etlua")
 app.layout = require "views.layout"
 
+app:before_filter(function(self)
+  local no_user_routes = {
+    [self:url_for("login")] = true,
+    [self:url_for("signup")] = true
+  }
+  if self.session.username and no_user_routes[self.req.parsed_url.path] then
+    self:write({ redirect_to = self:url_for("dashboard") })
+  end
+end)
+
+app:before_filter(function(self)
+  local user_routes = {
+    [self:url_for("dashboard")] = true,
+    [self:url_for("goals")] = true,
+    [self:url_for("tasks")] = true,
+    [self:url_for("achievements")] = true,
+    [self:url_for("settings")] = true
+  }
+  print("User is " .. (self.session.username or ""))
+  if not self.session.username and user_routes[self.req.parsed_url.path] then
+    self:write({ redirect_to = self:url_for("index") })
+  end
+end)
+
 --- routes ---
 
 --- index ---
@@ -22,6 +46,7 @@ app:get("index", "/", generic_controller.index)
 --- login ---
 
 app:get("login", "/login", user_controller.login)
+app:post("login", "/login", user_controller.login_post)
 
 app:get("/login_page", user_controller.login_page)
 
@@ -37,7 +62,7 @@ app:post("signup_complete", "/signup_complete", user_controller.signup_complete)
 
 app:get("home", "/home/:page", home_controller.home)
 
-app:post("/logout", user_controller.logout)
+app:post("logout", "/logout", user_controller.logout)
 
 --- settings ---
 
@@ -45,13 +70,11 @@ app:get("settings", "/home/settings", home_controller.settings)
 
 app:post("settings", "/home/settings", home_controller.settings_post)
 
-app:delete("/delete_account", user_controller.delete_account)
+app:delete("deltee_account", "/delete_account", user_controller.delete_account)
 
 --- dashboard ---
 
 app:get("dashboard", "/home/dashboard", home_controller.dashboard)
-
-app:post("dashboard", "/home/dashboard", home_controller.home_post)
 
 app:get("/new_transaction", transaction_controller.new_transaction)
 

@@ -6,15 +6,17 @@
   <link rel="stylesheet" href="/static/CSS/index.css"/>
   <div class="top">
     <img src="../../static/images/gold-nigerian-naira-coin-cartoon.svg" alt=""/>
-    <button
-      class="login-btn"
-      hx-get="/login"
-      hx-push-url="true"
-      hx-target="closest main"
-    >
-      Log in
-    </button>
- </div>
+    <% if not session.username then %>
+      <button
+        class="login-btn"
+        hx-get="/login"
+        hx-push-url="true"
+        hx-target="closest main"
+      >
+        Log in
+      </button>
+    <% end %>
+  </div>
 
   <div class="bottom">
     <div class="first-half">
@@ -24,16 +26,30 @@
         unlock achievements as you conquer your financial journey. Join today
         and game your way to financial success!
       </p>
-      <button
-        class="get-started"
-        hx-get="/signup"
-        hx-push-url="true"
-        hx-target="closest main"
-      >
-        Get started
-        <wbr/>
-        <i class="nf nf-cod-arrow_right"></i>
-      </button>
+      <% if not session.username then %>
+        <button
+          class="get-started"
+          hx-get="/signup"
+          hx-push-url="true"
+          hx-target="closest main"
+        >
+          Get started
+          <wbr/>
+          <i class="nf nf-cod-arrow_right"></i>
+        </button>
+      <% else %>
+        <button
+          class="get-started"
+          hx-get="<%= url_for("dashboard") %>"
+          hx-target="body"
+          hx-push-url="true"
+          hx-target="closest main"
+        >
+          Continue to Dashboard
+          <wbr/>
+          <i class="nf nf-cod-arrow_right"></i>
+        </button>
+      <% end %>
     </div>
     <div class="second-half">
       <img src="../../static/images/currency-symbol-nigerian-naira-3d.png" alt=""/>
