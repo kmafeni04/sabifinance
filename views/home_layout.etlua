@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +37,7 @@
         <div class="bottom">
           <a
             href="<%= url_for('dashboard')%>"
-            class="nav-button"
+            class="nav-button <%= Is_active('dashboard') %>"
             x-bind:class="active ? 'nav-button-opened' : ''"
             @click="active = false"
             title="Dashboard"
@@ -46,7 +47,7 @@
           </a>
           <a
             href="<%= url_for('goals')%>"
-            class="nav-button"
+            class="nav-button <%= Is_active('goals') %>"
             x-bind:class="active ? 'nav-button-opened' : ''"
             @click="active = false"
             title="Goals"
@@ -56,7 +57,7 @@
           </a>
           <a
             href="<%= url_for('tasks')%>"
-            class="nav-button"
+            class="nav-button <%= Is_active('tasks') %>"
             x-bind:class="active ? 'nav-button-opened' : ''"
             @click="active = false"
             title="Tasks"
@@ -66,7 +67,7 @@
           </a>
           <a
             href="<%= url_for('achievements')%>"
-            class="nav-button"
+            class="nav-button <%= Is_active('achievements') %>"
             x-bind:class="active ? 'nav-button-opened' : ''"
             title="Achievements"
             @click="active = false"
@@ -76,7 +77,7 @@
           </a>
           <a
             href="<%= url_for('settings')%>"
-            class="nav-button"
+            class="nav-button <%= Is_active('settings') %>"
             x-bind:class="active ? 'nav-button-opened' : ''"
             @click="active = false"
             title="Settings"

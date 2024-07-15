@@ -45,6 +45,9 @@ main {
   align-items: center;
   justify-content: center;
 }
+.sidebar .bottom .nav-button.active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
 .sidebar .bottom .nav-button-opened {
   width: 70%;
   justify-content: start;
@@ -59,7 +62,7 @@ main {
 }
 
 .sidebar .bottom .nav-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.5);
   transition: var(--transition-time);
 }
 

@@ -2,6 +2,12 @@ FROM openresty/openresty:jammy
 
 WORKDIR /app
 
+ARG PGHOST
+ARG PGPORT
+ARG PGUSER
+ARG PGDATABASE
+ARG PGPASSWORD
+
 RUN apt-get update
 RUN apt-get install -y sqlite3 \
  libssl-dev \

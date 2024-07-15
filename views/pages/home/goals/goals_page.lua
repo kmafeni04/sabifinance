@@ -110,7 +110,6 @@ return Widget:extend(function(self)
           local none_completed = false
           for _, goal in pairs(self.goals) do
             if goal.progress > goal.total_amount then
-              print("AAAAAAAAAAAAAA" .. goal.remaining_amount)
               div({ class = "card goal-card" }, function()
                 div({ class = "card-top" }, function()
                   div(function()

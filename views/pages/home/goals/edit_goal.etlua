@@ -52,7 +52,8 @@
         />
         <div class="new-goal-btn">
         </div>
-
+      </div>
+      <div>
         <button
           class="new-goal-btn"
           type="button"

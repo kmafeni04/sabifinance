@@ -5,7 +5,7 @@ local Transactions = require("models.transactions")
 
 return {
   home = function(self)
-    return { render = "dashboard" }
+    return { redirect_to = self:url_for("dashboard") }
   end,
   dashboard = function(self)
     self.username = self.session.username

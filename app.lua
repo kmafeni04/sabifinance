@@ -1,4 +1,5 @@
 local lapis = require("lapis")
+---@type App
 local app = lapis.Application()
 
 local generic_controller = require("controllers.generic_controller")
@@ -37,30 +38,45 @@ app:before_filter(function(self)
   end
 end)
 
+app:before_filter(function(self)
+  function Is_active(url)
+    if self.req.parsed_url.path == self:url_for(url) then
+      return "active"
+    else
+      return ""
+    end
+  end
+end)
+
 --- routes ---
 
 --- index ---
 
 app:get("index", "/", generic_controller.index)
 
+app:get("test", "/test", function(self)
+  return { render = true }
+end)
+
 --- login ---
 
 app:get("login", "/login", user_controller.login)
 app:post("login", "/login", user_controller.login_post)
 
-app:get("/login_page", user_controller.login_page)
+app:get(nil, "/login_page", user_controller.login_page)
 
 --- signup ---
 
 app:get("signup", "/signup", user_controller.signup)
 
-app:get("/signup_page", user_controller.signup_page)
+app:get(nil, "/signup_page", user_controller.signup_page)
 
 app:post("signup_complete", "/signup_complete", user_controller.signup_complete)
 
 --- home ---
 
-app:get("home", "/home/:page", home_controller.home)
+app:get("home_unknown", "/home/:page", home_controller.home)
+app:get("home_no_route", "/home", home_controller.home)
 
 app:post("logout", "/logout", user_controller.logout)
 
