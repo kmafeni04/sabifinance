@@ -3,3 +3,4 @@ nginx.conf.compiled
 *.sqlite
 *_temp/
 .git
+.env

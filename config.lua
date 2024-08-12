@@ -1,20 +1,27 @@
 ---@type Config
 local config = require("lapis.config")
-
-config({ "development", "production" }, {
-  num_workers = "auto",
-})
+local dotenv = require("lib.dotenv")
+local env, err = dotenv.load()
+-- if err then
+--   print(err)
+-- end
 
 config("development", {
+  port = "8080",
   code_cache = "off",
+  num_workers = "1",
   sqlite = {
-    database = "app.sqlite",
+    database = env.get("DATABASE_URL"),
   }
 })
 
 config("production", {
+  port = "8080",
   code_cache = "on",
+  num_workers = "auto",
   sqlite = {
-    database = os.getenv("DATABASE_URL")
+    database = env.get("DATABASE_URL"),
   }
 })
+
+-- print("Currently running on port: " .. config.get().port)

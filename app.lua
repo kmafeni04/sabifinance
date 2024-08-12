@@ -63,13 +63,13 @@ end)
 app:get("login", "/login", user_controller.login)
 app:post("login", "/login", user_controller.login_post)
 
-app:get(nil, "/login_page", user_controller.login_page)
+app:get("/login_page", user_controller.login_page)
 
 --- signup ---
 
 app:get("signup", "/signup", user_controller.signup)
 
-app:get(nil, "/signup_page", user_controller.signup_page)
+app:get("/signup_page", user_controller.signup_page)
 
 app:post("signup_complete", "/signup_complete", user_controller.signup_complete)
 

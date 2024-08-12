@@ -4,11 +4,10 @@ WORKDIR /app
 
 ARG DATABASE_URL
 
-RUN apt-get update
-RUN apt-get install -y sqlite3 \
- libssl-dev \
- libsqlite3-dev
-RUN apt-get clean
+RUN apt update
+RUN apt install -y sqlite3 
+RUN apt install -y libssl-dev 
+RUN apt install -y libsqlite3-dev
 
 RUN luarocks install luasec
 RUN luarocks install bcrypt
@@ -18,6 +17,8 @@ RUN luarocks install lsqlite3
 RUN luarocks install tableshape
 
 COPY . .
+
+RUN mkdir /data
 
 RUN lapis migrate production --trace
 
