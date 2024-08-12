@@ -39,7 +39,7 @@ app:before_filter(function(self)
 end)
 
 app:before_filter(function(self)
-  function Is_active(url)
+  is_active = function(url)
     if self.req.parsed_url.path == self:url_for(url) then
       return "active"
     else

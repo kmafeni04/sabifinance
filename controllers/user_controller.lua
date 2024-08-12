@@ -4,6 +4,8 @@ local db = require("lapis.db")
 return {
   login = function(self)
     self.load = "/login_page"
+    ngx.say("The var is " .. os.getenv("PGUSER"))
+    print("The PG variable is " .. (os.getenv("PGDATABSE") or "none"))
     return { render = "pages.login_signup.login_signup_page" }
   end,
   login_page = function()

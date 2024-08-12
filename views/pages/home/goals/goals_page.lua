@@ -1,16 +1,11 @@
 local Widget = require("lapis.html").Widget
-local db = require("lapis.db")
-local Model = require("lapis.db.model").Model
-local Users = Model:extend("users")
-local Transactions = Model:extend("transactions")
-local Goals = Model:extend("goals")
 
 return Widget:extend(function(self)
   div({ class = "goals" }, function()
     link({ rel = "stylesheet", href = "/static/CSS/goals.css" })
     div({ class = "top" }, function()
-      h2("Goals")
-      h4("View all your set goals")
+      h2(nil, "Goals")
+      h4(nil, "View all your set goals")
     end)
     div({ class = "bottom" }, function()
       div({ class = "new-goal-container" })
@@ -27,7 +22,7 @@ return Widget:extend(function(self)
               if goal.progress < goal.total_amount then
                 div({ class = "card goal-card" }, function()
                   div({ class = "card-top" }, function()
-                    div(function()
+                    div(nil, function()
                       h3({ class = "card-header" }, goal.name)
                       p({ class = "card-paragraph" }, goal.description)
                     end)
@@ -59,7 +54,7 @@ return Widget:extend(function(self)
                       progress({ value = goal.progress, max = goal.total_amount })
                       div({ class = "progress-details" }, function()
                         p({ class = "amount-remaining" }, function()
-                          b("Remaining:")
+                          b(nil, "Remaining:")
                           br()
                           if goal.remaining_amount < 0 then
                             goal.remaining_amount = 0

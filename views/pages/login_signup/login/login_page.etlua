@@ -1,5 +1,6 @@
 <form
-  hx-post="<%= url_for('login') %>"
+  method="post"
+  action="<%= url_for('login') %>"
   hx-push-url="true"
   hx-target="closest body"
   hx-swap="outerHTML"

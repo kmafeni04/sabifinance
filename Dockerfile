@@ -2,11 +2,7 @@ FROM openresty/openresty:jammy
 
 WORKDIR /app
 
-ARG PGHOST
-ARG PGPORT
-ARG PGUSER
-ARG PGDATABASE
-ARG PGPASSWORD
+ARG DATABASE_URL
 
 RUN apt-get update
 RUN apt-get install -y sqlite3 \
